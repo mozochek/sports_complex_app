@@ -1,0 +1,44 @@
+{
+  "app_name": "Спортивный центр",
+
+  "sign_in_screen_text": "Экран авторизации",
+  "sign_up_screen_text": "Экран регистрации",
+  "do_not_have_an_account_text": "Нет аккаунта",
+  "already_registered_text": "Уже зарегестрированы",
+
+  "home_text": "Главная",
+  "schedule_text": "Расписание",
+  "profile_text": "Профиль",
+    "favorite_workouts_text": "Избранные тренировки",
+    "admin_console_text": "Консоль администратора",
+      "add_schedule_text": "Добавить расписание",
+      "write_news_text": "Написать новость",
+    "settings_text": "Настройки",
+
+  "cancel_text": "Отмена",
+  "delete_text": "Удалить",
+  "sign_in_text": "Войти",
+  "sign_up_text": "Зарегестрироваться",
+  "sign_out_text": "Выход",
+  "email_text": "Почта",
+  "password_text": "Пароль",
+  "list_is_empty_text": "Список пуст",
+
+  "list_of_coaches_text": "Список тренеров",
+  "list_of_halls_text": "Список залов",
+
+  "sign_out_confirmation_dialog_title": "Выйти из аккаунта?",
+  "sign_out_confirmation_dialog_content": "Вы выйдите из текущего аккаунта и будете перенаправлены на экран авторизации.",
+
+  "coach_delete_confirmation_dialog_title": "Удалить тренера?",
+  "coach_delete_confirmation_dialog_content": "Выбранный тренер будет удален из списка.",
+
+  "hall_form_title": "Добавить зал",
+  "hall_form_hall_name_label_text": "Название зала",
+
+  "hall_delete_dialog_title": "Удалить зал?",
+  "hall_delete_dialog_content": "Выбранный зал будет удален из списка.",
+
+  "loading_data_text": "Загрузка данных",
+  "no_schedule_for_this_date_text": "Расписание на эту дату отсутствует"
+}

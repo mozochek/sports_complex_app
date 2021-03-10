@@ -1,0 +1,44 @@
+{
+  "app_name": "Sports Complex",
+
+  "sign_in_screen_text": "Sign In screen",
+  "sign_up_screen_text": "Sign Up screen",
+  "do_not_have_an_account_text": "Do not have an account",
+  "already_registered_text": "Already registered",
+
+  "home_text": "Home",
+  "schedule_text": "Schedule",
+  "profile_text": "Profile",
+    "favorite_workouts_text": "Favorite workouts",
+    "admin_console_text": "Admin console",
+      "add_schedule_text": "Add schedule",
+      "write_news_text": "Write news",
+    "settings_text": "Settings",
+
+  "cancel_text": "Cancel",
+  "delete_text": "Delete",
+  "sign_in_text": "Sign In",
+  "sign_up_text": "Sign Up",
+  "sign_out_text": "Sign Out",
+  "email_text": "Email",
+  "password_text": "Password",
+  "list_is_empty_text": "List is empty",
+
+  "list_of_coaches_text": "List of trainers",
+  "list_of_halls_text": "List of halls",
+
+  "sign_out_confirmation_dialog_title": "Sign Out?",
+  "sign_out_confirmation_dialog_content": "You will be sign out of your current account and will be redirected to the login screen.",
+
+  "coach_delete_confirmation_dialog_title": "Delete coach?",
+  "coach_delete_confirmation_dialog_content": "This will delete selected coach from list.",
+
+  "hall_form_title": "Add hall",
+  "hall_form_hall_name_label_text": "Hall name",
+
+  "hall_delete_dialog_title": "Delete hall?",
+  "hall_delete_dialog_content": "This will delete selected hall from list.",
+
+  "loading_data_text": "Loading data",
+  "no_schedule_for_this_date_text": "There is no schedule for this date"
+}

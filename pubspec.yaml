@@ -1,0 +1,58 @@
+name: sports_complex_app
+description: A sports complex application.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ">=2.7.0 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  flutter_localizations:
+    sdk: flutter
+
+  provider: ^4.3.3
+  rxdart: ^0.25.0
+
+  bloc: ^6.1.1
+  flutter_bloc: ^6.1.2
+
+  firebase_core: ^0.7.0
+  firebase_auth: ^0.20.1
+  cloud_firestore: ^0.16.0+1
+
+  animations: ^1.1.2
+  date_picker_timeline: ^1.2.1
+
+  injectable: ^1.0.7
+  get_it: ^5.0.6
+
+  uuid: ^2.2.2
+  firebase_auth_web: ^0.3.3
+  intl: ^0.17.0
+
+  json_annotation: ^3.1.1
+
+  # add hive (https://pub.dev/packages/hive)
+
+  cupertino_icons: ^1.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  build_runner: ^1.11.1
+  json_serializable: ^3.5.1
+  injectable_generator: ^1.0.7
+
+  surf_lint_rules: ^0.0.2-dev.3
+
+flutter:
+  uses-material-design: true
+
+flutter_intl:
+  enabled: true

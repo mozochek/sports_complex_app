@@ -1,0 +1,9 @@
+include: package:surf_lint_rules/analysis_options.yaml
+
+analyzer:
+  exclude:
+    - "lib/generated/**"
+    - "lib/l10n/**"
+    - "lib/injection.config.dart"
+    - "lib/generated_plugin_registrant.dart"
+    - "**/*.g.dart"
