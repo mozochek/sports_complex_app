@@ -3,6 +3,7 @@ import 'package:injectable/injectable.dart';
 
 import 'package:sports_complex_app/src/domain/user/user.dart';
 import 'package:sports_complex_app/src/infrastructure/core/exceptions/user_repository_exception.dart';
+import 'package:sports_complex_app/src/infrastructure/core/extensions/string_x.dart';
 
 @Injectable(
   env: [
@@ -15,37 +16,42 @@ class UserRepository {
 
   final FirebaseFirestore _firebaseFirestore;
 
-  Future<void> saveUserAdditionalInfo(UserData userData) async {
-    if (userData.authData.email.isEmpty) {
+  Future<void> saveUser(User user) async {
+    if (user.authData.email.isEmpty) {
       throw UserRepositoryException(UserRepositoryException.invalidEmail);
     }
     // TODO: improve validation
-    if (userData.additionalInfo.surname.isEmpty) {
+    if (user.additionalInfo.surname.isEmpty) {
       throw UserRepositoryException(UserRepositoryException.invalidUserSurname);
     }
     // TODO: improve validation
-    if (userData.additionalInfo.name.isEmpty) {
+    if (user.additionalInfo.name.isEmpty) {
       throw UserRepositoryException(UserRepositoryException.invalidUserName);
     }
 
-    await _firebaseFirestore
-        .collection('users')
-        .doc(userData.authData.email)
-        .set(
-      <String, String>{
-        'surname': userData.additionalInfo.surname,
-        'name': userData.additionalInfo.name,
+    // TODO: replace with toJson()
+    await _firebaseFirestore.collection('users').doc(user.authData.email).set(
+      <String, String?>{
+        'surname': user.additionalInfo.surname,
+        'name': user.additionalInfo.name,
+        'role': user.role.asString,
       },
     );
   }
 
-  Future<UserAdditionalInfo> getUserAdditionalInfo(
-      UserAuthData authData) async {
-    final _doc =
+  Future<User> getUser(UserAuthData authData) async {
+    final userDoc =
         await _firebaseFirestore.collection('users').doc(authData.email).get();
-    return UserAdditionalInfo(
-      surname: _doc.data()['surname'] as String,
-      name: _doc.data()['name'] as String,
+    final userAsJson = userDoc.data() ?? <String, dynamic>{};
+    // TODO: improve data validation
+    if (userAsJson.isEmpty) {
+      throw UserRepositoryException(UserRepositoryException.userDataIsEmpty);
+    }
+
+    return User.fromData(
+      authData: authData,
+      additionalInfo: UserAdditionalInfo.fromJson(userAsJson),
+      role: (userAsJson['role'] as String).asUserRole,
     );
   }
 }
