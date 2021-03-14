@@ -1,5 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:sports_complex_app/src/domain/core/exceptions/sign_in_exception.dart';
+import 'package:sports_complex_app/src/infrastructure/core/exceptions/user_repository_exception.dart';
 
 /// Enum which represents all possible exceptions while authenticated a user.
 ///
@@ -20,6 +22,12 @@ enum SignInExceptionCode {
   /// Equivalent to [FirebaseAuthException] with code 'user-not-found'
   firebaseUserNotFound,
 
+  /// Equivalent to [FirebaseAuthException] with code 'too-many-requests'
+  firebaseTooManyRequests,
+
+  /// Equivalent to [UserRepositoryException] with code [UserRepositoryException.userDataIsEmpty]
+  userDataIsEmpty,
+
   /// Option for unexpected exception code
   unsupportedCode,
 }
@@ -30,22 +38,20 @@ extension SignInExceptionCodeX on SignInExceptionCode {
     switch (this) {
       case SignInExceptionCode.firebaseInvalidEmail:
         return 'Данный пользователь не найден';
-        break;
       case SignInExceptionCode.firebaseWrongPassword:
-        return 'Данный польлзователь не найден';
-        break;
+        return 'Данный пользователь не найден';
       case SignInExceptionCode.firebaseUserDisabled:
         return 'Данный пользователь заблокирован';
-        break;
       case SignInExceptionCode.firebaseUserNotFound:
         return 'Данного пользователя не существует';
-        break;
+      case SignInExceptionCode.firebaseTooManyRequests:
+        return 'Слишком много попыток. Попробуйте позже';
+      case SignInExceptionCode.userDataIsEmpty:
+        return 'Не удалось получить данные пользователя';
       case SignInExceptionCode.unsupportedCode:
-        return 'Произошла неподдерживаемая ошибка';
-        break;
+        return 'Неподдерживаемая ошибка';
       default:
-        return 'Произошла неизвестная ошибка';
-        break;
+        return 'Неизвестная ошибка';
     }
   }
 }
