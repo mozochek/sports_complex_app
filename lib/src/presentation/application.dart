@@ -1,17 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
 import 'package:sports_complex_app/injection.dart';
-import 'package:sports_complex_app/src/application/sign_in/i_sign_in_bloc.dart';
-import 'package:sports_complex_app/src/presentation/sign_in/sign_in_screen.dart';
+import 'package:sports_complex_app/src/presentation/router/i_sports_complex_router.dart';
+import 'package:sports_complex_app/src/presentation/welcome/welcome_screen.dart';
 
-class Application extends StatelessWidget {
+class Application extends StatefulWidget {
   const Application({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
+  @override
+  _ApplicationState createState() => _ApplicationState();
+}
+
+class _ApplicationState extends State<Application> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,15 +31,8 @@ class Application extends StatelessWidget {
         primarySwatch: Colors.indigo,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MultiProvider(
-        providers: [
-          Provider<ISignInBloc>(
-            create: (_) => getIt<ISignInBloc>(),
-            dispose: (_, bloc) async => bloc.dispose(),
-          ),
-        ],
-        child: const SignInScreen(),
-      ),
+      navigatorKey: getIt<ISportsComplexRouter>().rootNavigatorKey,
+      home: const WelcomeScreen(),
     );
   }
 }

@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:sports_complex_app/injection.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
-import 'package:sports_complex_app/src/application/sign_in/i_sign_in_bloc.dart';
-import 'package:sports_complex_app/src/presentation/sign_in/sign_in_screen.dart';
+import 'package:sports_complex_app/src/presentation/router/i_sports_complex_router.dart';
 
 class AlreadyRegisteredText extends StatelessWidget {
   const AlreadyRegisteredText({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -18,16 +16,10 @@ class AlreadyRegisteredText extends StatelessWidget {
       children: <Widget>[
         Text('${S.current.already_registered_text}?'),
         GestureDetector(
-          onTap: () {
-            Navigator.of(context).pushAndRemoveUntil<Widget>(
-              MaterialPageRoute(
-                builder: (_) => Provider<ISignInBloc>(
-                  create: (_) => getIt<ISignInBloc>(),
-                  dispose: (_, bloc) => bloc.dispose(),
-                  child: const SignInScreen(),
-                ),
-              ),
-              (route) => false,
+          onTap: () async {
+            await getIt<ISportsComplexRouter>().pushAndRemoveUntil(
+              ScreenRoutes.signIn,
+              predicate: (route) => route.settings.name == '/',
             );
           },
           child: Text(
