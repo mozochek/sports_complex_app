@@ -27,6 +27,8 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
   final _userSurname = BehaviorSubject<String>();
   final _userName = BehaviorSubject<String>();
 
+  final User _possibleUser = User.empty();
+
   @override
   Stream<String> get userSurname =>
       _userSurname.stream.transform(_validateUserSurname);
@@ -35,10 +37,10 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
       StreamTransformer.fromHandlers(
         handleData: (rawUserSurname, sink) {
           final userSurname = rawUserSurname.trim();
+          _possibleUser.additionalInfo.surname = userSurname;
           sink.add(userSurname);
           if (!isUserSurnameCorrect(userSurname)) {
             // TODO: add localization
-            // TODO: add error sending via error object
             sink.addError('Фамилия должна состоять из 2 или более символов');
           }
         },
@@ -54,10 +56,10 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
       StreamTransformer.fromHandlers(
         handleData: (rawUserName, sink) {
           final userName = rawUserName.trim();
+          _possibleUser.additionalInfo.name = userName;
           sink.add(userName);
           if (!isUserNameCorrect(userName)) {
             // TODO: add localization
-            // TODO: add error sending via error object
             sink.addError('Имя должно состоять из 2 или более символов');
           }
         },
@@ -73,10 +75,10 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
       StreamTransformer.fromHandlers(
         handleData: (rawEmail, sink) {
           final email = rawEmail.trim();
+          _possibleUser.authData.email = email;
           sink.add(email);
           if (!isEmailCorrect(email)) {
             // TODO: add localization
-            // TODO: add error sending via error object
             sink.addError('Введите корректный адрес эл.почты');
           }
         },
@@ -92,10 +94,10 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
       StreamTransformer.fromHandlers(
         handleData: (rawPassword, sink) {
           final password = rawPassword.trim();
+          _possibleUser.authData.password = password;
           sink.add(password);
           if (!isPasswordCorrect(password)) {
             // TODO: add localization
-            // TODO: add error sending via error object
             sink.addError('Длина пароля должна быть не менее 6 символов');
           }
         },
@@ -104,6 +106,7 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
   @override
   ChangePassword get changePassword => _password.sink.add;
 
+  // TODO: подумать по поводоу переработки метода как в SignInBloc'е
   @override
   Stream<bool> get isSignUpAllowed =>
       Rx.combineLatest4<String, String, String, String, bool>(
@@ -121,7 +124,7 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
   @override
   Future<void> signUp() async {
     try {
-      await _auth.signUpWithEmailAndPassword(_userData);
+      await _auth.signUpWithEmailAndPassword(_possibleUser);
     } on SignUpException catch (e) {
       debugPrint(
         'Application layer: inside $runtimeType: catch ${e.runtimeType}: ${e.enumCode}: ${e.description}',
@@ -157,17 +160,6 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
       }
     }
   }
-
-  UserData get _userData => UserData(
-        authData: UserAuthData(
-          email: _email.value,
-          password: _password.value,
-        ),
-        additionalInfo: UserAdditionalInfo(
-          surname: _userSurname.value,
-          name: _userName.value,
-        ),
-      );
 
   @override
   Future<void> dispose() async {
