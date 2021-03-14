@@ -25,6 +25,8 @@ class SignInBloc extends ISignInBloc with SignInValidator {
   final _email = BehaviorSubject<String>();
   final _password = BehaviorSubject<String>();
 
+  final UserAuthData _userAuthData = UserAuthData.empty();
+
   @override
   Stream<String> get email => _email.stream.transform(_validateEmail);
 
@@ -32,10 +34,10 @@ class SignInBloc extends ISignInBloc with SignInValidator {
       StreamTransformer.fromHandlers(
         handleData: (rawEmail, sink) {
           final email = rawEmail.trim();
+          _userAuthData.email = email;
           sink.add(email);
           if (!isEmailCorrect(email)) {
             // TODO: add localization
-            // TODO: add error sending via error object
             sink.addError('Введите корректный адрес эл.почты');
           }
         },
@@ -51,10 +53,10 @@ class SignInBloc extends ISignInBloc with SignInValidator {
       StreamTransformer.fromHandlers(
         handleData: (rawPassword, sink) {
           final password = rawPassword.trim();
+          _userAuthData.password = password;
           sink.add(password);
           if (!isPasswordCorrect(password)) {
             // TODO: add localization
-            // TODO: add error sending via error object
             sink.addError('Длина пароля должна быть не менее 6 символов');
           }
         },
@@ -63,11 +65,7 @@ class SignInBloc extends ISignInBloc with SignInValidator {
   @override
   ChangePassword get changePassword => _password.sink.add;
 
-  UserAuthData get _userAuthData => UserAuthData(
-        email: _email.value,
-        password: _password.value,
-      );
-
+  // TODO: rework this check with cached object (not streams)
   @override
   Stream<bool> get isSignInAllowed => Rx.combineLatest2<String, String, bool>(
         email,
@@ -76,12 +74,10 @@ class SignInBloc extends ISignInBloc with SignInValidator {
       );
 
   @override
-  Future<bool> signIn() async {
+  Future<void> signIn() async {
     // TODO: refactor
-    bool isSignedIn = false;
     try {
       await _auth.signInWithEmailAndPassword(_userAuthData);
-      isSignedIn = true;
     } on SignInException catch (e) {
       debugPrint(
         'Application layer: inside $runtimeType: catch ${e.runtimeType}: ${e.enumCode}: ${e.description}',
@@ -103,13 +99,17 @@ class SignInBloc extends ISignInBloc with SignInValidator {
           // TODO: add behavior(as some pop up stuff)
           _email.sink.addError(e.description);
           break;
+        case SignInExceptionCode.firebaseTooManyRequests:
+          _email.sink.addError(e.description);
+          break;
+        case SignInExceptionCode.userDataIsEmpty:
+          _email.sink.addError(e.description);
+          break;
         case SignInExceptionCode.unsupportedCode:
           // TODO: add behavior(as some pop up stuff)
           _email.sink.addError(e.description);
           break;
       }
-    } finally {
-      return isSignedIn;
     }
   }
 
