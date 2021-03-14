@@ -4,7 +4,7 @@ import 'package:sports_complex_app/src/presentation/common/scaffold_wrapper.dart
 
 class FavoriteWorkoutsScreen extends StatelessWidget {
   const FavoriteWorkoutsScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

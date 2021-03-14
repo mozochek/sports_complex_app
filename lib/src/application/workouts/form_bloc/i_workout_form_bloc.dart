@@ -9,8 +9,8 @@ import 'package:sports_complex_app/src/domain/workouts/workout.dart';
 abstract class IWorkoutFormBloc extends IFormBloc<Workout> {
   IWorkoutFormBloc(
     ICudRepository<Workout> repository,
-    Workout workout,
-    FormBlocPurpose purpose,
+    Workout? workout,
+    FormBlocPurpose? purpose,
   ) : super(
           repository: repository,
           obj: workout,
@@ -19,32 +19,25 @@ abstract class IWorkoutFormBloc extends IFormBloc<Workout> {
 
   Stream<String> get workoutName;
 
-  Function(String) get changeWorkoutName;
+  void changeWorkoutName(String workoutName);
 
   Stream<Hall> get workoutHall;
 
-  void changeWorkoutHall(Hall hall);
+  void changeWorkoutHall(Hall? hall);
 
   Stream<Coach> get workoutCoach;
 
-  void changeWorkoutCoach(Coach coach);
+  void changeWorkoutCoach(Coach? coach);
 
-  // Function(Coach) get changeWorkoutCoach;
+  Stream<DateTime?> get workoutDate;
 
-  Stream<DateTime> get workoutDate;
+  void changeWorkoutDate(DateTime? date);
 
-  void changeWorkoutDate(DateTime date);
+  Stream<TimeOfDay?> get workoutStartTime;
 
-  // Function(DateTime) get changeWorkoutDate;
+  void changeWorkoutStartTime(TimeOfDay? startTime);
 
-  Stream<TimeOfDay> get workoutStartTime;
+  Stream<TimeOfDay?> get workoutEndTime;
 
-  void changeWorkoutStartTime(TimeOfDay startTime);
-
-  // Function(TimeOfDay) get changeWorkoutStartTime;
-
-  Stream<TimeOfDay> get workoutEndTime;
-
-  void changeWorkoutEndTime(TimeOfDay endTime);
-// Function(TimeOfDay) get changeWorkoutEndTime;
+  void changeWorkoutEndTime(TimeOfDay? endTime);
 }

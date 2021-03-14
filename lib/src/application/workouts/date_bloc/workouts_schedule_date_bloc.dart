@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
-@Singleton(
+@Injectable(
   env: [
     Environment.dev,
     Environment.prod,

@@ -9,7 +9,7 @@ import 'package:sports_complex_app/src/presentation/profile/admin_console/halls/
 
 class ListOfHallsButton extends StatelessWidget {
   const ListOfHallsButton({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -20,10 +20,10 @@ class ListOfHallsButton extends StatelessWidget {
           MaterialPageRoute(
             builder: (_) => MultiProvider(
               providers: [
-                Provider(
+                Provider<IHallsWatcherBloc>(
                   create: (_) => getIt<IHallsWatcherBloc>(),
                 ),
-                Provider(
+                Provider<IHallsActorBloc>(
                   create: (_) => getIt<IHallsActorBloc>(),
                 ),
               ],

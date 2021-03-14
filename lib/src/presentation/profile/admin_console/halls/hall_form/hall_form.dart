@@ -10,11 +10,11 @@ import 'package:sports_complex_app/src/presentation/profile/admin_console/halls/
 
 class HallForm extends StatelessWidget {
   const HallForm({
-    Key key,
+    Key? key,
     this.editedHall,
   }) : super(key: key);
 
-  final Hall editedHall;
+  final Hall? editedHall;
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +54,8 @@ class HallForm extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
-          children: <Widget>[
-            HallNameTextField(initialValue: editedHall?.name),
+          children: const <Widget>[
+            HallNameTextField(),
           ],
         ),
       ),

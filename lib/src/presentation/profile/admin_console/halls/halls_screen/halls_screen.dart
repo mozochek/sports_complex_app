@@ -17,7 +17,7 @@ import 'package:sports_complex_app/src/presentation/profile/admin_console/halls/
 
 class HallsScreen extends StatelessWidget {
   const HallsScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -32,12 +32,13 @@ class HallsScreen extends StatelessWidget {
           if (snapshot.hasData) {
             if (snapshot.connectionState == ConnectionState.active ||
                 snapshot.connectionState == ConnectionState.done) {
-              return snapshot.data.isNotEmpty
+              final listOfHalls = snapshot.data!;
+              return listOfHalls.isNotEmpty
                   ? ListView.builder(
                       shrinkWrap: true,
-                      itemCount: snapshot.data.length,
+                      itemCount: listOfHalls.length,
                       itemBuilder: (_, index) {
-                        final hall = snapshot.data[index];
+                        final hall = listOfHalls[index];
                         return HallListTile(
                           hall: hall,
                           onTap: () async {

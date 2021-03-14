@@ -16,21 +16,21 @@ class WorkoutsFirestoreCrudRepository extends IWorkoutsFirestoreCrudRepository {
   @override
   Future<void> create(Workout obj) =>
       firestoreInstance
-          .workoutsScheduleCollection(obj.date)
+          .workoutsScheduleCollection(obj.date!)
           .doc(obj.id)
           .set(obj.toJson());
 
   @override
   Future<void> delete(Workout obj) =>
       firestoreInstance
-          .workoutsScheduleCollection(obj.date)
+          .workoutsScheduleCollection(obj.date!)
           .doc(obj.id)
-          .delete();
+         .delete();
 
   @override
   Future<void> update(Workout obj) =>
       firestoreInstance
-          .workoutsScheduleCollection(obj.date)
+          .workoutsScheduleCollection(obj.date!)
           .doc(obj.id)
           .update(obj.toJson());
 

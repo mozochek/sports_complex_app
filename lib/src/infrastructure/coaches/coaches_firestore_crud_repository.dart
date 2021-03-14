@@ -7,7 +7,10 @@ import 'package:sports_complex_app/src/infrastructure/core/extensions/firebase_f
 
 @LazySingleton(
   as: ICoachesFirestoreCrudRepository,
-  env: [Environment.dev, Environment.prod],
+  env: [
+    Environment.dev,
+    Environment.prod,
+  ],
 )
 class CoachesFirestoreCrudRepository extends ICoachesFirestoreCrudRepository {
   CoachesFirestoreCrudRepository(FirebaseFirestore firestoreInstance)

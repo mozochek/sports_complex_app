@@ -5,11 +5,8 @@ import 'package:sports_complex_app/src/application/coaches/form_bloc/i_coach_for
 
 class CoachNameTextField extends StatelessWidget {
   const CoachNameTextField({
-    Key key,
-    this.initialValue,
+    Key? key,
   }) : super(key: key);
-
-  final String initialValue;
 
   @override
   Widget build(BuildContext context) {
@@ -19,14 +16,14 @@ class CoachNameTextField extends StatelessWidget {
       stream: bloc.coachName,
       builder: (_, snapshot) {
         return TextFormField(
-          initialValue: initialValue,
+          initialValue: bloc.obj?.name,
           keyboardType: TextInputType.name,
           onChanged: bloc.changeCoachName,
           decoration: InputDecoration(
             // TODO: add localization
           labelText: 'Имя',
             prefixIcon: const Icon(Icons.short_text),
-            errorText: snapshot.error as String,
+            errorText: snapshot.error as String?,
             errorMaxLines: 3,
           ),
         );

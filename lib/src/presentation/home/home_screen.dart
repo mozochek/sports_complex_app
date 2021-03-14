@@ -5,7 +5,7 @@ import 'package:sports_complex_app/src/presentation/common/scaffold_wrapper.dart
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

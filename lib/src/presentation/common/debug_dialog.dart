@@ -3,8 +3,8 @@ import 'package:sports_complex_app/src/presentation/common/confirmation_dialog.d
 
 class DebugDialog extends StatelessWidget {
   const DebugDialog({
-    @required this.content,
-    Key key,
+    required this.content,
+    Key? key,
   }) : super(key: key);
 
   final String content;

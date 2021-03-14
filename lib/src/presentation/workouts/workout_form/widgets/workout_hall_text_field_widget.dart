@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'package:sports_complex_app/src/application/halls/watcher_bloc/i_halls_watcher_bloc.dart';
-import 'package:sports_complex_app/src/application/workouts_schedule/form_bloc/i_workout_schedule_form_bloc.dart';
+import 'package:sports_complex_app/src/application/workouts/form_bloc/i_workout_form_bloc.dart';
 import 'package:sports_complex_app/src/domain/halls/hall.dart';
 import 'package:sports_complex_app/src/presentation/common/hall_selector_dialog.dart';
 import 'package:sports_complex_app/injection.dart';
 
 
-class WorkoutScheduleHallTextField extends StatelessWidget {
-  const WorkoutScheduleHallTextField({
-    Key key,
+class WorkoutHallTextField extends StatelessWidget {
+  const WorkoutHallTextField({
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -23,13 +24,13 @@ class WorkoutScheduleHallTextField extends StatelessWidget {
           controller: TextEditingController(
             // TODO: add localization
             text: snapshot.hasData
-                ? snapshot.data.name
+                ? snapshot.data!.name
                 : 'Выберите зал',
           ),
           decoration: InputDecoration(
             labelText: 'Зал',
             prefixIcon: const Icon(Icons.sports_volleyball),
-            errorText: snapshot.error as String,
+            errorText: snapshot.error as String?,
             errorMaxLines: 3,
           ),
           readOnly: true,

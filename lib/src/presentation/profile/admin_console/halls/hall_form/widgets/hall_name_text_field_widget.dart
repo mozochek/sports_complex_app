@@ -6,11 +6,8 @@ import 'package:sports_complex_app/src/application/halls/form_bloc/i_hall_form_b
 
 class HallNameTextField extends StatelessWidget {
   const HallNameTextField({
-    Key key,
-    this.initialValue,
+    Key? key,
   }) : super(key: key);
-
-  final String initialValue;
 
   @override
   Widget build(BuildContext context) {
@@ -20,13 +17,13 @@ class HallNameTextField extends StatelessWidget {
       stream: bloc.hallName,
       builder: (_, snapshot) {
         return TextFormField(
-          initialValue: initialValue,
+          initialValue: bloc.obj?.name,
           keyboardType: TextInputType.name,
           onChanged: bloc.changeHallName,
           decoration: InputDecoration(
             labelText: S.current.hall_form_hall_name_label_text,
             prefixIcon: const Icon(Icons.short_text),
-            errorText: snapshot.error as String,
+            errorText: snapshot.error as String?,
             errorMaxLines: 3,
           ),
         );

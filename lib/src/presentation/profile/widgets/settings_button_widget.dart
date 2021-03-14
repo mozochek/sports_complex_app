@@ -5,13 +5,14 @@ import 'package:sports_complex_app/src/presentation/profile/settings/settings_sc
 
 class SettingsButton extends StatelessWidget {
   const SettingsButton({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
+        // TODO: old navigation
         await Navigator.of(context).push<void>(
           MaterialPageRoute(
             fullscreenDialog: true,

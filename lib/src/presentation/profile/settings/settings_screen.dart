@@ -4,7 +4,7 @@ import 'package:sports_complex_app/src/presentation/common/scaffold_wrapper.dart
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

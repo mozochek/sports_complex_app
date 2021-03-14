@@ -8,7 +8,7 @@ import 'package:sports_complex_app/src/presentation/profile/admin_console/widget
 
 class AdminConsoleScreen extends StatelessWidget {
   const AdminConsoleScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -22,8 +22,6 @@ class AdminConsoleScreen extends StatelessWidget {
       body: Center(
         child: Column(
           children: const <Widget>[
-            // TODO: don't need this functionality in this place
-            // AddScheduleButton(),
             WriteNewsButton(),
             ListOfCoachesButton(),
             ListOfHallsButton(),

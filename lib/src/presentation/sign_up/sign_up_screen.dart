@@ -13,7 +13,7 @@ import 'package:sports_complex_app/src/presentation/sign_up/widgets/user_surname
 
 class SignUpScreen extends StatelessWidget {
   const SignUpScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

@@ -10,7 +10,7 @@ import 'package:sports_complex_app/src/presentation/common/loading_indicator_wid
 
 class CoachSelectorDialog extends StatelessWidget {
   const CoachSelectorDialog({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -36,16 +36,17 @@ class CoachSelectorDialog extends StatelessWidget {
             if (snapshot.hasData) {
               if (snapshot.connectionState == ConnectionState.active ||
                   snapshot.connectionState == ConnectionState.done) {
-                return snapshot.data.isNotEmpty
+                return snapshot.data!.isNotEmpty
                     ? ListView.builder(
                         physics: const ScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: snapshot.data.length,
+                        itemCount: snapshot.data!.length,
                         itemBuilder: (_, index) {
-                          final coach = snapshot.data[index];
+                          final coach = snapshot.data![index];
                           return CoachListTile(
                             coach: coach,
                             onTap: () {
+                              // TODO: old navigation
                               Navigator.of(context).pop<Coach>(coach);
                             },
                           );

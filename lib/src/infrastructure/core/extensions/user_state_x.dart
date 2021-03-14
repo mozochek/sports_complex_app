@@ -5,13 +5,10 @@ extension UserStateX on UserState {
     switch (this) {
       case UserState.signedIn:
         return 'Пользователь успешно зарегестрировал аккаунт';
-        break;
       case UserState.signedUp:
         return 'Пользователь успешно авторизовался';
-        break;
       case UserState.signedOut:
         return 'Пользователь вышел из своего аккаунта';
-        break;
       default:
         return '';
     }

@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:sports_complex_app/src/application/workouts_schedule/form_bloc/i_workout_schedule_form_bloc.dart';
+import 'package:sports_complex_app/src/application/workouts/form_bloc/i_workout_form_bloc.dart';
 import 'package:sports_complex_app/src/domain/workouts/workout.dart';
 import 'package:sports_complex_app/src/presentation/common/debug_dialog.dart';
 import 'package:sports_complex_app/src/presentation/common/scaffold_wrapper.dart';
-import 'package:sports_complex_app/src/presentation/workouts_schedule/workout_schedule_form/widgets/workout_schedule_coach_text_field_widget.dart';
-import 'package:sports_complex_app/src/presentation/workouts_schedule/workout_schedule_form/widgets/workout_schedule_date_text_field_widget.dart';
-import 'package:sports_complex_app/src/presentation/workouts_schedule/workout_schedule_form/widgets/workout_schedule_end_time_text_field_widget.dart';
-import 'package:sports_complex_app/src/presentation/workouts_schedule/workout_schedule_form/widgets/workout_schedule_hall_text_field_widget.dart';
-import 'package:sports_complex_app/src/presentation/workouts_schedule/workout_schedule_form/widgets/workout_schedule_name_text_field_widget.dart';
-import 'package:sports_complex_app/src/presentation/workouts_schedule/workout_schedule_form/widgets/workout_schedule_start_time_text_field_widget.dart';
+import 'package:sports_complex_app/src/presentation/workouts/workout_form/widgets/workout_coach_text_field_widget.dart';
+import 'package:sports_complex_app/src/presentation/workouts/workout_form/widgets/workout_date_text_field_widget.dart';
+import 'package:sports_complex_app/src/presentation/workouts/workout_form/widgets/workout_end_time_text_field_widget.dart';
+import 'package:sports_complex_app/src/presentation/workouts/workout_form/widgets/workout_hall_text_field_widget.dart';
+import 'package:sports_complex_app/src/presentation/workouts/workout_form/widgets/workout_name_text_field_widget.dart';
+import 'package:sports_complex_app/src/presentation/workouts/workout_form/widgets/workout_start_time_text_field_widget.dart';
 
-class WorkoutScheduleForm extends StatelessWidget {
-  const WorkoutScheduleForm({
-    Key key,
+class WorkoutForm extends StatelessWidget {
+  const WorkoutForm({
+    Key? key,
     this.editedWorkoutSchedule,
   }) : super(key: key);
 
-  final Workout editedWorkoutSchedule;
+  final Workout? editedWorkoutSchedule;
 
   @override
   Widget build(BuildContext context) {
@@ -60,15 +60,13 @@ class WorkoutScheduleForm extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           child: Column(
-            children: <Widget>[
-              WorkoutScheduleNameTextField(
-                initialValue: editedWorkoutSchedule?.name,
-              ),
-              const WorkoutScheduleHallTextField(),
-              const WorkoutScheduleCoachTextField(),
-              const WorkoutScheduleDateTextField(),
-              const WorkoutScheduleStartTimeTextField(),
-              const WorkoutScheduleEndTimeTextField(),
+            children: const <Widget>[
+              WorkoutNameTextField(),
+              WorkoutHallTextField(),
+              WorkoutCoachTextField(),
+              WorkoutDateTextField(),
+              WorkoutStartTimeTextField(),
+              WorkoutEndTimeTextField(),
             ],
           ),
         ),

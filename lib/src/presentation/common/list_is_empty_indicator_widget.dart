@@ -4,7 +4,7 @@ import 'package:sports_complex_app/generated/l10n.dart';
 
 class ListIsEmptyIndicator extends StatelessWidget {
   const ListIsEmptyIndicator({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

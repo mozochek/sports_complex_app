@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
 
 class EmailTextField extends StatelessWidget {
   const EmailTextField({
-    @required this.emailStream,
-    @required this.onChanged,
+    required this.emailStream,
+    required this.onChanged,
     this.initialValue,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
-  final String initialValue;
+  final String? initialValue;
   final Stream<String> emailStream;
   final Function(String) onChanged;
 
@@ -27,8 +28,7 @@ class EmailTextField extends StatelessWidget {
           decoration: InputDecoration(
             labelText: S.current.email_text,
             prefixIcon: const Icon(Icons.email),
-            // TODO: pass error via error object
-            errorText: snapshot.error as String,
+            errorText: snapshot.error as String?,
             errorMaxLines: 2,
           ),
         );

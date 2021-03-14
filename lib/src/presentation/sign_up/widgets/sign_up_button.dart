@@ -6,7 +6,7 @@ import 'package:sports_complex_app/src/application/sign_up/i_sign_up_bloc.dart';
 
 class SignUpButton extends StatelessWidget {
   const SignUpButton({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

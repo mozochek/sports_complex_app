@@ -4,15 +4,15 @@ import 'package:sports_complex_app/src/domain/halls/hall.dart';
 
 class HallListTile extends StatelessWidget {
   const HallListTile({
-    @required this.hall,
+    required this.hall,
     this.onTap,
     this.onLongPress,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   final Hall hall;
-  final Function() onTap;
-  final Function() onLongPress;
+  final Function()? onTap;
+  final Function()? onLongPress;
 
   @override
   Widget build(BuildContext context) {

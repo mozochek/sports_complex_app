@@ -17,7 +17,7 @@ import 'package:sports_complex_app/src/presentation/profile/admin_console/coache
 
 class CoachesScreen extends StatelessWidget {
   const CoachesScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -32,12 +32,13 @@ class CoachesScreen extends StatelessWidget {
           if (snapshot.hasData) {
             if (snapshot.connectionState == ConnectionState.active ||
                 snapshot.connectionState == ConnectionState.done) {
-              return snapshot.data.isNotEmpty
+              // TODO: !
+              return snapshot.data!.isNotEmpty
                   ? ListView.builder(
                       shrinkWrap: true,
-                      itemCount: snapshot.data.length,
+                      itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
-                        final coach = snapshot.data[index];
+                        final coach = snapshot.data![index];
                         return CoachListTile(
                           coach: coach,
                           onTap: () async {

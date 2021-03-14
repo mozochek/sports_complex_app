@@ -5,7 +5,7 @@ import 'package:sports_complex_app/src/presentation/common/debug_dialog.dart';
 
 class WriteNewsButton extends StatelessWidget {
   const WriteNewsButton({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

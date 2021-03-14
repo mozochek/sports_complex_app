@@ -12,41 +12,51 @@ part 'workout.g.dart';
 @JsonSerializable()
 class Workout {
   Workout({
-    @required this.id,
-    this.name,
-    this.hall,
-    this.coach,
-    this.date,
-    this.startTime,
-    this.endTime,
+    required this.id,
+    required this.name,
+    required this.hall,
+    required this.coach,
+    required this.date,
+    required this.startTime,
+    required this.endTime,
   });
 
   factory Workout.empty() => Workout(
-        id: Uuid().v4(),
+        id: const Uuid().v4(),
         name: '',
         hall: Hall.empty(),
         coach: Coach.empty(),
-        date: DateTime.now(),
-        startTime: TimeOfDay.now(),
-        endTime: TimeOfDay.now(),
+        date: null,
+        startTime: null,
+        endTime: null,
       );
 
   factory Workout.fromJson(Map<String, dynamic> json) =>
       _$WorkoutFromJson(json);
 
   factory Workout.fromFirestore(QueryDocumentSnapshot doc) =>
-      Workout.fromJson(doc.data());
+      Workout.fromJson(doc.data()!);
 
   final String id;
   String name;
   Hall hall;
   Coach coach;
   @dateTimeToDateConverter
-  DateTime date;
+  DateTime? date;
   @timeOfDayConverter
-  TimeOfDay startTime;
+  TimeOfDay? startTime;
   @timeOfDayConverter
-  TimeOfDay endTime;
+  TimeOfDay? endTime;
 
   Map<String, dynamic> toJson() => _$WorkoutToJson(this);
+
+  Workout copy() => Workout(
+        id: id,
+        name: name,
+        hall: hall,
+        coach: coach,
+        date: date,
+        startTime: startTime,
+        endTime: endTime,
+      );
 }

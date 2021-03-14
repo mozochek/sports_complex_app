@@ -14,11 +14,12 @@ extension FirebaseFirestoreX on FirebaseFirestore {
 
   DocumentReference hallDoc(Hall hall) => hallsCollection.doc(hall.id);
 
-  CollectionReference get workoutsCollection => collection('coachings');
+  CollectionReference get workoutsCollection => collection('workouts');
 
   CollectionReference workoutsScheduleCollection(DateTime date) =>
       workoutsCollection.doc(date.asFormattedString).collection('schedule');
 
+  // TODO: !
   DocumentReference workoutDoc(Workout workout) =>
-      workoutsCollection.doc(workout.date.asFormattedString);
+      workoutsCollection.doc(workout.date!.asFormattedString);
 }

@@ -3,15 +3,15 @@ import 'package:sports_complex_app/src/domain/workouts/workout.dart';
 
 class WorkoutScheduleListTile extends StatelessWidget {
   const WorkoutScheduleListTile({
-    @required this.workout,
+    required this.workout,
     this.onTap,
     this.onLongPress,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   final Workout workout;
-  final Function() onTap;
-  final Function() onLongPress;
+  final Function()? onTap;
+  final Function()? onLongPress;
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class WorkoutScheduleListTile extends StatelessWidget {
         title: Text(workout.name),
         subtitle: Text(workout.coach.fullName),
         leading: Text(
-          '${workout.startTime.format(context)}\n${workout.endTime.format(context)}',
+          '${workout.startTime!.format(context)}\n${workout.endTime!.format(context)}',
         ),
       ),
     );

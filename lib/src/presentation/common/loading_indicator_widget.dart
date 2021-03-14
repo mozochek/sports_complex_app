@@ -4,7 +4,7 @@ import 'package:sports_complex_app/generated/l10n.dart';
 
 class LoadingIndicator extends StatelessWidget {
   const LoadingIndicator({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override

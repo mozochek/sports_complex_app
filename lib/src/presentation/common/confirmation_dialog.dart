@@ -5,11 +5,11 @@ import 'package:flutter/material.dart';
 /// Return true if confirmation button was pressed, otherwise it will return false
 class ConfirmationDialog extends StatelessWidget {
   const ConfirmationDialog({
-    @required this.title,
-    @required this.content,
-    @required this.confirmButtonText,
-    @required this.refuseButtonText,
-    Key key,
+    required this.title,
+    required this.content,
+    required this.confirmButtonText,
+    required this.refuseButtonText,
+    Key? key,
   }) : super(key: key);
 
   final String title;
@@ -22,6 +22,7 @@ class ConfirmationDialog extends StatelessWidget {
     return AlertDialog(
       title: Text(title),
       content: Text(content),
+      // TODO: old navigation
       actions: [
         TextButton(
           onPressed: () {

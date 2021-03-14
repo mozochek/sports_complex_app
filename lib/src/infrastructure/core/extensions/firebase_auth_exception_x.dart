@@ -5,27 +5,21 @@ import 'package:sports_complex_app/src/infrastructure/auth/sign_up_exception_cod
 
 extension FirebaseAuthExceptionX on FirebaseAuthException {
   /// Return [SignUpExceptionCode] enum value
-  /// depending on the [FirebaseAuthException.code] value
+  /// depending on the FirebaseAuthException.code value
   SignUpExceptionCode get asSignUpEnumCode {
     switch (code) {
       case 'email-already-in-use':
         return SignUpExceptionCode.firebaseEmailAlreadyInUse;
-        break;
       case 'invalid-email':
         return SignUpExceptionCode.invalidEmail;
-        break;
       case 'operation-not-allowed':
         return SignUpExceptionCode.firebaseOperationNotAllowed;
-        break;
       case 'weak-password':
         return SignUpExceptionCode.firebaseWeakPassword;
-        break;
       case 'unknown':
         return SignUpExceptionCode.firebaseUnknownCode;
-        break;
       default:
         return SignUpExceptionCode.unsupportedCode;
-        break;
     }
   }
 
@@ -33,19 +27,16 @@ extension FirebaseAuthExceptionX on FirebaseAuthException {
     switch (code) {
       case 'invalid-email':
         return SignInExceptionCode.firebaseInvalidEmail;
-        break;
       case 'wrong-password':
         return SignInExceptionCode.firebaseWrongPassword;
-        break;
       case 'user-disabled':
         return SignInExceptionCode.firebaseUserDisabled;
-        break;
       case 'user-not-found':
         return SignInExceptionCode.firebaseUserNotFound;
-        break;
+      case 'too-many-requests':
+        return SignInExceptionCode.firebaseTooManyRequests;
       default:
         return SignInExceptionCode.unsupportedCode;
-        break;
     }
   }
 }

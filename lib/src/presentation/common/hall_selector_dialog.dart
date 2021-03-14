@@ -9,7 +9,7 @@ import 'package:sports_complex_app/src/presentation/common/loading_indicator_wid
 
 class HallSelectorDialog extends StatelessWidget {
   const HallSelectorDialog({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -22,6 +22,7 @@ class HallSelectorDialog extends StatelessWidget {
         color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(24.0),
+          // TODO: add localization
           child: Text(
             'Выберите зал:',
             style: Theme.of(context).textTheme.headline6,
@@ -35,13 +36,13 @@ class HallSelectorDialog extends StatelessWidget {
             if (snapshot.hasData) {
               if (snapshot.connectionState == ConnectionState.active ||
                   snapshot.connectionState == ConnectionState.done) {
-                return snapshot.data.isNotEmpty
+                return snapshot.data!.isNotEmpty
                     ? ListView.builder(
                         physics: const ScrollPhysics(),
                         shrinkWrap: true,
-                        itemCount: snapshot.data.length,
+                        itemCount: snapshot.data!.length,
                         itemBuilder: (_, index) {
-                          final hall = snapshot.data[index];
+                          final hall = snapshot.data![index];
                           return HallListTile(
                             hall: hall,
                             onTap: () {

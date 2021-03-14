@@ -7,9 +7,9 @@ import 'package:sports_complex_app/generated/l10n.dart';
 /// Return true if delete button was pressed, otherwise it will return false
 class DeleteDialog extends StatelessWidget {
   const DeleteDialog({
-    @required this.title,
-    @required this.content,
-    Key key,
+    required this.title,
+    required this.content,
+    Key? key,
   }) : super(key: key);
 
   final String title;
@@ -21,6 +21,7 @@ class DeleteDialog extends StatelessWidget {
       title: Text(title),
       content: Text(content),
       actions: [
+        // TODO: old navigation
         TextButton(
           onPressed: () {
             Navigator.of(context).pop(false);
@@ -33,20 +34,6 @@ class DeleteDialog extends StatelessWidget {
           },
           child: Text(S.current.delete_text.toUpperCase()),
         ),
-        // FlatButton(
-        //   textColor: const Color(0xFF6200EE),
-        //   onPressed: () {
-        //     Navigator.of(context).pop(false);
-        //   },
-        //   child: const Text('ОТМЕНА'),
-        // ),
-        // FlatButton(
-        //   textColor: const Color(0xFF6200EE),
-        //   onPressed: () {
-        //     Navigator.of(context).pop(true);
-        //   },
-        //   child: const Text('УДАЛИТЬ'),
-        // ),
       ],
     );
   }

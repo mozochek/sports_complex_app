@@ -4,13 +4,13 @@ import 'package:sports_complex_app/generated/l10n.dart';
 
 class PasswordTextField extends StatefulWidget {
   const PasswordTextField({
-    @required this.passwordStream,
-    @required this.onChanged,
+    required this.passwordStream,
+    required this.onChanged,
     this.initialValue,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
-  final String initialValue;
+  final String? initialValue;
   final Stream<String> passwordStream;
   final Function(String) onChanged;
 
@@ -19,7 +19,7 @@ class PasswordTextField extends StatefulWidget {
 }
 
 class _PasswordTextFieldState extends State<PasswordTextField> {
-  bool _obscureText;
+  late bool _obscureText;
 
   @override
   void initState() {
@@ -49,8 +49,7 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
               icon:
                   Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
             ),
-            // TODO: pass error via error object
-            errorText: snapshot.error as String,
+            errorText: snapshot.error as String?,
             errorMaxLines: 2,
           ),
         );

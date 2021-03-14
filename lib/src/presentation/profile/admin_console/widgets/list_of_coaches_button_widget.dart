@@ -9,7 +9,7 @@ import 'package:sports_complex_app/src/presentation/profile/admin_console/coache
 
 class ListOfCoachesButton extends StatelessWidget {
   const ListOfCoachesButton({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
@@ -20,10 +20,10 @@ class ListOfCoachesButton extends StatelessWidget {
           MaterialPageRoute(
             builder: (_) => MultiProvider(
               providers: [
-                Provider(
+                Provider<ICoachesWatcherBloc>(
                   create: (_) => getIt<ICoachesWatcherBloc>(),
                 ),
-                Provider(
+                Provider<ICoachesActorBloc>(
                   create: (_) => getIt<ICoachesActorBloc>(),
                 ),
               ],

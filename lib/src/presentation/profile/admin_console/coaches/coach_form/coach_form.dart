@@ -11,11 +11,11 @@ import 'package:sports_complex_app/src/presentation/profile/admin_console/coache
 
 class CoachForm extends StatelessWidget {
   const CoachForm({
-    Key key,
+    Key? key,
     this.editedCoach,
   }) : super(key: key);
 
-  final Coach editedCoach;
+  final Coach? editedCoach;
 
   @override
   Widget build(BuildContext context) {
@@ -56,10 +56,10 @@ class CoachForm extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         child: Column(
-          children: <Widget>[
-            CoachSurnameTextField(initialValue: editedCoach?.surname),
-            CoachNameTextField(initialValue: editedCoach?.name),
-            CoachPatronymicTextField(initialValue: editedCoach?.patronymic),
+          children: const <Widget>[
+            CoachSurnameTextField(),
+            CoachNameTextField(),
+            CoachPatronymicTextField(),
           ],
         ),
       ),

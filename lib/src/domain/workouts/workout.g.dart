@@ -10,12 +10,8 @@ Workout _$WorkoutFromJson(Map<String, dynamic> json) {
   return Workout(
     id: json['id'] as String,
     name: json['name'] as String,
-    hall: json['hall'] == null
-        ? null
-        : Hall.fromJson(json['hall'] as Map<String, dynamic>),
-    coach: json['coach'] == null
-        ? null
-        : Coach.fromJson(json['coach'] as Map<String, dynamic>),
+    hall: Hall.fromJson(json['hall'] as Map<String, dynamic>),
+    coach: Coach.fromJson(json['coach'] as Map<String, dynamic>),
     date:
         dateTimeToDateConverter.fromJson(json['date'] as Map<String, dynamic>),
     startTime:
@@ -28,8 +24,8 @@ Workout _$WorkoutFromJson(Map<String, dynamic> json) {
 Map<String, dynamic> _$WorkoutToJson(Workout instance) => <String, dynamic>{
       'id': instance.id,
       'name': instance.name,
-      'hall': instance.hall?.toJson(),
-      'coach': instance.coach?.toJson(),
+      'hall': instance.hall.toJson(),
+      'coach': instance.coach.toJson(),
       'date': dateTimeToDateConverter.toJson(instance.date),
       'startTime': timeOfDayConverter.toJson(instance.startTime),
       'endTime': timeOfDayConverter.toJson(instance.endTime),

@@ -4,7 +4,7 @@ import 'package:sports_complex_app/generated/l10n.dart';
 
 class NoScheduleIndicator extends StatelessWidget {
   const NoScheduleIndicator({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
