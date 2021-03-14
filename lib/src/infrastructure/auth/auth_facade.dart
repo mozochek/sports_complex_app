@@ -1,8 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
-import 'package:sports_complex_app/src/application/user/user_bloc.dart';
+import 'package:sports_complex_app/src/application/user/i_user_bloc.dart';
 import 'package:sports_complex_app/injection.dart';
 import 'package:sports_complex_app/src/domain/auth/i_auth.dart';
 import 'package:sports_complex_app/src/domain/core/exceptions/sign_in_exception.dart';
@@ -27,14 +28,18 @@ class AuthFacade extends IAuth {
   final UserRepository _userRepository;
 
   @override
-  Future<void> signUpWithEmailAndPassword(UserData userData) async {
+  Future<void> signUpWithEmailAndPassword(User user) async {
     try {
-      await _userRepository.saveUserAdditionalInfo(userData);
+      await _userRepository.saveUserData(user);
       await _firebaseAuth.createUserWithEmailAndPassword(
-        email: userData.authData.email,
-        password: userData.authData.password,
+        email: user.authData.email,
+        password: user.authData.password,
       );
-      getIt<UserBloc>().addUserState(UserState.signedUp);
+      getIt<IUserBloc>().addUserState(UserState.signedUp);
+      await Hive.box<String>('auth').put(
+        'email',
+        user.authData.email,
+      );
     } on FirebaseAuthException catch (e) {
       debugPrint(
         'Infrastructure layer: inside $runtimeType: catch ${e.runtimeType}: code: ${e.code} | message: ${e.message}',
@@ -55,20 +60,22 @@ class AuthFacade extends IAuth {
         email: userAuthData.email,
         password: userAuthData.password,
       );
-      final userAdditionalInfo =
-          await _userRepository.getUserAdditionalInfo(userAuthData);
-      final user = User.fromUserData(
-        UserData(
-          authData: userAuthData,
-          additionalInfo: userAdditionalInfo,
-        ),
+      final user = await _userRepository.getUser(userAuthData);
+      await Hive.box<String>('auth').put(
+        'email',
+        userAuthData.email,
       );
-      getIt<UserBloc>()
+      getIt<IUserBloc>()
         ..addUserState(UserState.signedIn)
         ..addUser(user);
     } on FirebaseAuthException catch (e) {
       debugPrint(
         'Infrastructure layer: inside $runtimeType: catch ${e.runtimeType}: code: ${e.code} | message: ${e.message}',
+      );
+      throw SignInException.fromEnumCode(e.asSignInEnumCode);
+    } on UserRepositoryException catch (e) {
+      debugPrint(
+        'Infrastructure layer: inside $runtimeType: catch ${e.runtimeType}: code: ${e.code} |',
       );
       throw SignInException.fromEnumCode(e.asSignInEnumCode);
     }
@@ -77,6 +84,8 @@ class AuthFacade extends IAuth {
   @override
   Future<void> signOut() async {
     await _firebaseAuth.signOut();
-    getIt<UserBloc>().addUserState(UserState.signedOut);
+    getIt<IUserBloc>()
+      ..addUserState(UserState.signedOut)
+      ..addUser(null);
   }
 }
