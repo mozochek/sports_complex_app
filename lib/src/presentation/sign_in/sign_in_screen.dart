@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
@@ -11,12 +12,15 @@ import 'package:sports_complex_app/src/presentation/sign_in/widgets/sign_in_butt
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({
-    Key key,
+    Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<ISignInBloc>(context);
+    // TODO: temporary caching (improve in future)
+    final authBox = Hive.box<String>('auth');
+    final bloc = Provider.of<ISignInBloc>(context)
+      ..changeEmail(authBox.get('email') ?? '');
 
     return ScaffoldWrapper(
       body: Center(
@@ -28,6 +32,7 @@ class SignInScreen extends StatelessWidget {
               EmailTextField(
                 emailStream: bloc.email,
                 onChanged: bloc.changeEmail,
+                initialValue: authBox.get('email'),
               ),
               PasswordTextField(
                 passwordStream: bloc.password,
