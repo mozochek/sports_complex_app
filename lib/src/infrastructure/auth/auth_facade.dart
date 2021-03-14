@@ -30,7 +30,7 @@ class AuthFacade extends IAuth {
   @override
   Future<void> signUpWithEmailAndPassword(User user) async {
     try {
-      await _userRepository.saveUserData(user);
+      await _userRepository.saveUser(user);
       await _firebaseAuth.createUserWithEmailAndPassword(
         email: user.authData.email,
         password: user.authData.password,
