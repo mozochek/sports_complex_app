@@ -5,8 +5,8 @@ import 'package:sports_complex_app/src/domain/coaches/i_coaches_firestore_crud_r
 abstract class ICoachFormBloc extends IFormBloc<Coach> {
   ICoachFormBloc(
     ICoachesFirestoreCrudRepository repository,
-    Coach coach,
-    FormBlocPurpose purpose,
+    Coach? coach,
+    FormBlocPurpose? purpose,
   ) : super(
           repository: repository,
           obj: coach,
@@ -17,17 +17,17 @@ abstract class ICoachFormBloc extends IFormBloc<Coach> {
   Stream<String> get coachSurname;
 
   /// Set [Coach] surname
-  Function(String) get changeCoachSurname;
+  void changeCoachSurname(String? coachSurname);
 
   /// Get current [Coach] name
   Stream<String> get coachName;
 
   /// Set [Coach] name
-  Function(String) get changeCoachName;
+  void changeCoachName(String? coachName);
 
   /// Get current [Coach] patronymic
   Stream<String> get coachPatronymic;
 
   /// Set [Coach] patronymic
-  Function(String) get changeCoachPatronymic;
+  void changeCoachPatronymic(String? coachPatronymic);
 }

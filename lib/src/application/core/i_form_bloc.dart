@@ -1,9 +1,11 @@
 import 'package:sports_complex_app/src/domain/core/repositories/i_cud_repository.dart';
 
+part 'form_bloc_purpose.dart';
+
 /// Abstract class that describes the default behaviour for any BLoC on any form screen
 abstract class IFormBloc<T> {
   IFormBloc({
-    this.repository,
+    required this.repository,
     this.obj,
     this.purpose,
   });
@@ -11,14 +13,14 @@ abstract class IFormBloc<T> {
   /// Instance of repository
   final ICudRepository<T> repository;
 
-  // todo: переписать документацию
-  /// Назначение блока
-  final FormBlocPurpose purpose;
-
   /// Function for creating object from all entered data
   ///
   /// As default used in [create()] function
-  final T obj;
+  final T? obj;
+
+  // TODO: doc
+  ///
+  final FormBlocPurpose? purpose;
 
   /// Stream of [bool] for UI responsiveness
   ///
@@ -41,17 +43,17 @@ abstract class IFormBloc<T> {
         switch (purpose) {
           case FormBlocPurpose.editing:
             {
-              await repository
-                  .update(obj)
-                  .catchError((dynamic e) => isSaved = false);
+              await repository.update(obj!).catchError(
+                    (dynamic e) => isSaved = false,
+                  );
               break;
             }
           case FormBlocPurpose.creating:
           default:
             {
-              await repository
-                  .create(obj)
-                  .catchError((dynamic e) => isSaved = false);
+              await repository.create(obj!).catchError(
+                    (dynamic e) => isSaved = false,
+                  );
               break;
             }
         }
@@ -62,9 +64,4 @@ abstract class IFormBloc<T> {
 
   /// Dispose of all possible resources
   Future<void> dispose();
-}
-
-enum FormBlocPurpose {
-  creating,
-  editing,
 }
