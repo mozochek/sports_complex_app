@@ -1,10 +1,10 @@
 enum UserState {
-  /// Пользователь зарегестрировался
+  /// Event signifying that user just signed up
   signedUp,
 
-  /// Пользователь вошел в аккаунт
+  /// Event signifying that user just signed in
   signedIn,
 
-  /// Пользователь вышел из аккаунта
+  /// Event signifying that user just signed out
   signedOut,
 }
