@@ -1,3 +1,4 @@
+import 'package:sports_complex_app/src/infrastructure/auth/sign_in_exception_code.dart';
 import 'package:sports_complex_app/src/infrastructure/auth/sign_up_exception_code.dart';
 
 class UserRepositoryException implements Exception {
@@ -16,23 +17,30 @@ class UserRepositoryException implements Exception {
 
   static const String invalidEmail = 'invalid-email';
 
+  static const String userDataIsEmpty = 'user-data-is-empty';
+
   SignUpExceptionCode get asSignUpEnumCode {
     switch (code) {
       case invalidUserSurname:
         return SignUpExceptionCode.invalidUserSurname;
-        break;
       case invalidUserName:
         return SignUpExceptionCode.invalidUserName;
-        break;
       case invalidEmail:
         return SignUpExceptionCode.invalidEmail;
-        break;
       default:
         return SignUpExceptionCode.unsupportedCode;
-        break;
+    }
+  }
+
+  SignInExceptionCode get asSignInEnumCode {
+    switch (code) {
+      case userDataIsEmpty:
+        return SignInExceptionCode.userDataIsEmpty;
+      default:
+        return SignInExceptionCode.unsupportedCode;
     }
   }
 
   @override
-  String toString() => '$runtimeType($_code)';
+  String toString() => '$runtimeType{_code: $_code}';
 }
