@@ -36,6 +36,8 @@ class User {
   UserRole role;
 
   String get fullName => '${additionalInfo.surname} ${additionalInfo.name}';
+
+  bool get isAdmin => role == UserRole.admin;
 }
 
 class UserAuthData {
