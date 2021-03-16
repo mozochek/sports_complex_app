@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/injection.dart';
@@ -9,6 +10,7 @@ import 'package:sports_complex_app/src/application/workouts/form_bloc/workout_fo
 import 'package:sports_complex_app/src/domain/workouts/workout.dart';
 import 'package:sports_complex_app/src/presentation/common/delete_dialog.dart';
 import 'package:sports_complex_app/src/presentation/common/workout_list_tile_widget.dart';
+import 'package:sports_complex_app/src/presentation/workouts/workout_details/workout_details_screen.dart';
 import 'package:sports_complex_app/src/presentation/workouts/workout_form/workout_form.dart';
 
 class ListOfWorkouts extends StatelessWidget {
@@ -29,50 +31,71 @@ class ListOfWorkouts extends StatelessWidget {
       itemCount: workouts.length,
       itemBuilder: (_, index) {
         final workout = workouts[index];
-        return WorkoutListTile(
-          workout: workout,
-          onTap: user.isAdmin
-              ? () async {
-                  // TODO: old navigation
-                  await Navigator.of(context).push<void>(
-                    MaterialPageRoute(
-                      fullscreenDialog: true,
-                      builder: (_) => Provider<IWorkoutFormBloc>(
-                        create: (_) => WorkoutFormBloc.forEditing(
-                          workout,
+        return Slidable(
+          actionPane: const SlidableScrollActionPane(),
+          secondaryActions: user.isAdmin
+              ? <Widget>[
+                  IconSlideAction(
+                    color: Colors.yellow,
+                    icon: Icons.edit,
+                    onTap: () async {
+                      // TODO: old navigation
+                      await Navigator.of(context).push<void>(
+                        MaterialPageRoute(
+                          fullscreenDialog: true,
+                          builder: (_) => Provider<IWorkoutFormBloc>(
+                            create: (_) => WorkoutFormBloc.forEditing(
+                              workout,
+                            ),
+                            dispose: (_, bloc) async => bloc.dispose(),
+                            child: const WorkoutForm(),
+                          ),
                         ),
-                        dispose: (_, bloc) async => bloc.dispose(),
-                        child: const WorkoutForm(),
-                      ),
-                    ),
-                  );
-                }
-              : null,
-          onLongPress: user.isAdmin
-              ? () async {
-                  final isDeleteConfirmed = await showDialog<bool>(
-                    context: context,
-                    builder: (_) {
-                      // TODO: add localization
-                      return const DeleteDialog(
-                        title: 'Удалить расписание тренировки?',
-                        content:
-                            'Выбранное расписание тренировки будет удалено из общего расписания',
                       );
                     },
-                  );
+                  ),
+                  IconSlideAction(
+                    color: Colors.red,
+                    icon: Icons.delete,
+                    onTap: () async {
+                      final isDeleteConfirmed = await showDialog<bool>(
+                        context: context,
+                        builder: (_) {
+                          // TODO: add localization
+                          return const DeleteDialog(
+                            title: 'Удалить расписание тренировки?',
+                            content:
+                                'Выбранное расписание тренировки будет удалено из общего расписания.',
+                          );
+                        },
+                      );
 
-                  // Null check in this statement work when user tap outside of dialog.
-                  // In this case we didn't get any response from dialog so as default
-                  // we set it to false
-                  if (isDeleteConfirmed ?? false) {
-                    await Provider.of<IWorkoutActorBloc>(
-                      context,
-                      listen: false,
-                    ).delete(workout);
-                  }
-                }
+                      // Null check in this statement work when user tap outside of dialog.
+                      // In this case we didn't get any response from dialog so as default
+                      // we set it to false
+                      if (isDeleteConfirmed ?? false) {
+                        await Provider.of<IWorkoutActorBloc>(
+                          context,
+                          listen: false,
+                        ).delete(workout);
+                      }
+                    },
+                  ),
+                ]
               : null,
+          child: WorkoutListTile(
+            workout: workout,
+            onTap: () async {
+              // TODO: old navigation
+              await Navigator.of(context).push<void>(
+                MaterialPageRoute(
+                  builder: (_) => WorkoutDetailsScreen(
+                    workout: workout,
+                  ),
+                ),
+              );
+            },
+          ),
         );
       },
     );
