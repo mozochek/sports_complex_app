@@ -19,9 +19,14 @@ class CoachListTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       onLongPress: onLongPress,
-      child: ListTile(
-        title: Text(coach.fullName),
-        leading: const Icon(Icons.account_circle),
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            title: Text(coach.fullName),
+            leading: const Icon(Icons.account_circle),
+          ),
+          const Divider(height: 0.0),
+        ],
       ),
     );
   }

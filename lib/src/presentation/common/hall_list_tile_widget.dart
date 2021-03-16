@@ -19,8 +19,13 @@ class HallListTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       onLongPress: onLongPress,
-      child: ListTile(
-        title: Text(hall.name),
+      child: Column(
+        children: <Widget>[
+          ListTile(
+            title: Text(hall.name),
+          ),
+          const Divider(height: 0.0),
+        ],
       ),
     );
   }
