@@ -8,7 +8,7 @@ import 'package:sports_complex_app/src/application/workouts/form_bloc/i_workout_
 import 'package:sports_complex_app/src/application/workouts/form_bloc/workout_form_bloc.dart';
 import 'package:sports_complex_app/src/domain/workouts/workout.dart';
 import 'package:sports_complex_app/src/presentation/common/delete_dialog.dart';
-import 'package:sports_complex_app/src/presentation/common/workout_schedule_list_tile_widget.dart';
+import 'package:sports_complex_app/src/presentation/common/workout_list_tile_widget.dart';
 import 'package:sports_complex_app/src/presentation/workouts/workout_form/workout_form.dart';
 
 class ListOfWorkouts extends StatelessWidget {
@@ -29,7 +29,7 @@ class ListOfWorkouts extends StatelessWidget {
       itemCount: workouts.length,
       itemBuilder: (_, index) {
         final workout = workouts[index];
-        return WorkoutScheduleListTile(
+        return WorkoutListTile(
           workout: workout,
           onTap: user.isAdmin
               ? () async {
