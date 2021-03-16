@@ -13,13 +13,16 @@ class WorkoutsDatePickerLine extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return DatePicker(
-      DateTime.now(),
-      daysCount: 14,
-      // TODO: check when null provided
-      initialSelectedDate: initialSelectedDate ?? DateTime.now(),
-      onDateChange: onDateChange,
-      locale: 'ru_RU',
+    return Material(
+      elevation: 2.0,
+      child: DatePicker(
+        DateTime.now(),
+        daysCount: 14,
+        // TODO: check when null provided
+        initialSelectedDate: initialSelectedDate ?? DateTime.now(),
+        onDateChange: onDateChange,
+        locale: 'ru_RU',
+      ),
     );
   }
 }
