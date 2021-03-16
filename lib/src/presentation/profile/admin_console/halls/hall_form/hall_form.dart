@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
 import 'package:sports_complex_app/src/application/halls/form_bloc/i_hall_form_bloc.dart';
-import 'package:sports_complex_app/src/domain/halls/hall.dart';
 import 'package:sports_complex_app/src/presentation/common/debug_dialog.dart';
 import 'package:sports_complex_app/src/presentation/common/scaffold_wrapper.dart';
 import 'package:sports_complex_app/src/presentation/profile/admin_console/halls/hall_form/widgets/hall_name_text_field_widget.dart';
@@ -11,10 +10,7 @@ import 'package:sports_complex_app/src/presentation/profile/admin_console/halls/
 class HallForm extends StatelessWidget {
   const HallForm({
     Key? key,
-    this.editedHall,
   }) : super(key: key);
-
-  final Hall? editedHall;
 
   @override
   Widget build(BuildContext context) {
