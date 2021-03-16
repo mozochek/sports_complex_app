@@ -44,13 +44,12 @@ class WorkoutsScreen extends StatelessWidget {
                       snapshot.connectionState == ConnectionState.done) {
                     // TODO: !
                     final workouts = snapshot.data!;
-                    if (workouts.isNotEmpty) {
-                      return ListOfWorkouts(workouts: workouts);
-                    } else {
-                      return const Expanded(
-                        child: NoScheduleIndicator(),
-                      );
-                    }
+
+                    return workouts.isNotEmpty
+                        ? ListOfWorkouts(workouts: workouts)
+                        : const Expanded(
+                            child: NoScheduleIndicator(),
+                          );
                   }
                   return const Expanded(
                     child: LoadingIndicator(),
