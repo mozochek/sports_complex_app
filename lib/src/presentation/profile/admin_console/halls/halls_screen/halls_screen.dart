@@ -42,13 +42,14 @@ class HallsScreen extends StatelessWidget {
                         return HallListTile(
                           hall: hall,
                           onTap: () async {
+                            // TODO: old navigation
                             await Navigator.of(context).push<void>(
                               MaterialPageRoute(
                                 fullscreenDialog: true,
                                 builder: (_) => Provider<IHallFormBloc>(
                                   create: (_) => HallFormBloc.forEditing(hall),
                                   dispose: (_, bloc) async => bloc.dispose(),
-                                  child: HallForm(editedHall: hall),
+                                  child: const HallForm(),
                                 ),
                               ),
                             );
