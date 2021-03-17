@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
 import 'package:sports_complex_app/src/presentation/common/debug_dialog.dart';
@@ -22,7 +23,7 @@ class WriteNewsButton extends StatelessWidget {
         );
       },
       child: ListTile(
-        leading: const Icon(Icons.edit),
+        leading: const FaIcon(FontAwesomeIcons.pen, color: Colors.lightBlue,),
         title: Text(
           S.current.write_news_text,
         ),

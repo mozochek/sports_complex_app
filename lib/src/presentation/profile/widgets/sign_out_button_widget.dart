@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
 import 'package:sports_complex_app/injection.dart';
@@ -31,8 +32,8 @@ class SignOutButton extends StatelessWidget {
         }
       },
       child: ListTile(
-        leading: const Icon(
-          Icons.logout,
+        leading: const FaIcon(
+          FontAwesomeIcons.signOutAlt,
           color: Colors.red,
         ),
         title: Text(

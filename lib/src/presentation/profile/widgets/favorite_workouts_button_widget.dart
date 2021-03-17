@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
 import 'package:sports_complex_app/src/presentation/profile/favorite_workouts/favorite_workouts_screen.dart';
@@ -20,8 +21,8 @@ class FavoriteWorkoutsButton extends StatelessWidget {
         );
       },
       child: ListTile(
-        leading: const Icon(
-          Icons.star_border,
+        leading: const FaIcon(
+          FontAwesomeIcons.star,
           color: Colors.yellow,
         ),
         title: Text(

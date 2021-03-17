@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/src/application/bottom_nav/bottom_navigation_bloc.dart';
@@ -39,15 +40,15 @@ class BottomNavigation extends StatelessWidget {
   final _navBarItems = <BottomNavigationBarItem>[
     BottomNavigationBarItem(
       label: S.current.home_text,
-      icon: const Icon(Icons.home),
+      icon: const FaIcon(FontAwesomeIcons.home),
     ),
     BottomNavigationBarItem(
       label: S.current.schedule_text,
-      icon: const Icon(Icons.date_range),
+      icon: const FaIcon(FontAwesomeIcons.calendarWeek),
     ),
     BottomNavigationBarItem(
       label: S.current.profile_text,
-      icon: const Icon(Icons.account_circle),
+      icon: const FaIcon(FontAwesomeIcons.userCircle),
     ),
   ];
 

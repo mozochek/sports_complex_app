@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
 import 'package:sports_complex_app/src/presentation/profile/settings/settings_screen.dart';
@@ -21,8 +22,8 @@ class SettingsButton extends StatelessWidget {
         );
       },
       child: ListTile(
-        leading: const Icon(
-          Icons.settings,
+        leading: const FaIcon(
+          FontAwesomeIcons.cog,
           color: Colors.black54,
         ),
         title: Text(

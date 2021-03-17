@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
 import 'package:sports_complex_app/injection.dart';
@@ -15,8 +16,8 @@ class AdminConsoleButton extends StatelessWidget {
       onTap: () async =>
           getIt<ISportsComplexRouter>().push(ScreenRoutes.adminConsole),
       child: ListTile(
-        leading: const Icon(
-          Icons.admin_panel_settings,
+        leading: const FaIcon(
+          FontAwesomeIcons.userShield,
           color: Colors.lightBlue,
         ),
         title: Text(

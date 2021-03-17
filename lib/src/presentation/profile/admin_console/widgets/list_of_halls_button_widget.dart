@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
@@ -33,7 +34,10 @@ class ListOfHallsButton extends StatelessWidget {
         );
       },
       child: ListTile(
-        leading: const Icon(Icons.sports_volleyball),
+        leading: const FaIcon(
+          FontAwesomeIcons.volleyballBall,
+          color: Colors.lightBlue,
+        ),
         title: Text(
           S.current.list_of_halls_text,
         ),
