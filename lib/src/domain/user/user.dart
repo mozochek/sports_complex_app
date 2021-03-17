@@ -1,111 +1,55 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:uuid/uuid.dart';
 
-// TODO: move all classes to their own files
+import 'package:sports_complex_app/src/domain/user/auth_data.dart';
+import 'package:sports_complex_app/src/domain/user/personal_data.dart';
+import 'package:sports_complex_app/src/domain/user/role.dart';
+
+part 'user.g.dart';
+
 // TODO: add json serializable
+@JsonSerializable()
 class User {
-  User._({
+  User({
     required this.id,
-    required this.additionalInfo,
+    required this.personalData,
     required this.authData,
     required this.role,
   });
 
-  factory User.empty() => User._(
+  factory User.createNewFrom({
+    required PersonalData personalData,
+    required AuthData authData,
+  }) =>
+      User(
         id: const Uuid().v4(),
-        additionalInfo: UserAdditionalInfo.empty(),
-        authData: UserAuthData.empty(),
-        role: UserRole.user,
+        personalData: personalData,
+        authData: authData,
+        role: Role.user,
       );
 
-  factory User.fromData({
-    required UserAdditionalInfo additionalInfo,
-    required UserAuthData authData,
-    required UserRole role,
-  }) =>
-      User._(
+  factory User.empty() => User(
         id: const Uuid().v4(),
-        additionalInfo: additionalInfo,
-        authData: authData,
-        role: role,
+        personalData: PersonalData.empty(),
+        authData: AuthData(),
+        role: Role.user,
       );
+
+  factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
+
+  // TODO: !
+  factory User.fromFirestore(QueryDocumentSnapshot doc) =>
+      User.fromJson(doc.data()!);
 
   final String id;
-  final UserAdditionalInfo additionalInfo;
-  final UserAuthData authData;
-  UserRole role;
+  final PersonalData personalData;
+  final AuthData authData;
+  Role role;
 
-  String get fullName => '${additionalInfo.surname} ${additionalInfo.name}';
+  Map<String, dynamic> toJson() => _$UserToJson(this);
 
-  bool get isAdmin => role == UserRole.admin;
-}
+  String get fullName => '${personalData.surname} ${personalData.name}';
 
-class UserAuthData {
-  UserAuthData({
-    required this.email,
-    required this.password,
-  });
-
-  factory UserAuthData.empty() => UserAuthData(
-        email: '',
-        password: '',
-      );
-
-  String email;
-  String password;
-
-  @override
-  String toString() => '$runtimeType(email: $email, password: $password)';
-}
-
-class UserAdditionalInfo {
-  UserAdditionalInfo({
-    required this.surname,
-    required this.name,
-  });
-
-  factory UserAdditionalInfo.empty() => UserAdditionalInfo(
-        surname: '',
-        name: '',
-      );
-
-  factory UserAdditionalInfo.fromJson(Map<String, dynamic> json) =>
-      UserAdditionalInfo(
-        surname: json['surname'] as String,
-        name: json['name'] as String,
-      );
-
-  factory UserAdditionalInfo.fromFirestore(DocumentSnapshot doc) =>
-      UserAdditionalInfo(
-        surname: doc.data()!['surname'] as String,
-        name: doc.data()!['name'] as String,
-      );
-
-  String surname;
-  String name;
-
-  @override
-  String toString() => '$runtimeType(surname: $surname, name: $name)';
-}
-
-enum UserRole {
-  unknown,
-  user,
-  moderator,
-  admin,
-}
-
-extension UserRoleX on UserRole {
-  String get asString {
-    switch (this) {
-      case UserRole.unknown:
-        return 'unknown';
-      case UserRole.user:
-        return 'user';
-      case UserRole.moderator:
-        return 'moderator';
-      case UserRole.admin:
-        return 'admin';
-    }
-  }
+  bool get isAdmin => role == Role.admin;
 }
