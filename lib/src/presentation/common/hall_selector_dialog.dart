@@ -29,7 +29,7 @@ class HallSelectorDialog extends StatelessWidget {
           ),
         ),
       ),
-      children: [
+      children: <Widget>[
         StreamBuilder<List<Hall>>(
           stream: Provider.of<IHallsWatcherBloc>(context).streamOfObjects,
           builder: (_, snapshot) {

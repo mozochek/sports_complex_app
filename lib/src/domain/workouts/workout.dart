@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'package:sports_complex_app/src/infrastructure/core/extensions/time_of_day_x.dart';
 import 'package:sports_complex_app/src/domain/coaches/coach.dart';
 import 'package:sports_complex_app/src/domain/halls/hall.dart';
 import 'package:sports_complex_app/src/infrastructure/core/json_converters/json_converters.dart';
@@ -49,6 +50,8 @@ class Workout {
   TimeOfDay? endTime;
 
   Map<String, dynamic> toJson() => _$WorkoutToJson(this);
+
+  TimeOfDay get duration => endTime!.subtract(startTime!);
 
   Workout copy() => Workout(
         id: id,

@@ -18,6 +18,7 @@ class Hall {
 
   factory Hall.fromJson(Map<String, dynamic> json) => _$HallFromJson(json);
 
+  // TODO: !
   factory Hall.fromFirestore(QueryDocumentSnapshot doc) =>
       Hall.fromJson(doc.data()!);
 

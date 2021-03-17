@@ -5,12 +5,14 @@ class ScaffoldWrapper extends StatelessWidget {
     required this.body,
     this.appBar,
     this.floatingActionButton,
+    this.floatingActionButtonLocation,
     Key? key,
   }) : super(key: key);
 
   final PreferredSizeWidget? appBar;
   final Widget body;
   final Widget? floatingActionButton;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class ScaffoldWrapper extends StatelessWidget {
         child: body,
       ),
       floatingActionButton: floatingActionButton,
+      floatingActionButtonLocation: floatingActionButtonLocation,
     );
   }
 }

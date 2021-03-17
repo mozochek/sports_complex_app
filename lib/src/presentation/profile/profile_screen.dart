@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:sports_complex_app/injection.dart';
 import 'package:sports_complex_app/src/application/user/i_user_bloc.dart';
-import 'package:sports_complex_app/src/domain/user/user.dart';
+import 'package:sports_complex_app/src/domain/user/role.dart';
 import 'package:sports_complex_app/src/presentation/common/scaffold_wrapper.dart';
 import 'package:sports_complex_app/src/presentation/profile/widgets/admin_console_button_widget.dart';
 import 'package:sports_complex_app/src/presentation/profile/widgets/favorite_workouts_button_widget.dart';
@@ -40,7 +40,7 @@ class ProfileScreen extends StatelessWidget {
             Column(
               children: <Widget>[
                 const FavoriteWorkoutsButton(),
-                if (currentUser.role == UserRole.admin)
+                if (currentUser.role == Role.admin)
                   const AdminConsoleButton(),
                 const SettingsButton(),
                 const SignOutButton(),
