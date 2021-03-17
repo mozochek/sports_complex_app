@@ -22,4 +22,6 @@ extension FirebaseFirestoreX on FirebaseFirestore {
   // TODO: !
   DocumentReference workoutDoc(Workout workout) =>
       workoutsCollection.doc(workout.date!.asFormattedString);
+
+  CollectionReference get usersCollection => collection('users');
 }
