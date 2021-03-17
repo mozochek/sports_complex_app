@@ -7,6 +7,8 @@ import 'package:rxdart/rxdart.dart';
 import 'package:sports_complex_app/src/application/sign_up/i_sign_up_bloc.dart';
 import 'package:sports_complex_app/src/domain/auth/i_auth.dart';
 import 'package:sports_complex_app/src/domain/core/exceptions/sign_up_exception.dart';
+import 'package:sports_complex_app/src/domain/user/auth_data.dart';
+import 'package:sports_complex_app/src/domain/user/personal_data.dart';
 import 'package:sports_complex_app/src/domain/user/user.dart';
 import 'package:sports_complex_app/src/infrastructure/auth/sign_up_exception_code.dart';
 import 'package:sports_complex_app/src/infrastructure/core/extensions/string_x.dart';
@@ -27,7 +29,8 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
   final _userSurname = BehaviorSubject<String>();
   final _userName = BehaviorSubject<String>();
 
-  final User _possibleUser = User.empty();
+  final AuthData _userAuthData = AuthData();
+  final PersonalData _userPersonalData = PersonalData.empty();
 
   @override
   Stream<String> get userSurname =>
@@ -37,7 +40,7 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
       StreamTransformer.fromHandlers(
         handleData: (rawUserSurname, sink) {
           final userSurname = rawUserSurname.trim();
-          _possibleUser.additionalInfo.surname = userSurname;
+          _userPersonalData.surname = userSurname;
           sink.add(userSurname);
           if (!isUserSurnameCorrect(userSurname)) {
             // TODO: add localization
@@ -56,7 +59,7 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
       StreamTransformer.fromHandlers(
         handleData: (rawUserName, sink) {
           final userName = rawUserName.trim();
-          _possibleUser.additionalInfo.name = userName;
+          _userPersonalData.name = userName;
           sink.add(userName);
           if (!isUserNameCorrect(userName)) {
             // TODO: add localization
@@ -75,7 +78,7 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
       StreamTransformer.fromHandlers(
         handleData: (rawEmail, sink) {
           final email = rawEmail.trim();
-          _possibleUser.authData.email = email;
+          _userAuthData.email = email;
           sink.add(email);
           if (!isEmailCorrect(email)) {
             // TODO: add localization
@@ -94,7 +97,7 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
       StreamTransformer.fromHandlers(
         handleData: (rawPassword, sink) {
           final password = rawPassword.trim();
-          _possibleUser.authData.password = password;
+          _userAuthData.password = password;
           sink.add(password);
           if (!isPasswordCorrect(password)) {
             // TODO: add localization
@@ -124,7 +127,7 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
   @override
   Future<void> signUp() async {
     try {
-      await _auth.signUpWithEmailAndPassword(_possibleUser);
+      await _auth.signUp(_userPersonalData, _userAuthData);
     } on SignUpException catch (e) {
       debugPrint(
         'Application layer: inside $runtimeType: catch ${e.runtimeType}: ${e.enumCode}: ${e.description}',

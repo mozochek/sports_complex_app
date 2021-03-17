@@ -1,4 +1,4 @@
-enum UserState {
+enum UserAuthState {
   /// Event signifying that user just signed up
   signedUp,
 

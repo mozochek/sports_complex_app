@@ -7,7 +7,7 @@ import 'package:rxdart/rxdart.dart';
 import 'package:sports_complex_app/src/application/sign_in/i_sign_in_bloc.dart';
 import 'package:sports_complex_app/src/domain/auth/i_auth.dart';
 import 'package:sports_complex_app/src/domain/core/exceptions/sign_in_exception.dart';
-import 'package:sports_complex_app/src/domain/user/user.dart';
+import 'package:sports_complex_app/src/domain/user/auth_data.dart';
 import 'package:sports_complex_app/src/infrastructure/auth/sign_in_exception_code.dart';
 import 'package:sports_complex_app/src/infrastructure/core/extensions/string_x.dart';
 
@@ -25,7 +25,7 @@ class SignInBloc extends ISignInBloc with SignInValidator {
   final _email = BehaviorSubject<String>();
   final _password = BehaviorSubject<String>();
 
-  final UserAuthData _userAuthData = UserAuthData.empty();
+  final AuthData _userAuthData = AuthData();
 
   @override
   Stream<String> get email => _email.stream.transform(_validateEmail);
@@ -77,7 +77,7 @@ class SignInBloc extends ISignInBloc with SignInValidator {
   Future<void> signIn() async {
     // TODO: refactor
     try {
-      await _auth.signInWithEmailAndPassword(_userAuthData);
+      await _auth.signInWithAuthData(_userAuthData);
     } on SignInException catch (e) {
       debugPrint(
         'Application layer: inside $runtimeType: catch ${e.runtimeType}: ${e.enumCode}: ${e.description}',
