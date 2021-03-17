@@ -42,6 +42,8 @@ dependencies:
 
   flutter_slidable: ^0.6.0-nullsafety.0
 
+  font_awesome_flutter: ^9.0.0-nullsafety
+
   cupertino_icons: ^1.0.2
 
 dev_dependencies:
