@@ -38,10 +38,6 @@ class User {
 
   factory User.fromJson(Map<String, dynamic> json) => _$UserFromJson(json);
 
-  // TODO: !
-  factory User.fromFirestore(QueryDocumentSnapshot doc) =>
-      User.fromJson(doc.data()!);
-
   final String id;
   final PersonalData personalData;
   final AuthData authData;
