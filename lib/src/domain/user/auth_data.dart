@@ -12,7 +12,6 @@ class AuthData {
   factory AuthData.fromJson(Map<String, dynamic> json) =>
       _$AuthDataFromJson(json);
 
-  @JsonKey(ignore: true)
   String email;
   @JsonKey(ignore: true)
   String password;
