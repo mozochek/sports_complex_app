@@ -7,7 +7,6 @@ import 'package:sports_complex_app/src/domain/coaches/coach.dart';
 import 'package:sports_complex_app/src/presentation/common/list_is_empty_indicator_widget.dart';
 import 'package:sports_complex_app/src/presentation/common/loading_indicator_widget.dart';
 import 'package:sports_complex_app/src/presentation/common/scaffold_wrapper.dart';
-import 'package:sports_complex_app/src/presentation/profile/admin_console/coaches/coaches_screen/widgets/coaches_screen_fab_widget.dart';
 import 'package:sports_complex_app/src/presentation/profile/admin_console/coaches/coaches_screen/widgets/list_of_coaches.dart';
 
 class CoachesScreen extends StatelessWidget {
@@ -37,7 +36,6 @@ class CoachesScreen extends StatelessWidget {
           return const LoadingIndicator();
         },
       ),
-      floatingActionButton: const CoachesScreenFabWidget(),
     );
   }
 }

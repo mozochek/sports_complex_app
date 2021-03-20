@@ -9,7 +9,6 @@ import 'package:sports_complex_app/src/domain/auth/i_auth.dart';
 import 'package:sports_complex_app/src/domain/core/exceptions/sign_up_exception.dart';
 import 'package:sports_complex_app/src/domain/user/auth_data.dart';
 import 'package:sports_complex_app/src/domain/user/personal_data.dart';
-import 'package:sports_complex_app/src/domain/user/user.dart';
 import 'package:sports_complex_app/src/infrastructure/auth/sign_up_exception_code.dart';
 import 'package:sports_complex_app/src/infrastructure/core/extensions/string_x.dart';
 

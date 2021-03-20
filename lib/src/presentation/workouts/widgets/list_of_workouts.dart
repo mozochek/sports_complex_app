@@ -24,8 +24,7 @@ class ListOfWorkouts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: !
-    final user = getIt<IUserBloc>().currentUser!;
-
+    final currentUser = getIt<IUserBloc>().currentUser!;
     return ListView.builder(
       shrinkWrap: true,
       itemCount: workouts.length,
@@ -33,56 +32,57 @@ class ListOfWorkouts extends StatelessWidget {
         final workout = workouts[index];
         return Slidable(
           actionPane: const SlidableScrollActionPane(),
-          secondaryActions: user.isAdmin
-              ? <Widget>[
-                  IconSlideAction(
-                    color: Colors.yellow,
-                    icon: Icons.edit,
-                    onTap: () async {
-                      // TODO: old navigation
-                      await Navigator.of(context).push<void>(
-                        MaterialPageRoute(
-                          fullscreenDialog: true,
-                          builder: (_) => Provider<IWorkoutFormBloc>(
-                            create: (_) => WorkoutFormBloc.forEditing(
-                              workout,
+          secondaryActions:
+              currentUser.isAdmin || workout.coach.id == currentUser.id
+                  ? <Widget>[
+                      IconSlideAction(
+                        color: Colors.yellow,
+                        icon: Icons.edit,
+                        onTap: () async {
+                          // TODO: old navigation
+                          await Navigator.of(context).push<void>(
+                            MaterialPageRoute(
+                              fullscreenDialog: true,
+                              builder: (_) => Provider<IWorkoutFormBloc>(
+                                create: (_) => WorkoutFormBloc.forEditing(
+                                  workout,
+                                ),
+                                dispose: (_, bloc) async => bloc.dispose(),
+                                child: const WorkoutForm(),
+                              ),
                             ),
-                            dispose: (_, bloc) async => bloc.dispose(),
-                            child: const WorkoutForm(),
-                          ),
-                        ),
-                      );
-                    },
-                  ),
-                  IconSlideAction(
-                    color: Colors.red,
-                    icon: Icons.delete,
-                    onTap: () async {
-                      final isDeleteConfirmed = await showDialog<bool>(
-                        context: context,
-                        builder: (_) {
-                          // TODO: add localization
-                          return const DeleteDialog(
-                            title: 'Удалить расписание тренировки?',
-                            content:
-                                'Выбранное расписание тренировки будет удалено из общего расписания.',
                           );
                         },
-                      );
+                      ),
+                      IconSlideAction(
+                        color: Colors.red,
+                        icon: Icons.delete,
+                        onTap: () async {
+                          final isDeleteConfirmed = await showDialog<bool>(
+                            context: context,
+                            builder: (_) {
+                              // TODO: add localization
+                              return const DeleteDialog(
+                                title: 'Удалить расписание тренировки?',
+                                content:
+                                    'Выбранное расписание тренировки будет удалено из общего расписания.',
+                              );
+                            },
+                          );
 
-                      // Null check in this statement work when user tap outside of dialog.
-                      // In this case we didn't get any response from dialog so as default
-                      // we set it to false
-                      if (isDeleteConfirmed ?? false) {
-                        await Provider.of<IWorkoutActorBloc>(
-                          context,
-                          listen: false,
-                        ).delete(workout);
-                      }
-                    },
-                  ),
-                ]
-              : null,
+                          // Null check in this statement work when user tap outside of dialog.
+                          // In this case we didn't get any response from dialog so as default
+                          // we set it to false
+                          if (isDeleteConfirmed ?? false) {
+                            await Provider.of<IWorkoutActorBloc>(
+                              context,
+                              listen: false,
+                            ).delete(workout);
+                          }
+                        },
+                      ),
+                    ]
+                  : null,
           child: WorkoutListTile(
             workout: workout,
             onTap: () async {

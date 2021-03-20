@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/src/application/coaches/watcher_bloc/i_coaches_watcher_bloc.dart';
+import 'package:sports_complex_app/src/application/user/i_user_bloc.dart';
 import 'package:sports_complex_app/src/application/workouts/form_bloc/i_workout_form_bloc.dart';
 import 'package:sports_complex_app/src/domain/coaches/coach.dart';
 import 'package:sports_complex_app/src/presentation/common/coach_selector_dialog.dart';
 import 'package:sports_complex_app/injection.dart';
-
 
 class WorkoutCoachTextField extends StatelessWidget {
   const WorkoutCoachTextField({
@@ -16,6 +16,11 @@ class WorkoutCoachTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final bloc = Provider.of<IWorkoutFormBloc>(context);
+    final currentUser = getIt<IUserBloc>().currentUser!;
+
+    if (currentUser.isCoach) {
+      bloc.changeWorkoutCoach(Coach.fromUser(currentUser));
+    }
 
     return StreamBuilder<Coach>(
       stream: bloc.workoutCoach,
@@ -23,9 +28,8 @@ class WorkoutCoachTextField extends StatelessWidget {
         return TextFormField(
           controller: TextEditingController(
             // TODO: add localization
-            text: snapshot.hasData
-                ? snapshot.data!.fullName
-                : 'Выберите тренера',
+            text:
+                snapshot.hasData ? snapshot.data!.fullName : 'Выберите тренера',
           ),
           decoration: InputDecoration(
             labelText: 'Тренер',
@@ -34,16 +38,18 @@ class WorkoutCoachTextField extends StatelessWidget {
             errorMaxLines: 3,
           ),
           readOnly: true,
-          onTap: () async {
-            final pickedCoach = await showDialog<Coach>(
-              context: context,
-              builder: (_) => Provider(
-                create: (_) => getIt<ICoachesWatcherBloc>(),
-                child: const CoachSelectorDialog(),
-              ),
-            );
-            bloc.changeWorkoutCoach(pickedCoach);
-          },
+          onTap: currentUser.isCoach
+              ? null
+              : () async {
+                  final pickedCoach = await showDialog<Coach>(
+                    context: context,
+                    builder: (_) => Provider(
+                      create: (_) => getIt<ICoachesWatcherBloc>(),
+                      child: const CoachSelectorDialog(),
+                    ),
+                  );
+                  bloc.changeWorkoutCoach(pickedCoach);
+                },
         );
       },
     );

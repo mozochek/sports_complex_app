@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart' hide User;
-import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
@@ -13,7 +12,6 @@ import 'package:sports_complex_app/src/domain/user/personal_data.dart';
 import 'package:sports_complex_app/src/domain/user/user_auth_state.dart';
 import 'package:sports_complex_app/src/infrastructure/core/exceptions/user_repository_exception.dart';
 import 'package:sports_complex_app/src/infrastructure/user/i_user_repository.dart';
-import 'package:sports_complex_app/src/infrastructure/user/user_repository.dart';
 import 'package:sports_complex_app/src/infrastructure/core/extensions/firebase_auth_exception_x.dart';
 
 @Injectable(

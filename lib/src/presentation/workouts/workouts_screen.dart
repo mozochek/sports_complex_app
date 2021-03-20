@@ -60,7 +60,7 @@ class WorkoutsScreen extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: user.isAdmin ? const WorkoutsFab() : null,
+      floatingActionButton: user.isCoachOrHigher ? const WorkoutsFab() : null,
     );
   }
 }

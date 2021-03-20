@@ -1,7 +1,7 @@
 import 'package:injectable/injectable.dart';
 
 import 'package:sports_complex_app/src/application/coaches/watcher_bloc/i_coaches_watcher_bloc.dart';
-import 'package:sports_complex_app/src/domain/coaches/i_coaches_firestore_crud_repository.dart';
+import 'package:sports_complex_app/src/domain/coaches/i_coaches_firestore_watcher.dart';
 
 @LazySingleton(
   as: ICoachesWatcherBloc,
@@ -11,6 +11,6 @@ import 'package:sports_complex_app/src/domain/coaches/i_coaches_firestore_crud_r
   ],
 )
 class CoachesWatcherBloc extends ICoachesWatcherBloc {
-  CoachesWatcherBloc(ICoachesFirestoreCrudRepository repository)
+  CoachesWatcherBloc(ICoachesFirestoreWatcher repository)
       : super(repository);
 }

@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:uuid/uuid.dart';
 
@@ -48,4 +47,8 @@ class User {
   String get fullName => '${personalData.surname} ${personalData.name}';
 
   bool get isAdmin => role == Role.admin;
+
+  bool get isCoach => role == Role.coach;
+
+  bool get isCoachOrHigher => isCoach || isAdmin;
 }

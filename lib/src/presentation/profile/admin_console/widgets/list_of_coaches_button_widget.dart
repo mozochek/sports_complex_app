@@ -3,7 +3,6 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
-import 'package:sports_complex_app/src/application/coaches/actor_bloc/i_coaches_actor_bloc.dart';
 import 'package:sports_complex_app/injection.dart';
 import 'package:sports_complex_app/src/application/coaches/watcher_bloc/i_coaches_watcher_bloc.dart';
 import 'package:sports_complex_app/src/presentation/profile/admin_console/coaches/coaches_screen/coaches_screen.dart';
@@ -19,15 +18,8 @@ class ListOfCoachesButton extends StatelessWidget {
       onTap: () async {
         await Navigator.of(context).push<void>(
           MaterialPageRoute(
-            builder: (_) => MultiProvider(
-              providers: [
-                Provider<ICoachesWatcherBloc>(
-                  create: (_) => getIt<ICoachesWatcherBloc>(),
-                ),
-                Provider<ICoachesActorBloc>(
-                  create: (_) => getIt<ICoachesActorBloc>(),
-                ),
-              ],
+            builder: (_) => Provider<ICoachesWatcherBloc>(
+              create: (_) => getIt<ICoachesWatcherBloc>(),
               child: const CoachesScreen(),
             ),
           ),
