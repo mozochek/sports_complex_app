@@ -15,63 +15,63 @@ import 'package:sports_complex_app/src/application/coaches/watcher_bloc/coaches_
 import 'package:sports_complex_app/src/application/coaches/watcher_bloc/i_coaches_watcher_bloc.dart'
     as _i8;
 import 'package:sports_complex_app/src/application/core/i_form_bloc.dart'
-    as _i31;
-import 'package:sports_complex_app/src/application/halls/actor_bloc/halls_actor_bloc.dart'
-    as _i34;
-import 'package:sports_complex_app/src/application/halls/actor_bloc/i_hall_actor_bloc.dart'
-    as _i33;
-import 'package:sports_complex_app/src/application/halls/form_bloc/hall_form_bloc.dart'
-    as _i32;
-import 'package:sports_complex_app/src/application/halls/form_bloc/i_hall_form_bloc.dart'
     as _i29;
+import 'package:sports_complex_app/src/application/halls/actor_bloc/halls_actor_bloc.dart'
+    as _i32;
+import 'package:sports_complex_app/src/application/halls/actor_bloc/i_hall_actor_bloc.dart'
+    as _i31;
+import 'package:sports_complex_app/src/application/halls/form_bloc/hall_form_bloc.dart'
+    as _i30;
+import 'package:sports_complex_app/src/application/halls/form_bloc/i_hall_form_bloc.dart'
+    as _i27;
 import 'package:sports_complex_app/src/application/halls/watcher_bloc/halls_watcher_bloc.dart'
     as _i13;
 import 'package:sports_complex_app/src/application/halls/watcher_bloc/i_halls_watcher_bloc.dart'
     as _i12;
 import 'package:sports_complex_app/src/application/sign_in/i_sign_in_bloc.dart'
-    as _i35;
+    as _i33;
 import 'package:sports_complex_app/src/application/sign_in/sign_in_bloc.dart'
-    as _i36;
+    as _i34;
 import 'package:sports_complex_app/src/application/sign_up/i_sign_up_bloc.dart'
-    as _i37;
+    as _i35;
 import 'package:sports_complex_app/src/application/sign_up/sign_up_bloc.dart'
-    as _i38;
+    as _i36;
 import 'package:sports_complex_app/src/application/user/actor_bloc/i_user_actor_bloc.dart'
-    as _i39;
+    as _i37;
 import 'package:sports_complex_app/src/application/user/actor_bloc/user_actor_bloc.dart'
-    as _i40;
+    as _i38;
 import 'package:sports_complex_app/src/application/user/i_user_bloc.dart'
-    as _i16;
-import 'package:sports_complex_app/src/application/user/user_bloc.dart' as _i17;
+    as _i39;
+import 'package:sports_complex_app/src/application/user/user_bloc.dart' as _i40;
 import 'package:sports_complex_app/src/application/user/watcher_bloc/i_users_watcher_bloc.dart'
-    as _i20;
+    as _i18;
 import 'package:sports_complex_app/src/application/user/watcher_bloc/users_watcher_bloc.dart'
-    as _i21;
+    as _i19;
 import 'package:sports_complex_app/src/application/workouts/actor_bloc/i_workout_actor_bloc.dart'
     as _i41;
 import 'package:sports_complex_app/src/application/workouts/actor_bloc/workout_actor_bloc.dart'
     as _i42;
 import 'package:sports_complex_app/src/application/workouts/date_bloc/workouts_schedule_date_bloc.dart'
-    as _i26;
+    as _i24;
 import 'package:sports_complex_app/src/application/workouts/form_bloc/i_workout_form_bloc.dart'
     as _i43;
 import 'package:sports_complex_app/src/application/workouts/form_bloc/workout_form_bloc.dart'
     as _i45;
 import 'package:sports_complex_app/src/application/workouts/watcher_bloc/i_workouts_watcher_bloc.dart'
-    as _i24;
+    as _i22;
 import 'package:sports_complex_app/src/application/workouts/watcher_bloc/workouts_watcher_bloc.dart'
-    as _i25;
-import 'package:sports_complex_app/src/domain/auth/i_auth.dart' as _i27;
+    as _i23;
+import 'package:sports_complex_app/src/domain/auth/i_auth.dart' as _i25;
 import 'package:sports_complex_app/src/domain/coaches/i_coaches_firestore_watcher.dart'
     as _i6;
-import 'package:sports_complex_app/src/domain/halls/hall.dart' as _i30;
+import 'package:sports_complex_app/src/domain/halls/hall.dart' as _i28;
 import 'package:sports_complex_app/src/domain/halls/i_halls_firestore_crud_repository.dart'
     as _i10;
 import 'package:sports_complex_app/src/domain/workouts/i_workouts_firestore_crud_repository.dart'
-    as _i22;
+    as _i20;
 import 'package:sports_complex_app/src/domain/workouts/workout.dart' as _i44;
 import 'package:sports_complex_app/src/infrastructure/auth/auth_facade.dart'
-    as _i28;
+    as _i26;
 import 'package:sports_complex_app/src/infrastructure/coaches/coaches_firestore_watcher.dart'
     as _i7;
 import 'package:sports_complex_app/src/infrastructure/core/injectables/firebase_injectables.dart'
@@ -79,11 +79,11 @@ import 'package:sports_complex_app/src/infrastructure/core/injectables/firebase_
 import 'package:sports_complex_app/src/infrastructure/halls/halls_firestore_crud_repository.dart'
     as _i11;
 import 'package:sports_complex_app/src/infrastructure/user/i_user_repository.dart'
-    as _i18;
+    as _i16;
 import 'package:sports_complex_app/src/infrastructure/user/user_repository.dart'
-    as _i19;
+    as _i17;
 import 'package:sports_complex_app/src/infrastructure/workouts/workouts_firestore_crud_repository.dart'
-    as _i23;
+    as _i21;
 import 'package:sports_complex_app/src/presentation/router/i_sports_complex_router.dart'
     as _i14;
 import 'package:sports_complex_app/src/presentation/router/sports_complex_router.dart'
@@ -126,53 +126,54 @@ extension GetItInjectableX on _i1.GetIt {
     gh.lazySingleton<_i14.ISportsComplexRouter>(
         () => _i15.SportsComplexRouter(),
         registerFor: {_dev, _prod, _test});
-    gh.lazySingleton<_i16.IUserBloc>(() => _i17.UserBloc(),
-        registerFor: {_dev, _prod, _test});
-    gh.factory<_i18.IUserRepository>(
-        () => _i19.UserRepository(get<_i5.FirebaseFirestore>()),
+    gh.factory<_i16.IUserRepository>(
+        () => _i17.UserRepository(get<_i5.FirebaseFirestore>()),
         registerFor: {_dev, _prod});
-    gh.lazySingleton<_i20.IUsersWatcherBloc>(
-        () => _i21.UsersWatcherBloc(get<_i18.IUserRepository>()),
+    gh.lazySingleton<_i18.IUsersWatcherBloc>(
+        () => _i19.UsersWatcherBloc(get<_i16.IUserRepository>()),
         registerFor: {_dev, _prod});
-    gh.lazySingleton<_i22.IWorkoutsFirestoreCrudRepository>(
+    gh.lazySingleton<_i20.IWorkoutsFirestoreCrudRepository>(
         () =>
-            _i23.WorkoutsFirestoreCrudRepository(get<_i5.FirebaseFirestore>()),
+            _i21.WorkoutsFirestoreCrudRepository(get<_i5.FirebaseFirestore>()),
         registerFor: {_dev, _prod});
-    gh.lazySingleton<_i24.IWorkoutsWatcherBloc>(
-        () => _i25.WorkoutsWatcherBloc(
-            get<_i22.IWorkoutsFirestoreCrudRepository>()),
+    gh.lazySingleton<_i22.IWorkoutsWatcherBloc>(
+        () => _i23.WorkoutsWatcherBloc(
+            get<_i20.IWorkoutsFirestoreCrudRepository>()),
         registerFor: {_dev, _prod});
-    gh.factory<_i26.WorkoutsScheduleDateBloc>(
-        () => _i26.WorkoutsScheduleDateBloc(),
+    gh.factory<_i24.WorkoutsScheduleDateBloc>(
+        () => _i24.WorkoutsScheduleDateBloc(),
         registerFor: {_dev, _prod, _test});
-    gh.factory<_i27.IAuth>(
-        () => _i28.AuthFacade(
-            get<_i4.FirebaseAuth>(), get<_i18.IUserRepository>()),
+    gh.factory<_i25.IAuth>(
+        () => _i26.AuthFacade(
+            get<_i4.FirebaseAuth>(), get<_i16.IUserRepository>()),
         registerFor: {_dev, _prod});
-    gh.factoryParam<_i29.IHallFormBloc, _i30.Hall?, _i31.FormBlocPurpose?>(
-        (hall, purpose) => _i32.HallFormBloc(
+    gh.factoryParam<_i27.IHallFormBloc, _i28.Hall?, _i29.FormBlocPurpose?>(
+        (hall, purpose) => _i30.HallFormBloc(
             get<_i10.IHallsFirestoreCrudRepository>(),
             hall: hall,
             purpose: purpose),
         registerFor: {_dev, _prod});
-    gh.lazySingleton<_i33.IHallsActorBloc>(
-        () => _i34.HallsActorBloc(get<_i10.IHallsFirestoreCrudRepository>()),
+    gh.lazySingleton<_i31.IHallsActorBloc>(
+        () => _i32.HallsActorBloc(get<_i10.IHallsFirestoreCrudRepository>()),
         registerFor: {_dev, _prod});
-    gh.factory<_i35.ISignInBloc>(() => _i36.SignInBloc(get<_i27.IAuth>()),
+    gh.factory<_i33.ISignInBloc>(() => _i34.SignInBloc(get<_i25.IAuth>()),
         registerFor: {_dev, _prod});
-    gh.factory<_i37.ISignUpBloc>(() => _i38.SignUpBloc(get<_i27.IAuth>()),
+    gh.factory<_i35.ISignUpBloc>(() => _i36.SignUpBloc(get<_i25.IAuth>()),
         registerFor: {_dev, _prod});
-    gh.lazySingleton<_i39.IUserActorBloc>(
-        () => _i40.UserActorBloc(get<_i18.IUserRepository>()),
+    gh.lazySingleton<_i37.IUserActorBloc>(
+        () => _i38.UserActorBloc(get<_i16.IUserRepository>()),
         registerFor: {_dev, _prod});
+    gh.lazySingleton<_i39.IUserBloc>(
+        () => _i40.UserBloc(get<_i16.IUserRepository>()),
+        registerFor: {_dev, _prod, _test});
     gh.lazySingleton<_i41.IWorkoutActorBloc>(
         () =>
-            _i42.WorkoutActorBloc(get<_i22.IWorkoutsFirestoreCrudRepository>()),
+            _i42.WorkoutActorBloc(get<_i20.IWorkoutsFirestoreCrudRepository>()),
         registerFor: {_dev, _prod});
     gh.factoryParam<_i43.IWorkoutFormBloc, _i44.Workout?,
-            _i31.FormBlocPurpose?>(
+            _i29.FormBlocPurpose?>(
         (workout, purpose) => _i45.WorkoutFormBloc(
-            get<_i22.IWorkoutsFirestoreCrudRepository>(),
+            get<_i20.IWorkoutsFirestoreCrudRepository>(),
             workout: workout,
             purpose: purpose),
         registerFor: {_dev, _prod});
