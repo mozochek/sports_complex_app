@@ -50,10 +50,12 @@ class AuthFacade extends IAuth {
           .addUserAuthState(UserAuthState.signedUp);
       // TODO: improve caching
       // Simple temporary caching
-      await Hive.box<String>('auth').put(
+      final box = await Hive.openBox<String>('auth');
+      await box.put(
         'email',
         createdUser.authData.email,
       );
+      await box.close();
     } on FirebaseAuthException catch (e) {
       throw SignUpException.fromEnumCode(e.asSignUpEnumCode);
     } on UserRepositoryException catch (e) {
@@ -76,12 +78,6 @@ class AuthFacade extends IAuth {
       getIt<IUserBloc>()
         ..addUserAuthState(UserAuthState.signedIn)
         ..addUser(user);
-      // TODO: improve caching
-      // Simple caching
-      await Hive.box<String>('auth').put(
-        'email',
-        userAuthData.email,
-      );
     } on FirebaseAuthException catch (e) {
       debugPrint(
         'Infrastructure layer: inside $runtimeType: catch ${e.runtimeType}: code: ${e.code} | message: ${e.message} | email: ${e.email}',
