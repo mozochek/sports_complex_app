@@ -35,8 +35,8 @@ class SignInBloc extends ISignInBloc with SignInValidator {
         handleData: (rawEmail, sink) {
           final email = rawEmail.trim();
           _userAuthData.email = email;
-          sink.add(email);
-          if (!isEmailCorrect(email)) {
+          sink.add(_userAuthData.email);
+          if (!isEmailCorrect(_userAuthData.email)) {
             // TODO: add localization
             sink.addError('Введите корректный адрес эл.почты');
           }
@@ -107,6 +107,9 @@ class SignInBloc extends ISignInBloc with SignInValidator {
           break;
         case SignInExceptionCode.unsupportedCode:
           // TODO: add behavior(as some pop up stuff)
+          _email.sink.addError(e.description);
+          break;
+        case SignInExceptionCode.unknown:
           _email.sink.addError(e.description);
           break;
       }

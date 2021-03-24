@@ -7,6 +7,7 @@ import 'package:sports_complex_app/src/application/user/i_user_bloc.dart';
 
 import 'package:sports_complex_app/src/domain/user/user.dart';
 import 'package:sports_complex_app/src/domain/user/user_auth_state.dart';
+import 'package:sports_complex_app/src/infrastructure/user/i_user_repository.dart';
 import 'package:sports_complex_app/src/presentation/router/i_sports_complex_router.dart';
 
 @LazySingleton(
@@ -17,25 +18,32 @@ import 'package:sports_complex_app/src/presentation/router/i_sports_complex_rout
     Environment.test,
   ],
 )
-class UserBloc implements IUserBloc {
-  UserBloc() {
+class UserBloc extends IUserBloc {
+  UserBloc(this._repository) {
     _listenUserAuthStates();
   }
 
-  final _userController = BehaviorSubject<User?>();
+  final IUserRepository _repository;
+
+  final _currentUserController = BehaviorSubject<User?>();
 
   final StreamController<UserAuthState> _userAuthStateController =
       StreamController<UserAuthState>.broadcast();
 
   @override
-  User? get currentUser => _userController.value;
+  User? get currentUser => _currentUserController.value;
+
+  @override
+  Stream<User?> get currentUserStream => _repository.watchUser(currentUser!);
 
   @override
   void addUserAuthState(UserAuthState state) =>
       _userAuthStateController.add(state);
 
   @override
-  void addUser(User? user) => _userController.add(user);
+  void addUser(User? user) {
+    _currentUserController.add(user);
+  }
 
   void _listenUserAuthStates() {
     _userAuthStateController.stream.listen(
@@ -65,6 +73,6 @@ class UserBloc implements IUserBloc {
 
   Future<void> dispose() async {
     await _userAuthStateController.close();
-    await _userController.close();
+    await _currentUserController.close();
   }
 }

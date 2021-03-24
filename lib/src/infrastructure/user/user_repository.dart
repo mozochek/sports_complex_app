@@ -62,6 +62,12 @@ class UserRepository implements IUserRepository {
   }
 
   @override
+  Future<Stream<User>> userStream(AuthData authData) async =>
+      _firebaseFirestore.usersCollection.doc(authData.email).snapshots().map(
+            (doc) => User.fromJson(doc.data()!),
+          );
+
+  @override
   Future<void> updateUserRole(User user, Role role) async =>
       _firebaseFirestore.usersCollection
           .doc(user.authData.email)
@@ -78,4 +84,10 @@ class UserRepository implements IUserRepository {
               return User.fromJson(userAsJson);
             },
           ).toList());
+
+  @override
+  Stream<User> watchUser(User user) => _firebaseFirestore.usersCollection
+      .doc(user.authData.email)
+      .snapshots()
+      .map((doc) => User.fromJson(doc.data()!));
 }

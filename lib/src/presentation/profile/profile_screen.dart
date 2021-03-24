@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:sports_complex_app/injection.dart';
 import 'package:sports_complex_app/src/application/user/i_user_bloc.dart';
 import 'package:sports_complex_app/src/domain/user/role.dart';
+import 'package:sports_complex_app/src/domain/user/user.dart';
+import 'package:sports_complex_app/src/presentation/common/loading_indicator_widget.dart';
 import 'package:sports_complex_app/src/presentation/common/scaffold_wrapper.dart';
 import 'package:sports_complex_app/src/presentation/profile/widgets/admin_console_button_widget.dart';
 import 'package:sports_complex_app/src/presentation/profile/widgets/favorite_workouts_button_widget.dart';
@@ -16,38 +18,47 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentUser = getIt<IUserBloc>().currentUser;
+    final userBloc = getIt<IUserBloc>();
 
     return ScaffoldWrapper(
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            const SizedBox(height: 25.0),
-            // TODO: remove placeholder
-            Text(
-              currentUser!.fullName,
-              style: const TextStyle(
-                fontSize: 25.0,
+      body: StreamBuilder<User?>(
+        stream: userBloc.currentUserStream,
+        builder: (_, snapshot) {
+          if (snapshot.hasData) {
+            final currentUser = snapshot.data!;
+            return Center(
+              child: Column(
+                children: <Widget>[
+                  const SizedBox(height: 25.0),
+                  // TODO: remove placeholder
+                  Text(
+                    currentUser.fullName,
+                    style: const TextStyle(
+                      fontSize: 25.0,
+                    ),
+                  ),
+                  const SizedBox(height: 25.0),
+                  // TODO: remove placeholder
+                  const CircleAvatar(
+                    radius: 100.0,
+                    child: Placeholder(),
+                  ),
+                  const SizedBox(height: 25.0),
+                  Column(
+                    children: <Widget>[
+                      const FavoriteWorkoutsButton(),
+                      if (currentUser.role == Role.admin)
+                        const AdminConsoleButton(),
+                      const SettingsButton(),
+                      const SignOutButton(),
+                    ],
+                  ),
+                ],
               ),
-            ),
-            const SizedBox(height: 25.0),
-            // TODO: remove placeholder
-            const CircleAvatar(
-              radius: 100.0,
-              child: Placeholder(),
-            ),
-            const SizedBox(height: 25.0),
-            Column(
-              children: <Widget>[
-                const FavoriteWorkoutsButton(),
-                if (currentUser.role == Role.admin)
-                  const AdminConsoleButton(),
-                const SettingsButton(),
-                const SignOutButton(),
-              ],
-            ),
-          ],
-        ),
+            );
+          }
+          return const LoadingIndicator();
+        },
       ),
     );
   }
