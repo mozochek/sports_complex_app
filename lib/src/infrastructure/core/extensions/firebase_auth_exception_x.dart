@@ -35,6 +35,8 @@ extension FirebaseAuthExceptionX on FirebaseAuthException {
         return SignInExceptionCode.firebaseUserNotFound;
       case 'too-many-requests':
         return SignInExceptionCode.firebaseTooManyRequests;
+      case 'unknown':
+        return SignInExceptionCode.unknown;
       default:
         return SignInExceptionCode.unsupportedCode;
     }

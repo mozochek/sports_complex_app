@@ -19,6 +19,8 @@ class UserRepositoryException implements Exception {
 
   static const String userDataIsEmpty = 'user-data-is-empty';
 
+  static const String unknown = 'unknown';
+
   SignUpExceptionCode get asSignUpEnumCode {
     switch (code) {
       case invalidUserSurname:

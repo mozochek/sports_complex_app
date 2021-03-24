@@ -28,6 +28,9 @@ enum SignInExceptionCode {
   /// Equivalent to [UserRepositoryException] with code [UserRepositoryException.userDataIsEmpty]
   userDataIsEmpty,
 
+  /// Internet connection troubles
+  unknown,
+
   /// Option for unexpected exception code
   unsupportedCode,
 }
@@ -48,6 +51,8 @@ extension SignInExceptionCodeX on SignInExceptionCode {
         return 'Слишком много попыток. Попробуйте позже';
       case SignInExceptionCode.userDataIsEmpty:
         return 'Не удалось получить данные пользователя';
+      case SignInExceptionCode.unknown:
+        return 'Проблемы с сетью. Проверьте подключение к интернету';
       case SignInExceptionCode.unsupportedCode:
         return 'Неподдерживаемая ошибка';
       default:
