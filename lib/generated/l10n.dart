@@ -57,21 +57,81 @@ class S {
     );
   }
 
-  /// `Sign In screen`
-  String get sign_in_screen_text {
+  /// `Welcome`
+  String get welcome_text {
     return Intl.message(
-      'Sign In screen',
-      name: 'sign_in_screen_text',
+      'Welcome',
+      name: 'welcome_text',
       desc: '',
       args: [],
     );
   }
 
-  /// `Sign Up screen`
-  String get sign_up_screen_text {
+  /// `Sports complex`
+  String get sports_complex_text {
     return Intl.message(
-      'Sign Up screen',
-      name: 'sign_up_screen_text',
+      'Sports complex',
+      name: 'sports_complex_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Workouts schedule`
+  String get workouts_schedule_text {
+    return Intl.message(
+      'Workouts schedule',
+      name: 'workouts_schedule_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Health`
+  String get health_text {
+    return Intl.message(
+      'Health',
+      name: 'health_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Welcome back`
+  String get sign_in_screen_title {
+    return Intl.message(
+      'Welcome back',
+      name: 'sign_in_screen_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `We were waiting for you`
+  String get sign_in_screen_subtitle {
+    return Intl.message(
+      'We were waiting for you',
+      name: 'sign_in_screen_subtitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Sign Up`
+  String get sign_up_screen_title {
+    return Intl.message(
+      'Sign Up',
+      name: 'sign_up_screen_title',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Register to start using the application`
+  String get sign_up_screen_subtitle {
+    return Intl.message(
+      'Register to start using the application',
+      name: 'sign_up_screen_subtitle',
       desc: '',
       args: [],
     );

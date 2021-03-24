@@ -1,8 +1,17 @@
 {
   "app_name": "Спортивный центр",
 
-  "sign_in_screen_text": "Экран авторизации",
-  "sign_up_screen_text": "Экран регистрации",
+  "welcome_text": "Добро пожаловать",
+  "sports_complex_text": "Спортивный комплекс",
+  "workouts_schedule_text": "Расписание тренировок",
+  "health_text": "Здоровье",
+
+  "sign_in_screen_title": "С возвращением",
+  "sign_in_screen_subtitle": "Мы вас ждали",
+
+  "sign_up_screen_title": "Регистрация",
+  "sign_up_screen_subtitle": "Зарегестрируйтесь, чтобы начать пользоваться приложением",
+
   "do_not_have_an_account_text": "Нет аккаунта",
   "already_registered_text": "Уже зарегестрированы",
 

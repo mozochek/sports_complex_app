@@ -1,8 +1,17 @@
 {
   "app_name": "Sports Complex",
 
-  "sign_in_screen_text": "Sign In screen",
-  "sign_up_screen_text": "Sign Up screen",
+  "welcome_text": "Welcome",
+  "sports_complex_text": "Sports complex",
+  "workouts_schedule_text": "Workouts schedule",
+  "health_text": "Health",
+
+  "sign_in_screen_title": "Welcome back",
+  "sign_in_screen_subtitle": "We were waiting for you",
+
+  "sign_up_screen_title": "Sign Up",
+  "sign_up_screen_subtitle": "Register to start using the application",
+
   "do_not_have_an_account_text": "Do not have an account",
   "already_registered_text": "Already registered",
 
