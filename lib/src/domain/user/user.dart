@@ -7,7 +7,6 @@ import 'package:sports_complex_app/src/domain/user/role.dart';
 
 part 'user.g.dart';
 
-// TODO: add json serializable
 @JsonSerializable()
 class User {
   User({

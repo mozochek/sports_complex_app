@@ -43,10 +43,17 @@ class AppThemes {
       selectedItemColor: AppColors.secondaryRed,
       unselectedItemColor: AppColors.textGrey,
     ),
+
+    // Buttons
     textButtonTheme: TextButtonThemeData(
       style: ButtonStyle(
         foregroundColor: MaterialStateProperty.resolveWith(
-          (states) => AppColors.secondaryRed,
+          (states) {
+            if (states.contains(MaterialState.disabled)) {
+              return AppColors.textGrey;
+            }
+            return AppColors.secondaryRed;
+          },
         ),
         textStyle: MaterialStateProperty.resolveWith(
           (states) => const TextStyle(
@@ -55,6 +62,7 @@ class AppThemes {
         ),
       ),
     ),
+    toggleableActiveColor: AppColors.secondaryRed,
 
     // Fab theme
     floatingActionButtonTheme: const FloatingActionButtonThemeData(

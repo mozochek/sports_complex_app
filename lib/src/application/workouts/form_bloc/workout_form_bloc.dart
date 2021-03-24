@@ -79,7 +79,6 @@ class WorkoutFormBloc extends IWorkoutFormBloc with WorkoutFormValidator {
           sink.add(hall);
           if (!isWorkoutHallCorrect(hall)) {
             // TODO: add localization
-            // TODO: add error sending via error object
             sink.addError('Обязательное поле');
           }
         },
@@ -100,7 +99,6 @@ class WorkoutFormBloc extends IWorkoutFormBloc with WorkoutFormValidator {
           sink.add(coach);
           if (!isWorkoutCoachCorrect(coach)) {
             // TODO: add localization
-            // TODO: add error sending via error object
             sink.addError('Обязательное поле');
           }
         },
@@ -121,7 +119,6 @@ class WorkoutFormBloc extends IWorkoutFormBloc with WorkoutFormValidator {
           sink.add(date);
           if (!isWorkoutDateCorrect(date)) {
             // TODO: add localization
-            // TODO: add error sending via error object
             sink.addError('Обязательное поле');
           }
         },
@@ -141,7 +138,6 @@ class WorkoutFormBloc extends IWorkoutFormBloc with WorkoutFormValidator {
           sink.add(startTime);
           if (!isWorkoutStartTimeCorrect(startTime)) {
             // TODO: add localization
-            // TODO: add error sending via error object
             sink.addError('Обязательное поле');
           }
         },
@@ -162,7 +158,6 @@ class WorkoutFormBloc extends IWorkoutFormBloc with WorkoutFormValidator {
           sink.add(endTime);
           if (!isWorkoutEndTimeCorrect(endTime)) {
             // TODO: add localization
-            // TODO: add error sending via error object
             sink.addError('Обязательное поле');
           }
         },

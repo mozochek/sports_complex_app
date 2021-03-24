@@ -28,9 +28,9 @@ class SignUpButton extends StatelessWidget {
         child: Center(
           child: Text(
             S.current.sign_up_text,
-            style: Theme.of(context).textButtonTheme.style!.textStyle!.resolve(
-                  MaterialState.values.toSet(),
-                ),
+            style: Theme.of(context).textButtonTheme.style!.textStyle!.resolve({
+              MaterialState.selected,
+            }),
           ),
         ),
       ),

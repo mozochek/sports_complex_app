@@ -27,9 +27,9 @@ class SignInButton extends StatelessWidget {
                   .textButtonTheme
                   .style!
                   .foregroundColor!
-                  .resolve(
-                    MaterialState.values.toSet(),
-                  ),
+                  .resolve({
+                MaterialState.selected,
+              }),
             ),
           ),
         ),
