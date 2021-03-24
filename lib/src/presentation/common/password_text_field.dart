@@ -46,8 +46,11 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                   _obscureText = !_obscureText;
                 });
               },
-              icon: Icon(
-                _obscureText ? Icons.visibility : Icons.visibility_off,
+              icon: AnimatedCrossFade(
+                firstChild: const Icon(Icons.visibility),
+                secondChild: const Icon(Icons.visibility_off),
+                crossFadeState: _obscureText ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+                duration: const Duration(milliseconds: 350),
               ),
             ),
             errorText: snapshot.error as String?,
