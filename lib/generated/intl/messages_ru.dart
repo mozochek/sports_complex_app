@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "hall_delete_dialog_title" : MessageLookupByLibrary.simpleMessage("Удалить зал?"),
     "hall_form_hall_name_label_text" : MessageLookupByLibrary.simpleMessage("Название зала"),
     "hall_form_title" : MessageLookupByLibrary.simpleMessage("Добавить зал"),
+    "health_text" : MessageLookupByLibrary.simpleMessage("Здоровье"),
     "home_text" : MessageLookupByLibrary.simpleMessage("Главная"),
     "list_is_empty_text" : MessageLookupByLibrary.simpleMessage("Список пуст"),
     "list_of_coaches_text" : MessageLookupByLibrary.simpleMessage("Список тренеров"),
@@ -46,13 +47,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "profile_text" : MessageLookupByLibrary.simpleMessage("Профиль"),
     "schedule_text" : MessageLookupByLibrary.simpleMessage("Расписание"),
     "settings_text" : MessageLookupByLibrary.simpleMessage("Настройки"),
-    "sign_in_screen_text" : MessageLookupByLibrary.simpleMessage("Экран авторизации"),
+    "sign_in_screen_subtitle" : MessageLookupByLibrary.simpleMessage("Мы вас ждали"),
+    "sign_in_screen_title" : MessageLookupByLibrary.simpleMessage("С возвращением"),
     "sign_in_text" : MessageLookupByLibrary.simpleMessage("Войти"),
     "sign_out_confirmation_dialog_content" : MessageLookupByLibrary.simpleMessage("Вы выйдите из текущего аккаунта и будете перенаправлены на экран авторизации."),
     "sign_out_confirmation_dialog_title" : MessageLookupByLibrary.simpleMessage("Выйти из аккаунта?"),
     "sign_out_text" : MessageLookupByLibrary.simpleMessage("Выход"),
-    "sign_up_screen_text" : MessageLookupByLibrary.simpleMessage("Экран регистрации"),
+    "sign_up_screen_subtitle" : MessageLookupByLibrary.simpleMessage("Зарегестрируйтесь, чтобы начать пользоваться приложением"),
+    "sign_up_screen_title" : MessageLookupByLibrary.simpleMessage("Регистрация"),
     "sign_up_text" : MessageLookupByLibrary.simpleMessage("Зарегестрироваться"),
+    "sports_complex_text" : MessageLookupByLibrary.simpleMessage("Спортивный комплекс"),
+    "welcome_text" : MessageLookupByLibrary.simpleMessage("Добро пожаловать"),
+    "workouts_schedule_text" : MessageLookupByLibrary.simpleMessage("Расписание тренировок"),
     "write_news_text" : MessageLookupByLibrary.simpleMessage("Написать новость")
   };
 }

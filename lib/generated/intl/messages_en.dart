@@ -36,6 +36,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "hall_delete_dialog_title" : MessageLookupByLibrary.simpleMessage("Delete hall?"),
     "hall_form_hall_name_label_text" : MessageLookupByLibrary.simpleMessage("Hall name"),
     "hall_form_title" : MessageLookupByLibrary.simpleMessage("Add hall"),
+    "health_text" : MessageLookupByLibrary.simpleMessage("Health"),
     "home_text" : MessageLookupByLibrary.simpleMessage("Home"),
     "list_is_empty_text" : MessageLookupByLibrary.simpleMessage("List is empty"),
     "list_of_coaches_text" : MessageLookupByLibrary.simpleMessage("List of trainers"),
@@ -46,13 +47,18 @@ class MessageLookup extends MessageLookupByLibrary {
     "profile_text" : MessageLookupByLibrary.simpleMessage("Profile"),
     "schedule_text" : MessageLookupByLibrary.simpleMessage("Schedule"),
     "settings_text" : MessageLookupByLibrary.simpleMessage("Settings"),
-    "sign_in_screen_text" : MessageLookupByLibrary.simpleMessage("Sign In screen"),
+    "sign_in_screen_subtitle" : MessageLookupByLibrary.simpleMessage("We were waiting for you"),
+    "sign_in_screen_title" : MessageLookupByLibrary.simpleMessage("Welcome back"),
     "sign_in_text" : MessageLookupByLibrary.simpleMessage("Sign In"),
     "sign_out_confirmation_dialog_content" : MessageLookupByLibrary.simpleMessage("You will be sign out of your current account and will be redirected to the login screen."),
     "sign_out_confirmation_dialog_title" : MessageLookupByLibrary.simpleMessage("Sign Out?"),
     "sign_out_text" : MessageLookupByLibrary.simpleMessage("Sign Out"),
-    "sign_up_screen_text" : MessageLookupByLibrary.simpleMessage("Sign Up screen"),
+    "sign_up_screen_subtitle" : MessageLookupByLibrary.simpleMessage("Register to start using the application"),
+    "sign_up_screen_title" : MessageLookupByLibrary.simpleMessage("Sign Up"),
     "sign_up_text" : MessageLookupByLibrary.simpleMessage("Sign Up"),
+    "sports_complex_text" : MessageLookupByLibrary.simpleMessage("Sports complex"),
+    "welcome_text" : MessageLookupByLibrary.simpleMessage("Welcome"),
+    "workouts_schedule_text" : MessageLookupByLibrary.simpleMessage("Workouts schedule"),
     "write_news_text" : MessageLookupByLibrary.simpleMessage("Write news")
   };
 }
