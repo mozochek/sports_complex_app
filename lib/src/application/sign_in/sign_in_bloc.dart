@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
 
@@ -26,6 +27,38 @@ class SignInBloc extends ISignInBloc with SignInValidator {
   final _password = BehaviorSubject<String>();
 
   final AuthData _userAuthData = AuthData();
+
+  final _isEmailRemembered = BehaviorSubject<bool>()..add(false);
+
+  @override
+  Stream<bool> get isEmailRememberedStream => _isEmailRemembered.stream;
+
+  @override
+  Function(bool) get changeIsEmailRemembered => _isEmailRemembered.sink.add;
+
+  Future<String?> _getCachedEmail() async {
+    final authBox = await Hive.openBox<String>('auth');
+    final cachedEmail = authBox.get('email');
+    if (cachedEmail != null) {
+      changeEmail(cachedEmail);
+    }
+    await authBox.close();
+    return cachedEmail;
+  }
+
+  Future<bool?> _getCachedIsEmailRemembered() async {
+    final statesBox = await Hive.openBox<bool>('states');
+    final isEmailRemembered = statesBox.get('isEmailRemembered');
+    _isEmailRemembered.add(isEmailRemembered ?? false);
+    await statesBox.close();
+    return isEmailRemembered;
+  }
+
+  @override
+  Future<Map<String, dynamic>> getCachedData() async => <String, dynamic>{
+        'email': await _getCachedEmail(),
+        'isEmailRemembered': await _getCachedIsEmailRemembered(),
+      };
 
   @override
   Stream<String> get email => _email.stream.transform(_validateEmail);
@@ -78,6 +111,23 @@ class SignInBloc extends ISignInBloc with SignInValidator {
     // TODO: refactor
     try {
       await _auth.signInWithAuthData(_userAuthData);
+
+      final statesBox = await Hive.openBox<bool>('states');
+      await statesBox.put('isEmailRemembered', _isEmailRemembered.value!);
+      await statesBox.close();
+
+      // TODO: probably need to create caching bloc or service
+      // Caching email
+      final authBox = await Hive.openBox<String>('auth');
+      if (_isEmailRemembered.value!) {
+        await authBox.put(
+          'email',
+          _userAuthData.email,
+        );
+      } else {
+        await authBox.delete('email');
+      }
+      await authBox.close();
     } on SignInException catch (e) {
       debugPrint(
         'Application layer: inside $runtimeType: catch ${e.runtimeType}: ${e.enumCode}: ${e.description}',
@@ -109,7 +159,7 @@ class SignInBloc extends ISignInBloc with SignInValidator {
           // TODO: add behavior(as some pop up stuff)
           _email.sink.addError(e.description);
           break;
-        case SignInExceptionCode.unknown:
+        case SignInExceptionCode.networkProblems:
           _email.sink.addError(e.description);
           break;
       }
@@ -120,6 +170,7 @@ class SignInBloc extends ISignInBloc with SignInValidator {
   Future<void> dispose() async {
     await _email.close();
     await _password.close();
+    await _isEmailRemembered.close();
   }
 }
 

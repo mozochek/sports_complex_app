@@ -3,6 +3,12 @@ typedef ChangeEmail = void Function(String);
 typedef ChangePassword = void Function(String);
 
 abstract class ISignInBloc {
+  Future<Map<String, dynamic>> getCachedData();
+
+  Stream<bool> get isEmailRememberedStream;
+
+  Function(bool) get changeIsEmailRemembered;
+
   /// Stream of email values
   Stream<String> get email;
 

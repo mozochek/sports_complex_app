@@ -19,7 +19,6 @@ Future<void> main() async {
     ],
   );
   await Hive.initFlutter();
-  await Hive.openBox<String>('auth');
   await Firebase.initializeApp();
   runApp(const Application());
 }
