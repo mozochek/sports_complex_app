@@ -20,7 +20,6 @@ class CoachSelectorDialog extends StatelessWidget {
       contentPadding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 16.0),
       title: Material(
         elevation: 2.0,
-        color: Colors.white,
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: Text(

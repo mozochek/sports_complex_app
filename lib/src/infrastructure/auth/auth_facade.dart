@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart' hide User;
+import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 
@@ -45,8 +46,8 @@ class AuthFacade extends IAuth {
       // Get to this point mean that user was created successfully so we
       // add user in bloc and update auth state
       getIt<IUserBloc>()
-        // ..addUser(createdUser)
-        .addUserAuthState(UserAuthState.signedUp);
+          // ..addUser(createdUser)
+          .addUserAuthState(UserAuthState.signedUp);
       // TODO: improve caching
       // Simple temporary caching
       await Hive.box<String>('auth').put(
@@ -82,8 +83,14 @@ class AuthFacade extends IAuth {
         userAuthData.email,
       );
     } on FirebaseAuthException catch (e) {
+      debugPrint(
+        'Infrastructure layer: inside $runtimeType: catch ${e.runtimeType}: code: ${e.code} | message: ${e.message} | email: ${e.email}',
+      );
       throw SignInException.fromEnumCode(e.asSignInEnumCode);
     } on UserRepositoryException catch (e) {
+      debugPrint(
+        'Application layer: inside $runtimeType: catch ${e.runtimeType}: ${e.code}',
+      );
       throw SignInException.fromEnumCode(e.asSignInEnumCode);
     }
   }

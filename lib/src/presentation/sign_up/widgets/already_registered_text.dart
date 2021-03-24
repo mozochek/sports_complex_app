@@ -14,7 +14,10 @@ class AlreadyRegisteredText extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text('${S.current.already_registered_text}?'),
+        Text(
+          '${S.current.already_registered_text}?',
+          style: Theme.of(context).textTheme.subtitle2,
+        ),
         GestureDetector(
           onTap: () async {
             await getIt<ISportsComplexRouter>().pushAndRemoveUntil(
@@ -24,8 +27,14 @@ class AlreadyRegisteredText extends StatelessWidget {
           },
           child: Text(
             ' ${S.current.sign_in_text}',
-            style: const TextStyle(
-              color: Colors.blue,
+            style: TextStyle(
+              color: Theme.of(context)
+                  .textButtonTheme
+                  .style!
+                  .foregroundColor!
+                  .resolve(
+                    MaterialState.values.toSet(),
+                  ),
             ),
           ),
         ),

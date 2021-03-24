@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import 'package:sports_complex_app/injection.dart';
 import 'package:sports_complex_app/src/application/user/i_user_bloc.dart';
-
 import 'package:sports_complex_app/src/application/workouts/date_bloc/workouts_schedule_date_bloc.dart';
 import 'package:sports_complex_app/src/application/workouts/watcher_bloc/i_workouts_watcher_bloc.dart';
+import 'package:sports_complex_app/src/domain/user/user.dart';
 import 'package:sports_complex_app/src/domain/workouts/workout.dart';
 import 'package:sports_complex_app/src/presentation/common/loading_indicator_widget.dart';
 import 'package:sports_complex_app/src/presentation/common/no_schedule_indicator.dart';
@@ -23,7 +24,7 @@ class WorkoutsScreen extends StatelessWidget {
     final watcherBloc = Provider.of<IWorkoutsWatcherBloc>(context);
     final dateBloc = Provider.of<WorkoutsScheduleDateBloc>(context);
     // TODO: !
-    final user = getIt<IUserBloc>().currentUser!;
+    final userBloc = getIt<IUserBloc>();
 
     return ScaffoldWrapper(
       body: StreamBuilder<DateTime>(
@@ -60,7 +61,18 @@ class WorkoutsScreen extends StatelessWidget {
           );
         },
       ),
-      floatingActionButton: user.isCoachOrHigher ? const WorkoutsFab() : null,
+      floatingActionButton: StreamBuilder<User?>(
+        stream: userBloc.currentUserStream,
+        builder: (_, snapshot) {
+          if (snapshot.hasData) {
+            final currentUser = snapshot.data!;
+            if (currentUser.isCoachOrHigher) {
+              return const WorkoutsFab();
+            }
+          }
+          return const SizedBox.shrink();
+        },
+      ),
     );
   }
 }

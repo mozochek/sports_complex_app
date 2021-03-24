@@ -46,11 +46,11 @@ class _PasswordTextFieldState extends State<PasswordTextField> {
                   _obscureText = !_obscureText;
                 });
               },
-              icon:
-                  Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+              icon: Icon(
+                _obscureText ? Icons.visibility : Icons.visibility_off,
+              ),
             ),
             errorText: snapshot.error as String?,
-            errorMaxLines: 2,
           ),
         );
       },

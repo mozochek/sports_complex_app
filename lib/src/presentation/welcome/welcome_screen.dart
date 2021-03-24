@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'package:sports_complex_app/injection.dart';
-import 'package:sports_complex_app/src/presentation/common/scaffold_wrapper.dart';
-import 'package:sports_complex_app/src/presentation/router/i_sports_complex_router.dart';
+import 'package:sports_complex_app/generated/l10n.dart';
+import 'package:sports_complex_app/src/presentation/welcome/widgets/sign_in_button.dart';
+import 'package:sports_complex_app/src/presentation/welcome/widgets/sign_up_button.dart';
+import 'package:sports_complex_app/src/presentation/welcome/widgets/welcome_picture.dart';
 
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({
@@ -11,32 +12,51 @@ class WelcomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldWrapper(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            // TODO: add localization
-            const Text('Приветствуем Вас'),
-            ElevatedButton(
-              onPressed: () async {
-                await getIt<ISportsComplexRouter>().pushAndRemoveUntil(
-                  ScreenRoutes.signIn,
-                  predicate: (route) => route.settings.name == '/',
-                );
-              },
-              // TODO: add localization
-              child: const Text('Авторизация'),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                await getIt<ISportsComplexRouter>().pushAndRemoveUntil(
-                  ScreenRoutes.signUp,
-                  predicate: (route) => route.settings.name == '/',
-                );
-              },
-              // TODO: add localization
-              child: const Text('Регистрация'),
+    return Scaffold(
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Expanded(
+                    flex: 4,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          const WelcomePicture(),
+                          const SizedBox(height: 20.0),
+                          Text(
+                            S.current.welcome_text,
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                          const SizedBox(height: 20.0),
+                          Text(
+                            '${S.current.sports_complex_text} | ${S.current.workouts_schedule_text} | ${S.current.health_text}',
+                            textAlign: TextAlign.center,
+                            style: Theme.of(context).textTheme.subtitle1,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: const <Widget>[
+                        SignUpButton(),
+                        SignInButton(),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

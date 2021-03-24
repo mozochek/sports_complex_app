@@ -24,7 +24,7 @@ class SettingsButton extends StatelessWidget {
       child: ListTile(
         leading: const FaIcon(
           FontAwesomeIcons.cog,
-          color: Colors.black54,
+          color: Colors.grey,
         ),
         title: Text(
           S.current.settings_text,

@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
 import 'package:sports_complex_app/src/application/sign_in/i_sign_in_bloc.dart';
 import 'package:sports_complex_app/src/presentation/common/email_text_field.dart';
 import 'package:sports_complex_app/src/presentation/common/password_text_field.dart';
-import 'package:sports_complex_app/src/presentation/common/scaffold_wrapper.dart';
 import 'package:sports_complex_app/src/presentation/sign_in/widgets/do_not_have_an_account_text.dart';
 import 'package:sports_complex_app/src/presentation/sign_in/widgets/sign_in_button.dart';
+import 'package:sports_complex_app/src/presentation/sign_in/widgets/sign_in_picture.dart';
 
 class SignInScreen extends StatelessWidget {
   const SignInScreen({
@@ -17,31 +16,60 @@ class SignInScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: temporary caching (improve in future)
-    final authBox = Hive.box<String>('auth');
-    final bloc = Provider.of<ISignInBloc>(context)
-      ..changeEmail(authBox.get('email') ?? '');
+    final bloc = Provider.of<ISignInBloc>(context);
 
-    return ScaffoldWrapper(
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Text(S.current.sign_in_screen_text),
-              EmailTextField(
-                emailStream: bloc.email,
-                onChanged: bloc.changeEmail,
-                initialValue: authBox.get('email'),
+    return Scaffold(
+      body: SafeArea(
+        child: CustomScrollView(
+          slivers: <Widget>[
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      children: <Widget>[
+                        const SignInPicture(),
+                        Text(
+                          S.current.sign_in_screen_title,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.headline4,
+                        ),
+                        Text(
+                          S.current.sign_in_screen_subtitle,
+                          textAlign: TextAlign.center,
+                          style: Theme.of(context).textTheme.subtitle1,
+                        ),
+                      ],
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      children: <Widget>[
+                        EmailTextField(
+                          emailStream: bloc.email,
+                          onChanged: bloc.changeEmail,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 16.0),
+                          child: PasswordTextField(
+                            passwordStream: bloc.password,
+                            onChanged: bloc.changePassword,
+                          ),
+                        ),
+                        const SignInButton(),
+                        const DoNotHaveAnAccountText(),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              PasswordTextField(
-                passwordStream: bloc.password,
-                onChanged: bloc.changePassword,
-              ),
-              const SignInButton(),
-              const DoNotHaveAnAccountText(),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

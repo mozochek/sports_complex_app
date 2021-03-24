@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:sports_complex_app/generated/l10n.dart';
 import 'package:sports_complex_app/src/application/halls/form_bloc/i_hall_form_bloc.dart';
 import 'package:sports_complex_app/src/presentation/common/debug_dialog.dart';
-import 'package:sports_complex_app/src/presentation/common/scaffold_wrapper.dart';
 import 'package:sports_complex_app/src/presentation/profile/admin_console/halls/hall_form/widgets/hall_name_text_field_widget.dart';
 
 class HallForm extends StatelessWidget {
@@ -16,7 +15,7 @@ class HallForm extends StatelessWidget {
   Widget build(BuildContext context) {
     final bloc = Provider.of<IHallFormBloc>(context);
 
-    return ScaffoldWrapper(
+    return Scaffold(
       appBar: AppBar(
         title: Text(S.current.hall_form_title),
         actions: <Widget>[
@@ -47,12 +46,14 @@ class HallForm extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16.0),
-        child: Column(
-          children: const <Widget>[
-            HallNameTextField(),
-          ],
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: const <Widget>[
+              HallNameTextField(),
+            ],
+          ),
         ),
       ),
     );

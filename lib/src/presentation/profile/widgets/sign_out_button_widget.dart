@@ -34,7 +34,6 @@ class SignOutButton extends StatelessWidget {
       child: ListTile(
         leading: const FaIcon(
           FontAwesomeIcons.signOutAlt,
-          color: Colors.red,
         ),
         title: Text(
           S.current.sign_out_text,

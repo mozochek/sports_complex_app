@@ -14,18 +14,25 @@ class DoNotHaveAnAccountText extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Text('${S.current.do_not_have_an_account_text}?'),
+        Text(
+          '${S.current.do_not_have_an_account_text}?',
+          style: Theme.of(context).textTheme.subtitle2,
+        ),
         GestureDetector(
-          onTap: () async {
-            await getIt<ISportsComplexRouter>().pushAndRemoveUntil(
-              ScreenRoutes.signUp,
-              predicate: (route) => route.settings.name == '/',
-            );
-          },
+          onTap: () async => getIt<ISportsComplexRouter>().pushAndRemoveUntil(
+            ScreenRoutes.signUp,
+            predicate: (route) => route.settings.name == '/',
+          ),
           child: Text(
             ' ${S.current.sign_up_text}',
-            style: const TextStyle(
-              color: Colors.blue,
+            style: TextStyle(
+              color: Theme.of(context)
+                  .textButtonTheme
+                  .style!
+                  .foregroundColor!
+                  .resolve(
+                    MaterialState.values.toSet(),
+                  ),
             ),
           ),
         ),

@@ -19,9 +19,7 @@ class SignInButton extends StatelessWidget {
         final isSignInAllowed = snapshot.data ?? false;
         return TextButton(
           onPressed: isSignInAllowed ? () async => bloc.signIn() : null,
-          child: Text(
-            S.current.sign_in_text,
-          ),
+          child: Text(S.current.sign_in_text),
         );
       },
     );
