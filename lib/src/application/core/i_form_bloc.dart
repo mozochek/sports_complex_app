@@ -18,8 +18,7 @@ abstract class IFormBloc<T> {
   /// As default used in [create()] function
   final T? obj;
 
-  // TODO: doc
-  ///
+  /// This bloc purpose
   final FormBlocPurpose? purpose;
 
   /// Stream of [bool] for UI responsiveness

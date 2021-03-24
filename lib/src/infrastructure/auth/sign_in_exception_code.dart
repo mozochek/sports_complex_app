@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:sports_complex_app/generated/l10n.dart';
 import 'package:sports_complex_app/src/domain/core/exceptions/sign_in_exception.dart';
 import 'package:sports_complex_app/src/infrastructure/core/exceptions/user_repository_exception.dart';
 
@@ -28,35 +29,35 @@ enum SignInExceptionCode {
   /// Equivalent to [UserRepositoryException] with code [UserRepositoryException.userDataIsEmpty]
   userDataIsEmpty,
 
-  /// Internet connection troubles
-  unknown,
+  /// Equivalent to [FirebaseAuthException] with code 'unknown'
+  /// Mostly when internet connection troubles occurs
+  networkProblems,
 
   /// Option for unexpected exception code
   unsupportedCode,
 }
 
-// TODO: add localization
 extension SignInExceptionCodeX on SignInExceptionCode {
   String get description {
     switch (this) {
       case SignInExceptionCode.firebaseInvalidEmail:
-        return 'Данный пользователь не найден';
+        return S.current.invalid_email_or_password;
       case SignInExceptionCode.firebaseWrongPassword:
-        return 'Данный пользователь не найден';
+        return S.current.invalid_email_or_password;
       case SignInExceptionCode.firebaseUserDisabled:
-        return 'Данный пользователь заблокирован';
+        return S.current.user_disabled;
       case SignInExceptionCode.firebaseUserNotFound:
-        return 'Данного пользователя не существует';
+        return S.current.user_not_found;
       case SignInExceptionCode.firebaseTooManyRequests:
-        return 'Слишком много попыток. Попробуйте позже';
+        return S.current.too_many_requests;
       case SignInExceptionCode.userDataIsEmpty:
-        return 'Не удалось получить данные пользователя';
-      case SignInExceptionCode.unknown:
-        return 'Проблемы с сетью. Проверьте подключение к интернету';
+        return S.current.user_data_is_empty;
+      case SignInExceptionCode.networkProblems:
+        return S.current.network_problems;
       case SignInExceptionCode.unsupportedCode:
-        return 'Неподдерживаемая ошибка';
+        return S.current.unsupported_error;
       default:
-        return 'Неизвестная ошибка';
+        return S.current.unknown_error;
     }
   }
 }

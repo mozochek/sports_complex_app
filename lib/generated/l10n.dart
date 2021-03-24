@@ -317,6 +317,46 @@ class S {
     );
   }
 
+  /// `Unknown`
+  String get unknown_text {
+    return Intl.message(
+      'Unknown',
+      name: 'unknown_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User`
+  String get user_text {
+    return Intl.message(
+      'User',
+      name: 'user_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Coach`
+  String get coach_text {
+    return Intl.message(
+      'Coach',
+      name: 'coach_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Admin`
+  String get admin_text {
+    return Intl.message(
+      'Admin',
+      name: 'admin_text',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `List of trainers`
   String get list_of_coaches_text {
     return Intl.message(
@@ -432,6 +472,156 @@ class S {
     return Intl.message(
       'There is no schedule for this date',
       name: 'no_schedule_for_this_date_text',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid email or password`
+  String get invalid_email_or_password {
+    return Intl.message(
+      'Invalid email or password',
+      name: 'invalid_email_or_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User not found`
+  String get user_not_found {
+    return Intl.message(
+      'User not found',
+      name: 'user_not_found',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User is disabled`
+  String get user_disabled {
+    return Intl.message(
+      'User is disabled',
+      name: 'user_disabled',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Too many requests. Try later`
+  String get too_many_requests {
+    return Intl.message(
+      'Too many requests. Try later',
+      name: 'too_many_requests',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `User data is empty`
+  String get user_data_is_empty {
+    return Intl.message(
+      'User data is empty',
+      name: 'user_data_is_empty',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Network problems. Check your internet connection`
+  String get network_problems {
+    return Intl.message(
+      'Network problems. Check your internet connection',
+      name: 'network_problems',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unsupported error`
+  String get unsupported_error {
+    return Intl.message(
+      'Unsupported error',
+      name: 'unsupported_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Unknown error`
+  String get unknown_error {
+    return Intl.message(
+      'Unknown error',
+      name: 'unknown_error',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Email already in use`
+  String get email_already_in_use {
+    return Intl.message(
+      'Email already in use',
+      name: 'email_already_in_use',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `This operation is not allowed. Try later`
+  String get operation_not_allowed {
+    return Intl.message(
+      'This operation is not allowed. Try later',
+      name: 'operation_not_allowed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Weak password`
+  String get weak_password {
+    return Intl.message(
+      'Weak password',
+      name: 'weak_password',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Incorrect data entered`
+  String get incorrect_data {
+    return Intl.message(
+      'Incorrect data entered',
+      name: 'incorrect_data',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `At least 2 characters`
+  String get invalid_user_surname {
+    return Intl.message(
+      'At least 2 characters',
+      name: 'invalid_user_surname',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `At least 2 characters`
+  String get invalid_user_name {
+    return Intl.message(
+      'At least 2 characters',
+      name: 'invalid_user_name',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Invalid email`
+  String get invalid_email {
+    return Intl.message(
+      'Invalid email',
+      name: 'invalid_email',
       desc: '',
       args: [],
     );

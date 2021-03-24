@@ -32,6 +32,10 @@
   "email_text": "Почта",
   "password_text": "Пароль",
   "list_is_empty_text": "Список пуст",
+  "unknown_text": "Неизвестно",
+  "user_text": "Пользователь",
+  "coach_text": "Тренер",
+  "admin_text": "Администратор",
 
   "list_of_coaches_text": "Список тренеров",
   "list_of_halls_text": "Список залов",
@@ -49,5 +53,23 @@
   "hall_delete_dialog_content": "Выбранный зал будет удален из списка.",
 
   "loading_data_text": "Загрузка данных",
-  "no_schedule_for_this_date_text": "Расписание на эту дату отсутствует"
+  "no_schedule_for_this_date_text": "Расписание на эту дату отсутствует",
+
+  "invalid_email_or_password": "Неправильно введены email или пароль",
+  "user_disabled": "Данный пользователь временно отключен",
+  "user_not_found": "Данный пользователь не найден",
+  "too_many_requests": "Слишком много попыток. Попробуйте позже",
+  "user_data_is_empty": "Не удалось получить данные пользователя",
+  "network_problems": "Проблемы с сетью. Проверьте подключение к интернету",
+  "unsupported_error": "Неподдерживаемая ошибка",
+  "unknown_error": "Неизвестная ошибка",
+
+  "email_already_in_use": "Данный адрес эл.почты уже зарегестрирован",
+  "operation_not_allowed": "Данный вид регистрации временно недоступен. Попробуйте позже",
+  "weak_password": "Введен слабый пароль",
+  "incorrect_data": "Введены некорректные данные",
+  "invalid_user_surname": "Фамилия должна состоять из 2 и более символов",
+  "invalid_user_name": "Имя должно состоять из 2 и более символов",
+  "invalid_email": "Введен некорректный адрес эл.почты"
+
 }

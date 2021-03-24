@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'package:sports_complex_app/generated/l10n.dart';
 import 'package:sports_complex_app/src/infrastructure/core/extensions/string_x.dart';
 
 enum Role {
@@ -17,17 +18,16 @@ extension RoleX on Role {
 
   Role fromJson(Map<String, dynamic> json) => (json['role'] as String).asRole;
 
-  // TODO: add localization
   String get asReadableString {
     switch (this) {
       case Role.unknown:
-        return 'Неизвестно';
+        return S.current.unknown_text;
       case Role.user:
-        return 'Пользователь';
+        return S.current.user_text;
       case Role.coach:
-        return 'Тренер';
+        return S.current.coach_text;
       case Role.admin:
-        return 'Администратор';
+        return S.current.admin_text;
     }
   }
 
@@ -44,41 +44,40 @@ extension RoleX on Role {
     }
   }
 
-  // TODO: add localization
   Widget get asIcon {
     switch (this) {
       case Role.unknown:
-        return const IconButton(
-          tooltip: 'Неизветсно',
+        return IconButton(
+          tooltip: S.current.unknown_text,
           onPressed: null,
-          icon: FaIcon(
+          icon: const FaIcon(
             FontAwesomeIcons.question,
           ),
         );
       case Role.user:
-        return const IconButton(
-          tooltip: 'Пользователь',
+        return IconButton(
+          tooltip: S.current.user_text,
           onPressed: null,
-          icon: FaIcon(
+          icon: const FaIcon(
             FontAwesomeIcons.userAlt,
             color: Colors.green,
           ),
         );
       case Role.coach:
-        return const IconButton(
+        return IconButton(
           splashRadius: 0.1,
-          tooltip: 'Тренер',
+          tooltip: S.current.coach_text,
           onPressed: null,
-          icon: FaIcon(
+          icon: const FaIcon(
             FontAwesomeIcons.users,
             color: Colors.deepPurple,
           ),
         );
       case Role.admin:
-        return const IconButton(
-          tooltip: 'Администратор',
+        return IconButton(
+          tooltip: S.current.admin_text,
           onPressed: null,
-          icon: FaIcon(
+          icon: const FaIcon(
             FontAwesomeIcons.userShield,
             color: Colors.red,
           ),

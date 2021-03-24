@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 
+import 'package:sports_complex_app/generated/l10n.dart';
 import 'package:sports_complex_app/src/domain/core/exceptions/sign_up_exception.dart';
 import 'package:sports_complex_app/src/infrastructure/core/exceptions/user_repository_exception.dart';
 
@@ -36,28 +37,27 @@ enum SignUpExceptionCode {
   unsupportedCode,
 }
 
-// TODO: add localization
 extension SignUpExceptionCodeX on SignUpExceptionCode {
   String get description {
     switch (this) {
       case SignUpExceptionCode.firebaseEmailAlreadyInUse:
-        return 'Данный адрес эл.почты уже зарегестрирован';
+        return S.current.email_already_in_use;
       case SignUpExceptionCode.firebaseOperationNotAllowed:
-        return 'Данный вид регистрации временно недоступен. Попробуйте позже';
+        return S.current.operation_not_allowed;
       case SignUpExceptionCode.firebaseWeakPassword:
-        return 'Введен слабый пароль';
+        return S.current.weak_password;
       case SignUpExceptionCode.firebaseUnknownCode:
-        return 'Введены некорректные данные';
+        return S.current.incorrect_data;
       case SignUpExceptionCode.invalidUserSurname:
-        return 'Фамилия должна состоять из 2 и более символов';
+        return S.current.invalid_user_surname;
       case SignUpExceptionCode.invalidUserName:
-        return 'Имя должно состоять из 2 и более символов';
+        return S.current.invalid_user_name;
       case SignUpExceptionCode.invalidEmail:
-        return 'Введен некорректный адрес эл.почты';
+        return S.current.invalid_email;
       case SignUpExceptionCode.unsupportedCode:
-        return 'Произошла неподдерживаемя ошибка';
+        return S.current.unsupported_error;
       default:
-        return 'Произошла неизвестная ошибка';
+        return S.current.unknown_error;
     }
   }
 }

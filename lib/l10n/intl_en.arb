@@ -32,6 +32,10 @@
   "email_text": "Email",
   "password_text": "Password",
   "list_is_empty_text": "List is empty",
+  "unknown_text": "Unknown",
+  "user_text": "User",
+  "coach_text": "Coach",
+  "admin_text": "Admin",
 
   "list_of_coaches_text": "List of trainers",
   "list_of_halls_text": "List of halls",
@@ -49,5 +53,22 @@
   "hall_delete_dialog_content": "This will delete selected hall from list.",
 
   "loading_data_text": "Loading data",
-  "no_schedule_for_this_date_text": "There is no schedule for this date"
+  "no_schedule_for_this_date_text": "There is no schedule for this date",
+
+  "invalid_email_or_password": "Invalid email or password",
+  "user_not_found": "User not found",
+  "user_disabled": "User is disabled",
+  "too_many_requests": "Too many requests. Try later",
+  "user_data_is_empty": "User data is empty",
+  "network_problems": "Network problems. Check your internet connection",
+  "unsupported_error": "Unsupported error",
+  "unknown_error": "Unknown error",
+
+  "email_already_in_use": "Email already in use",
+  "operation_not_allowed": "This operation is not allowed. Try later",
+  "weak_password": "Weak password",
+  "incorrect_data": "Incorrect data entered",
+  "invalid_user_surname": "At least 2 characters",
+  "invalid_user_name": "At least 2 characters",
+  "invalid_email": "Invalid email"
 }

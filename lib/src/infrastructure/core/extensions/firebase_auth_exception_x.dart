@@ -4,7 +4,7 @@ import 'package:sports_complex_app/src/infrastructure/auth/sign_in_exception_cod
 import 'package:sports_complex_app/src/infrastructure/auth/sign_up_exception_code.dart';
 
 extension FirebaseAuthExceptionX on FirebaseAuthException {
-  /// Return [SignUpExceptionCode] enum value
+  /// Returns [SignUpExceptionCode] enum value
   /// depending on the FirebaseAuthException.code value
   SignUpExceptionCode get asSignUpEnumCode {
     switch (code) {
@@ -23,6 +23,8 @@ extension FirebaseAuthExceptionX on FirebaseAuthException {
     }
   }
 
+  /// Returns [SignInExceptionCode] enum value
+  /// depending on the FirebaseAuthException.code value
   SignInExceptionCode get asSignInEnumCode {
     switch (code) {
       case 'invalid-email':
@@ -36,7 +38,7 @@ extension FirebaseAuthExceptionX on FirebaseAuthException {
       case 'too-many-requests':
         return SignInExceptionCode.firebaseTooManyRequests;
       case 'unknown':
-        return SignInExceptionCode.unknown;
+        return SignInExceptionCode.networkProblems;
       default:
         return SignInExceptionCode.unsupportedCode;
     }
