@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sports_complex_app/injection.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
-import 'package:sports_complex_app/src/presentation/router/i_sports_complex_router.dart';
+import 'package:sports_complex_app/src/presentation/router/app_router.gr.dart';
 
 class AlreadyRegisteredText extends StatelessWidget {
   const AlreadyRegisteredText({
@@ -18,25 +18,13 @@ class AlreadyRegisteredText extends StatelessWidget {
           '${S.current.already_registered_text}?',
           style: Theme.of(context).textTheme.subtitle2,
         ),
-        GestureDetector(
-          onTap: () async {
-            await getIt<ISportsComplexRouter>().pushAndRemoveUntil(
-              ScreenRoutes.signIn,
-              predicate: (route) => route.settings.name == '/',
-            );
-          },
-          child: Text(
-            ' ${S.current.sign_in_text}',
-            style: TextStyle(
-              color: Theme.of(context)
-                  .textButtonTheme
-                  .style!
-                  .foregroundColor!
-                  .resolve({
-                MaterialState.selected,
-              }),
-            ),
+        TextButton(
+          onPressed: () async => context.router.pushAndPopUntil(
+            const SignInScreenRoute(),
+            predicate: (route) =>
+                route.settings.name == WelcomeScreenRoute.name,
           ),
+          child: Text(S.current.sign_in_text),
         ),
       ],
     );

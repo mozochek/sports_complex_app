@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:auto_route/auto_route.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
-import 'package:sports_complex_app/injection.dart';
-import 'package:sports_complex_app/src/presentation/router/i_sports_complex_router.dart';
+import 'package:sports_complex_app/src/presentation/router/app_router.gr.dart';
 
 class SignUpButton extends StatelessWidget {
   const SignUpButton({
@@ -12,10 +12,7 @@ class SignUpButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () async => getIt<ISportsComplexRouter>().pushAndRemoveUntil(
-        ScreenRoutes.signUp,
-        predicate: (route) => route.settings.name == '/',
-      ),
+      onTap: () async => context.router.push(const SignUpScreenRoute()),
       child: Container(
         width: MediaQuery.of(context).size.width * 0.75,
         height: 50.0,
@@ -26,12 +23,7 @@ class SignUpButton extends StatelessWidget {
           ),
         ),
         child: Center(
-          child: Text(
-            S.current.sign_up_text,
-            style: Theme.of(context).textButtonTheme.style!.textStyle!.resolve({
-              MaterialState.selected,
-            }),
-          ),
+          child: Text(S.current.sign_up_text),
         ),
       ),
     );

@@ -30,7 +30,7 @@ class User {
   factory User.empty() => User(
         id: const Uuid().v4(),
         personalData: PersonalData.empty(),
-        authData: AuthData(),
+        authData: AuthData.empty(),
         role: Role.user,
       );
 

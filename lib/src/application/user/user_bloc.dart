@@ -2,13 +2,11 @@ import 'dart:async';
 
 import 'package:injectable/injectable.dart';
 import 'package:rxdart/rxdart.dart';
-import 'package:sports_complex_app/injection.dart';
-import 'package:sports_complex_app/src/application/user/i_user_bloc.dart';
 
+import 'package:sports_complex_app/src/application/user/i_user_bloc.dart';
 import 'package:sports_complex_app/src/domain/user/user.dart';
 import 'package:sports_complex_app/src/domain/user/user_auth_state.dart';
 import 'package:sports_complex_app/src/infrastructure/user/i_user_repository.dart';
-import 'package:sports_complex_app/src/presentation/router/i_sports_complex_router.dart';
 
 @LazySingleton(
   as: IUserBloc,
@@ -19,9 +17,7 @@ import 'package:sports_complex_app/src/presentation/router/i_sports_complex_rout
   ],
 )
 class UserBloc extends IUserBloc {
-  UserBloc(this._repository) {
-    _listenUserAuthStates();
-  }
+  UserBloc(this._repository);
 
   final IUserRepository _repository;
 
@@ -43,32 +39,6 @@ class UserBloc extends IUserBloc {
   @override
   void addUser(User? user) {
     _currentUserController.add(user);
-  }
-
-  void _listenUserAuthStates() {
-    _userAuthStateController.stream.listen(
-      (userState) async {
-        final router = getIt<ISportsComplexRouter>();
-        switch (userState) {
-          case UserAuthState.signedUp:
-            await router.pushAndRemoveUntil(
-              ScreenRoutes.signIn,
-              predicate: (route) => route.settings.name == '/',
-            );
-            break;
-          case UserAuthState.signedIn:
-            await router.pushAndRemoveUntil(
-              ScreenRoutes.bottomNav,
-            );
-            break;
-          case UserAuthState.signedOut:
-            await router.pushAndRemoveUntil(
-              ScreenRoutes.welcome,
-            );
-            break;
-        }
-      },
-    );
   }
 
   Future<void> dispose() async {

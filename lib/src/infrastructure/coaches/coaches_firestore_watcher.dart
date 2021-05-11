@@ -24,7 +24,7 @@ class CoachesFirestoreWatcher extends ICoachesFirestoreWatcher {
       .snapshots()
       .map((snapshot) => snapshot.docs
           .map((doc) => Coach.fromUser(
-                User.fromJson(doc.data()!),
+                User.fromJson(doc.data()),
               ))
           .toList());
 }

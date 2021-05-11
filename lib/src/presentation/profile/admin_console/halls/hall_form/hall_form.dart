@@ -1,43 +1,51 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
+import 'package:sports_complex_app/src/application/core/i_form_bloc.dart';
 import 'package:sports_complex_app/src/application/halls/form_bloc/i_hall_form_bloc.dart';
-import 'package:sports_complex_app/src/presentation/common/debug_dialog.dart';
+import 'package:sports_complex_app/src/presentation/profile/admin_console/halls/hall_form/hall_form_inh_widget.dart';
 import 'package:sports_complex_app/src/presentation/profile/admin_console/halls/hall_form/widgets/hall_name_text_field_widget.dart';
 
-class HallForm extends StatelessWidget {
+class HallForm extends StatefulWidget {
   const HallForm({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final bloc = Provider.of<IHallFormBloc>(context);
+  _HallFormState createState() => _HallFormState();
+}
 
+class _HallFormState extends State<HallForm> {
+  HallFormInhWidget? _inheritedWidget;
+  IHallFormBloc? _formBloc;
+
+  @override
+  void didChangeDependencies() {
+    _inheritedWidget ??= HallFormInhWidget.of(context);
+    _formBloc = _inheritedWidget!.hallFormBloc;
+
+    super.didChangeDependencies();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(S.current.hall_form_title),
+        title: _formBloc!.purpose == FormBlocPurpose.creating
+            ? Text(S.current.hall_form_title)
+            : const Text('Редактировать зал'),
         actions: <Widget>[
           StreamBuilder<bool>(
-            stream: bloc.isObjValidStream,
+            stream: _formBloc!.isObjValidStream,
             builder: (_, snapshot) {
               final isHallValid = snapshot.data ?? false;
               return IconButton(
                 icon: const Icon(Icons.check),
                 onPressed: isHallValid
                     ? () async {
-                        final isSaved = await bloc.saveObj();
+                        final isSaved = await _formBloc!.saveObj();
                         if (isSaved) {
                           Navigator.of(context).pop();
-                        } else {
-                          // TODO: debug
-                          await showDialog<void>(
-                            context: context,
-                            builder: (_) => const DebugDialog(
-                              content: 'Я не добавил твой сраный зал',
-                            ),
-                          );
                         }
                       }
                     : null,
@@ -50,8 +58,10 @@ class HallForm extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
-            children: const <Widget>[
-              HallNameTextField(),
+            children: <Widget>[
+              HallNameTextField(
+                formBloc: _formBloc!,
+              ),
             ],
           ),
         ),

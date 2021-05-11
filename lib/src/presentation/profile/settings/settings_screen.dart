@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:sports_complex_app/src/presentation/common/scaffold_wrapper.dart';
+import 'package:sports_complex_app/injection.dart';
+import 'package:sports_complex_app/src/application/theme/app_theme_bloc.dart';
+import 'package:sports_complex_app/src/presentation/common/screen_wide_switch.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({
@@ -9,12 +11,24 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ScaffoldWrapper(
+    final themeBloc = getIt<AppThemeBloc>();
+
+    return Scaffold(
       appBar: AppBar(
         title: const Text('Настройки'),
       ),
-      body: const Center(
-        child: Text('Экран с настройками приложения и аккаунта'),
+      body: SafeArea(
+        child: Center(
+          child: Column(
+            children: <Widget>[
+              ScreenWideSwitch(
+                label: 'Темная тема',
+                valueStream: themeBloc.isDarkTheme,
+                onChanged: (_) async => themeBloc.switchTheme(),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

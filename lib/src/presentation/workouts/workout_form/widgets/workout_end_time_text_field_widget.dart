@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/src/application/workouts/form_bloc/i_workout_form_bloc.dart';
 import 'package:sports_complex_app/src/infrastructure/core/extensions/time_of_day_x.dart';
 
 class WorkoutEndTimeTextField extends StatelessWidget {
   const WorkoutEndTimeTextField({
+    required this.formBloc,
     Key? key,
   }) : super(key: key);
 
+  final IWorkoutFormBloc formBloc;
+
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<IWorkoutFormBloc>(context);
-
     return StreamBuilder<TimeOfDay?>(
-      stream: bloc.workoutEndTime,
+      stream: formBloc.workoutEndTime,
       builder: (_, snapshot) {
         return TextFormField(
           controller: TextEditingController(
@@ -34,7 +34,7 @@ class WorkoutEndTimeTextField extends StatelessWidget {
               context: context,
               initialTime: TimeOfDay.now(),
             );
-            bloc.changeWorkoutEndTime(pickedEndTime);
+            formBloc.changeWorkoutEndTime(pickedEndTime);
           },
         );
       },

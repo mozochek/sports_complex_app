@@ -14,7 +14,6 @@ class ListOfCoaches extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      shrinkWrap: true,
       itemCount: coaches.length,
       itemBuilder: (_, index) {
         final coach = coaches[index];

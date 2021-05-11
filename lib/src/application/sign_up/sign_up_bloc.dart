@@ -28,7 +28,7 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
   final _userSurname = BehaviorSubject<String>();
   final _userName = BehaviorSubject<String>();
 
-  final AuthData _userAuthData = AuthData();
+  final AuthData _userAuthData = AuthData.empty();
   final PersonalData _userPersonalData = PersonalData.empty();
 
   @override
@@ -124,9 +124,9 @@ class SignUpBloc extends ISignUpBloc with SignUpValidator {
       );
 
   @override
-  Future<void> signUp() async {
+  Future<bool?> signUp() async {
     try {
-      await _auth.signUp(_userPersonalData, _userAuthData);
+      return (await _auth.signUp(_userPersonalData, _userAuthData)) != null;
     } on SignUpException catch (e) {
       debugPrint(
         'Application layer: inside $runtimeType: catch ${e.runtimeType}: ${e.enumCode}: ${e.description}',

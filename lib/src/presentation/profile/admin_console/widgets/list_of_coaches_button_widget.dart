@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
-import 'package:sports_complex_app/injection.dart';
-import 'package:sports_complex_app/src/application/coaches/watcher_bloc/i_coaches_watcher_bloc.dart';
+import 'package:sports_complex_app/src/presentation/colors.dart';
 import 'package:sports_complex_app/src/presentation/profile/admin_console/coaches/coaches_screen/coaches_screen.dart';
 
 class ListOfCoachesButton extends StatelessWidget {
@@ -14,24 +12,24 @@ class ListOfCoachesButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () async {
         await Navigator.of(context).push<void>(
           MaterialPageRoute(
-            builder: (_) => Provider<ICoachesWatcherBloc>(
-              create: (_) => getIt<ICoachesWatcherBloc>(),
-              child: const CoachesScreen(),
-            ),
+            builder: (_) => const CoachesScreen(),
           ),
         );
       },
       child: ListTile(
         leading: const FaIcon(
           FontAwesomeIcons.users,
-          color: Colors.deepPurple,
+          color: AppColors.deepPurple,
         ),
         title: Text(
           S.current.list_of_coaches_text,
+        ),
+        trailing: const Icon(
+          Icons.keyboard_arrow_right,
         ),
       ),
     );

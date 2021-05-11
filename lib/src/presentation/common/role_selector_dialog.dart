@@ -25,7 +25,7 @@ class RoleSelectorDialog extends StatelessWidget {
           padding: const EdgeInsets.all(24.0),
           // TODO: add localization
           child: Text(
-            'Выберите роль:',
+            'Выдать роль:',
             style: Theme.of(context).textTheme.headline6,
           ),
         ),
@@ -34,17 +34,17 @@ class RoleSelectorDialog extends StatelessWidget {
         ListView.builder(
           itemCount: roles.length,
           shrinkWrap: true,
-          itemBuilder: (context, index) {
+          itemBuilder: (_, index) {
             final role = roles[index];
             return GestureDetector(
               onTap: () async {
                 final isRoleSelectConfirmed = await showDialog<bool>(
                   context: context,
                   builder: (_) => ConfirmationDialog(
-                    title: 'Выбрать роль?',
+                    title: 'Выдать роль?',
                     content:
-                        'Роль "${role.asReadableString}" будет присвоена выбранному пользователю.',
-                    confirmButtonText: 'Выбрать',
+                        'Выбранному пользователю будет выдана роль "${role.asReadableString}".',
+                    confirmButtonText: 'Выдать',
                     refuseButtonText: 'Отмена',
                   ),
                 );

@@ -10,6 +10,7 @@ import 'package:sports_complex_app/src/domain/core/exceptions/sign_in_exception.
 import 'package:sports_complex_app/src/domain/core/exceptions/sign_up_exception.dart';
 import 'package:sports_complex_app/src/domain/user/auth_data.dart';
 import 'package:sports_complex_app/src/domain/user/personal_data.dart';
+import 'package:sports_complex_app/src/domain/user/user.dart';
 import 'package:sports_complex_app/src/domain/user/user_auth_state.dart';
 import 'package:sports_complex_app/src/infrastructure/core/exceptions/user_repository_exception.dart';
 import 'package:sports_complex_app/src/infrastructure/user/i_user_repository.dart';
@@ -29,19 +30,19 @@ class AuthFacade extends IAuth {
   final IUserRepository _userRepository;
 
   @override
-  Future<void> signUp(
+  Future<User?> signUp(
     PersonalData userPersonalData,
     AuthData userAuthData,
   ) async {
     try {
       // Trying to write given user data
-      final createdUser = await _userRepository.createUser(
+      final signedUpUser = await _userRepository.createUser(
         userPersonalData,
         userAuthData,
       );
       await _firebaseAuth.createUserWithEmailAndPassword(
-        email: createdUser.authData.email,
-        password: createdUser.authData.password,
+        email: signedUpUser.authData.email,
+        password: signedUpUser.authData.password,
       );
       // Get to this point mean that user was created successfully so we
       // add user in bloc and update auth state
@@ -53,9 +54,11 @@ class AuthFacade extends IAuth {
       final box = await Hive.openBox<String>('auth');
       await box.put(
         'email',
-        createdUser.authData.email,
+        signedUpUser.authData.email,
       );
       await box.close();
+
+      return signedUpUser;
     } on FirebaseAuthException catch (e) {
       throw SignUpException.fromEnumCode(e.asSignUpEnumCode);
     } on UserRepositoryException catch (e) {
@@ -64,7 +67,7 @@ class AuthFacade extends IAuth {
   }
 
   @override
-  Future<void> signInWithAuthData(AuthData userAuthData) async {
+  Future<User?> signInWithAuthData(AuthData userAuthData) async {
     try {
       // Trying to perform sign in with firebase auth
       await _firebaseAuth.signInWithEmailAndPassword(
@@ -73,11 +76,11 @@ class AuthFacade extends IAuth {
       );
       // Get to this point means that userAuthData is correct and user exist
       // Then we get all user data from firestore
-      final user = await _userRepository.getUser(userAuthData);
+      final signedInUser = await _userRepository.getUser(userAuthData);
       // Adding user in bloc and updating auth state
-      getIt<IUserBloc>()
-        ..addUserAuthState(UserAuthState.signedIn)
-        ..addUser(user);
+      getIt<IUserBloc>().addUser(signedInUser);
+
+      return signedInUser;
     } on FirebaseAuthException catch (e) {
       debugPrint(
         'Infrastructure layer: inside $runtimeType: catch ${e.runtimeType}: code: ${e.code} | message: ${e.message} | email: ${e.email}',

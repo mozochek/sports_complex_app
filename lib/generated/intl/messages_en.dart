@@ -7,7 +7,7 @@
 // ignore_for_file:unnecessary_brace_in_string_interps, unnecessary_new
 // ignore_for_file:prefer_single_quotes,comment_references, directives_ordering
 // ignore_for_file:annotate_overrides,prefer_generic_function_type_aliases
-// ignore_for_file:unused_import, file_names
+// ignore_for_file:unused_import, file_names, avoid_escaping_inner_quotes
 
 import 'package:intl/intl.dart';
 import 'package:intl/message_lookup_by_library.dart';
@@ -20,64 +20,100 @@ class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
   final messages = _notInlinedMessages(_notInlinedMessages);
-  static _notInlinedMessages(_) => <String, Function> {
-    "add_schedule_text" : MessageLookupByLibrary.simpleMessage("Add schedule"),
-    "admin_console_text" : MessageLookupByLibrary.simpleMessage("Admin console"),
-    "admin_text" : MessageLookupByLibrary.simpleMessage("Admin"),
-    "already_registered_text" : MessageLookupByLibrary.simpleMessage("Already registered"),
-    "app_name" : MessageLookupByLibrary.simpleMessage("Sports Complex"),
-    "cancel_text" : MessageLookupByLibrary.simpleMessage("Cancel"),
-    "coach_delete_confirmation_dialog_content" : MessageLookupByLibrary.simpleMessage("This will delete selected coach from list."),
-    "coach_delete_confirmation_dialog_title" : MessageLookupByLibrary.simpleMessage("Delete coach?"),
-    "coach_text" : MessageLookupByLibrary.simpleMessage("Coach"),
-    "delete_text" : MessageLookupByLibrary.simpleMessage("Delete"),
-    "do_not_have_an_account_text" : MessageLookupByLibrary.simpleMessage("Do not have an account"),
-    "email_already_in_use" : MessageLookupByLibrary.simpleMessage("Email already in use"),
-    "email_text" : MessageLookupByLibrary.simpleMessage("Email"),
-    "favorite_workouts_text" : MessageLookupByLibrary.simpleMessage("Favorite workouts"),
-    "hall_delete_dialog_content" : MessageLookupByLibrary.simpleMessage("This will delete selected hall from list."),
-    "hall_delete_dialog_title" : MessageLookupByLibrary.simpleMessage("Delete hall?"),
-    "hall_form_hall_name_label_text" : MessageLookupByLibrary.simpleMessage("Hall name"),
-    "hall_form_title" : MessageLookupByLibrary.simpleMessage("Add hall"),
-    "health_text" : MessageLookupByLibrary.simpleMessage("Health"),
-    "home_text" : MessageLookupByLibrary.simpleMessage("Home"),
-    "incorrect_data" : MessageLookupByLibrary.simpleMessage("Incorrect data entered"),
-    "invalid_email" : MessageLookupByLibrary.simpleMessage("Invalid email"),
-    "invalid_email_or_password" : MessageLookupByLibrary.simpleMessage("Invalid email or password"),
-    "invalid_user_name" : MessageLookupByLibrary.simpleMessage("At least 2 characters"),
-    "invalid_user_surname" : MessageLookupByLibrary.simpleMessage("At least 2 characters"),
-    "list_is_empty_text" : MessageLookupByLibrary.simpleMessage("List is empty"),
-    "list_of_coaches_text" : MessageLookupByLibrary.simpleMessage("List of trainers"),
-    "list_of_halls_text" : MessageLookupByLibrary.simpleMessage("List of halls"),
-    "loading_data_text" : MessageLookupByLibrary.simpleMessage("Loading data"),
-    "network_problems" : MessageLookupByLibrary.simpleMessage("Network problems. Check your internet connection"),
-    "no_schedule_for_this_date_text" : MessageLookupByLibrary.simpleMessage("There is no schedule for this date"),
-    "operation_not_allowed" : MessageLookupByLibrary.simpleMessage("This operation is not allowed. Try later"),
-    "password_text" : MessageLookupByLibrary.simpleMessage("Password"),
-    "profile_text" : MessageLookupByLibrary.simpleMessage("Profile"),
-    "schedule_text" : MessageLookupByLibrary.simpleMessage("Schedule"),
-    "settings_text" : MessageLookupByLibrary.simpleMessage("Settings"),
-    "sign_in_screen_subtitle" : MessageLookupByLibrary.simpleMessage("We were waiting for you"),
-    "sign_in_screen_title" : MessageLookupByLibrary.simpleMessage("Welcome back"),
-    "sign_in_text" : MessageLookupByLibrary.simpleMessage("Sign In"),
-    "sign_out_confirmation_dialog_content" : MessageLookupByLibrary.simpleMessage("You will be sign out of your current account and will be redirected to the login screen."),
-    "sign_out_confirmation_dialog_title" : MessageLookupByLibrary.simpleMessage("Sign Out?"),
-    "sign_out_text" : MessageLookupByLibrary.simpleMessage("Sign Out"),
-    "sign_up_screen_subtitle" : MessageLookupByLibrary.simpleMessage("Register to start using the application"),
-    "sign_up_screen_title" : MessageLookupByLibrary.simpleMessage("Sign Up"),
-    "sign_up_text" : MessageLookupByLibrary.simpleMessage("Sign Up"),
-    "sports_complex_text" : MessageLookupByLibrary.simpleMessage("Sports complex"),
-    "too_many_requests" : MessageLookupByLibrary.simpleMessage("Too many requests. Try later"),
-    "unknown_error" : MessageLookupByLibrary.simpleMessage("Unknown error"),
-    "unknown_text" : MessageLookupByLibrary.simpleMessage("Unknown"),
-    "unsupported_error" : MessageLookupByLibrary.simpleMessage("Unsupported error"),
-    "user_data_is_empty" : MessageLookupByLibrary.simpleMessage("User data is empty"),
-    "user_disabled" : MessageLookupByLibrary.simpleMessage("User is disabled"),
-    "user_not_found" : MessageLookupByLibrary.simpleMessage("User not found"),
-    "user_text" : MessageLookupByLibrary.simpleMessage("User"),
-    "weak_password" : MessageLookupByLibrary.simpleMessage("Weak password"),
-    "welcome_text" : MessageLookupByLibrary.simpleMessage("Welcome"),
-    "workouts_schedule_text" : MessageLookupByLibrary.simpleMessage("Workouts schedule"),
-    "write_news_text" : MessageLookupByLibrary.simpleMessage("Write news")
-  };
+  static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
+        "add_schedule_text":
+            MessageLookupByLibrary.simpleMessage("Add schedule"),
+        "admin_console_text":
+            MessageLookupByLibrary.simpleMessage("Admin console"),
+        "admin_text": MessageLookupByLibrary.simpleMessage("Admin"),
+        "already_registered_text":
+            MessageLookupByLibrary.simpleMessage("Already registered"),
+        "app_name": MessageLookupByLibrary.simpleMessage("Sports Complex"),
+        "cancel_text": MessageLookupByLibrary.simpleMessage("Cancel"),
+        "coach_delete_confirmation_dialog_content":
+            MessageLookupByLibrary.simpleMessage(
+                "This will delete selected coach from list."),
+        "coach_delete_confirmation_dialog_title":
+            MessageLookupByLibrary.simpleMessage("Delete coach?"),
+        "coach_text": MessageLookupByLibrary.simpleMessage("Coach"),
+        "delete_text": MessageLookupByLibrary.simpleMessage("Delete"),
+        "do_not_have_an_account_text":
+            MessageLookupByLibrary.simpleMessage("Do not have an account"),
+        "email_already_in_use":
+            MessageLookupByLibrary.simpleMessage("Email already in use"),
+        "email_text": MessageLookupByLibrary.simpleMessage("Email"),
+        "favorite_workouts_text":
+            MessageLookupByLibrary.simpleMessage("Favorite workouts"),
+        "hall_delete_dialog_content": MessageLookupByLibrary.simpleMessage(
+            "This will delete selected hall from list."),
+        "hall_delete_dialog_title":
+            MessageLookupByLibrary.simpleMessage("Delete hall?"),
+        "hall_form_hall_name_label_text":
+            MessageLookupByLibrary.simpleMessage("Hall name"),
+        "hall_form_title": MessageLookupByLibrary.simpleMessage("Add hall"),
+        "health_text": MessageLookupByLibrary.simpleMessage("Health"),
+        "home_text": MessageLookupByLibrary.simpleMessage("Home"),
+        "incorrect_data":
+            MessageLookupByLibrary.simpleMessage("Incorrect data entered"),
+        "invalid_email": MessageLookupByLibrary.simpleMessage("Invalid email"),
+        "invalid_email_or_password":
+            MessageLookupByLibrary.simpleMessage("Invalid email or password"),
+        "invalid_user_name":
+            MessageLookupByLibrary.simpleMessage("At least 2 characters"),
+        "invalid_user_surname":
+            MessageLookupByLibrary.simpleMessage("At least 2 characters"),
+        "list_is_empty_text":
+            MessageLookupByLibrary.simpleMessage("List is empty"),
+        "list_of_coaches_text":
+            MessageLookupByLibrary.simpleMessage("List of trainers"),
+        "list_of_halls_text":
+            MessageLookupByLibrary.simpleMessage("List of halls"),
+        "loading_data_text":
+            MessageLookupByLibrary.simpleMessage("Loading data"),
+        "network_problems": MessageLookupByLibrary.simpleMessage(
+            "Network problems. Check your internet connection"),
+        "no_schedule_for_this_date_text": MessageLookupByLibrary.simpleMessage(
+            "There is no schedule for this date"),
+        "operation_not_allowed": MessageLookupByLibrary.simpleMessage(
+            "This operation is not allowed. Try later"),
+        "password_text": MessageLookupByLibrary.simpleMessage("Password"),
+        "profile_text": MessageLookupByLibrary.simpleMessage("Profile"),
+        "schedule_text": MessageLookupByLibrary.simpleMessage("Schedule"),
+        "settings_text": MessageLookupByLibrary.simpleMessage("Settings"),
+        "sign_in_screen_subtitle":
+            MessageLookupByLibrary.simpleMessage("We were waiting for you"),
+        "sign_in_screen_title":
+            MessageLookupByLibrary.simpleMessage("Welcome back"),
+        "sign_in_text": MessageLookupByLibrary.simpleMessage("Sign In"),
+        "sign_out_confirmation_dialog_content":
+            MessageLookupByLibrary.simpleMessage(
+                "You will be sign out of your current account and will be redirected to the login screen."),
+        "sign_out_confirmation_dialog_title":
+            MessageLookupByLibrary.simpleMessage("Sign Out?"),
+        "sign_out_text": MessageLookupByLibrary.simpleMessage("Sign Out"),
+        "sign_up_screen_subtitle": MessageLookupByLibrary.simpleMessage(
+            "Register to start using the application"),
+        "sign_up_screen_title": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "sign_up_text": MessageLookupByLibrary.simpleMessage("Sign Up"),
+        "sports_complex_text":
+            MessageLookupByLibrary.simpleMessage("Sports complex"),
+        "too_many_requests": MessageLookupByLibrary.simpleMessage(
+            "Too many requests. Try later"),
+        "unknown_error": MessageLookupByLibrary.simpleMessage("Unknown error"),
+        "unknown_text": MessageLookupByLibrary.simpleMessage("Unknown"),
+        "unsupported_error":
+            MessageLookupByLibrary.simpleMessage("Unsupported error"),
+        "user_data_is_empty":
+            MessageLookupByLibrary.simpleMessage("User data is empty"),
+        "user_disabled":
+            MessageLookupByLibrary.simpleMessage("User is disabled"),
+        "user_not_found":
+            MessageLookupByLibrary.simpleMessage("User not found"),
+        "user_text": MessageLookupByLibrary.simpleMessage("User"),
+        "weak_password": MessageLookupByLibrary.simpleMessage("Weak password"),
+        "welcome_text": MessageLookupByLibrary.simpleMessage("Welcome"),
+        "workouts_schedule_text":
+            MessageLookupByLibrary.simpleMessage("Workouts schedule"),
+        "write_news_text": MessageLookupByLibrary.simpleMessage("Write news")
+      };
 }

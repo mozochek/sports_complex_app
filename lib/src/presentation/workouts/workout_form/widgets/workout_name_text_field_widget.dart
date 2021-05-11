@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/src/application/workouts/form_bloc/i_workout_form_bloc.dart';
 
 class WorkoutNameTextField extends StatelessWidget {
   const WorkoutNameTextField({
+    required this.formBloc,
     Key? key,
   }) : super(key: key);
 
+  final IWorkoutFormBloc formBloc;
+
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<IWorkoutFormBloc>(context);
-
     return StreamBuilder<String>(
-      stream: bloc.workoutName,
+      stream: formBloc.workoutName,
       builder: (_, snapshot) {
         return TextFormField(
-          initialValue: bloc.obj?.name,
+          initialValue: formBloc.obj?.name,
           keyboardType: TextInputType.name,
-          onChanged: bloc.changeWorkoutName,
+          onChanged: formBloc.changeWorkoutName,
           decoration: InputDecoration(
             // TODO: add localization
             labelText: 'Название',

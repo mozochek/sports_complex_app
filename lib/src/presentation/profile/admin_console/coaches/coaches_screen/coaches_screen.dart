@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
+import 'package:sports_complex_app/injection.dart';
 import 'package:sports_complex_app/src/application/coaches/watcher_bloc/i_coaches_watcher_bloc.dart';
 import 'package:sports_complex_app/src/domain/coaches/coach.dart';
 import 'package:sports_complex_app/src/presentation/common/list_is_empty_indicator_widget.dart';
@@ -21,7 +21,7 @@ class CoachesScreen extends StatelessWidget {
         title: Text(S.current.list_of_coaches_text),
       ),
       body: StreamBuilder<List<Coach>>(
-        stream: Provider.of<ICoachesWatcherBloc>(context).streamOfObjects,
+        stream: getIt<ICoachesWatcherBloc>().streamOfObjects,
         builder: (_, snapshot) {
           if (snapshot.hasData) {
             if (snapshot.connectionState == ConnectionState.active ||

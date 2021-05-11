@@ -26,7 +26,7 @@ class SignInBloc extends ISignInBloc with SignInValidator {
   final _email = BehaviorSubject<String>();
   final _password = BehaviorSubject<String>();
 
-  final AuthData _userAuthData = AuthData();
+  final AuthData _userAuthData = AuthData.empty();
 
   final _isEmailRemembered = BehaviorSubject<bool>()..add(false);
 
@@ -107,11 +107,10 @@ class SignInBloc extends ISignInBloc with SignInValidator {
       );
 
   @override
-  Future<void> signIn() async {
+  Future<bool?> signIn() async {
     // TODO: refactor
     try {
-      await _auth.signInWithAuthData(_userAuthData);
-
+      final signedInUser = await _auth.signInWithAuthData(_userAuthData);
       final statesBox = await Hive.openBox<bool>('states');
       await statesBox.put('isEmailRemembered', _isEmailRemembered.value!);
       await statesBox.close();
@@ -128,6 +127,7 @@ class SignInBloc extends ISignInBloc with SignInValidator {
         await authBox.delete('email');
       }
       await authBox.close();
+      return signedInUser != null;
     } on SignInException catch (e) {
       debugPrint(
         'Application layer: inside $runtimeType: catch ${e.runtimeType}: ${e.enumCode}: ${e.description}',

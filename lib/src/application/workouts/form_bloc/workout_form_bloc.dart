@@ -21,7 +21,7 @@ class WorkoutFormBloc extends IWorkoutFormBloc with WorkoutFormValidator {
     IWorkoutsFirestoreCrudRepository repository, {
     @factoryParam Workout? workout,
     @factoryParam FormBlocPurpose? purpose,
-  }) : super(repository, workout, purpose = FormBlocPurpose.creating);
+  }) : super(repository, workout, purpose);
 
   factory WorkoutFormBloc.forCreating() => getIt<IWorkoutFormBloc>(
         param1: Workout.empty(),
@@ -30,7 +30,7 @@ class WorkoutFormBloc extends IWorkoutFormBloc with WorkoutFormValidator {
 
   factory WorkoutFormBloc.forEditing(Workout workout) =>
       getIt<IWorkoutFormBloc>(
-        param1: workout.copy(),
+        param1: workout.clone(),
         param2: FormBlocPurpose.editing,
       ) as WorkoutFormBloc
         ..changeWorkoutName(workout.name)

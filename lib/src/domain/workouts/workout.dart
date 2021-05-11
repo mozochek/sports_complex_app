@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+import 'package:sports_complex_app/src/domain/cloneable_mixin.dart';
 import 'package:sports_complex_app/src/infrastructure/core/extensions/time_of_day_x.dart';
 import 'package:sports_complex_app/src/domain/coaches/coach.dart';
 import 'package:sports_complex_app/src/domain/halls/hall.dart';
@@ -11,7 +12,7 @@ import 'package:uuid/uuid.dart';
 part 'workout.g.dart';
 
 @JsonSerializable()
-class Workout {
+class Workout with Cloneable<Workout> {
   Workout({
     required this.id,
     required this.name,
@@ -36,7 +37,7 @@ class Workout {
       _$WorkoutFromJson(json);
 
   factory Workout.fromFirestore(QueryDocumentSnapshot doc) =>
-      Workout.fromJson(doc.data()!);
+      Workout.fromJson(doc.data());
 
   final String id;
   String name;
@@ -53,7 +54,8 @@ class Workout {
 
   TimeOfDay get duration => endTime!.subtract(startTime!);
 
-  Workout copy() => Workout(
+  @override
+  Workout clone() => Workout(
         id: id,
         name: name,
         hall: hall,

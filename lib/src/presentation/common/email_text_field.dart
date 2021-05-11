@@ -26,7 +26,6 @@ class EmailTextField extends StatelessWidget {
           onChanged: onChanged,
           autocorrect: false,
           decoration: InputDecoration(
-            fillColor: Colors.white,
             labelText: S.current.email_text,
             prefixIcon: const Icon(Icons.email),
             errorText: snapshot.error as String?,

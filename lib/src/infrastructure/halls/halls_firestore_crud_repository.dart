@@ -18,18 +18,15 @@ class HallsFirestoreCrudRepository extends IHallsFirestoreCrudRepository {
       : super(firebaseFirestore);
 
   @override
-  Future<void> create(Hall obj) {
-    debugPrint('create');
-    return firestoreInstance.hallDoc(obj).set(obj.toJson());
-  }
+  Future<void> create(Hall obj) =>
+      firestoreInstance.hallDoc(obj).set(obj.toJson());
 
   @override
   Future<void> delete(Hall obj) => firestoreInstance.hallDoc(obj).delete();
 
   @override
-  Future<void> update(Hall obj) {
-    return firestoreInstance.hallDoc(obj).update(obj.toJson());
-  }
+  Future<void> update(Hall obj, {Hall? initObj}) =>
+      firestoreInstance.hallDoc(obj).update(obj.toJson());
 
   @override
   Stream<List<Hall>> watchAll() => firestoreInstance.hallsCollection

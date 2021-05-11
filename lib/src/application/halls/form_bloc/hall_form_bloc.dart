@@ -12,14 +12,17 @@ import 'package:sports_complex_app/src/domain/halls/hall.dart';
 /// Implementation of [IHallFormBloc] interface for managing entered data on the HallForm screen
 @Injectable(
   as: IHallFormBloc,
-  env: [Environment.dev, Environment.prod],
+  env: [
+    Environment.dev,
+    Environment.prod,
+  ],
 )
 class HallFormBloc extends IHallFormBloc with HallFormValidator {
   HallFormBloc(
     IHallsFirestoreCrudRepository repository, {
     @factoryParam Hall? hall,
     @factoryParam FormBlocPurpose? purpose,
-  }) : super(repository, hall, purpose = FormBlocPurpose.creating);
+  }) : super(repository, hall, purpose);
 
   factory HallFormBloc.forCreating() => getIt<IHallFormBloc>(
         param1: Hall.empty(),
@@ -27,7 +30,7 @@ class HallFormBloc extends IHallFormBloc with HallFormValidator {
       ) as HallFormBloc;
 
   factory HallFormBloc.forEditing(Hall hall) => getIt<IHallFormBloc>(
-        param1: hall.copy(),
+        param1: hall.clone(),
         param2: FormBlocPurpose.editing,
       ) as HallFormBloc
         ..changeHallName(hall.name);

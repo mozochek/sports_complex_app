@@ -1,22 +1,25 @@
+import 'package:flutter/material.dart';
+import 'package:sports_complex_app/src/domain/cloneable_mixin.dart';
 import 'package:sports_complex_app/src/domain/core/repositories/i_cud_repository.dart';
 
 part 'form_bloc_purpose.dart';
 
 /// Abstract class that describes the default behaviour for any BLoC on any form screen
-abstract class IFormBloc<T> {
+abstract class IFormBloc<T extends Cloneable<T>> {
   IFormBloc({
     required this.repository,
     this.obj,
     this.purpose,
-  });
+  }) : initObjState = obj!.clone();
 
   /// Instance of repository
   final ICudRepository<T> repository;
 
-  /// Function for creating object from all entered data
-  ///
-  /// As default used in [create()] function
+  /// Editable object
   final T? obj;
+
+  /// Initial [obj] state
+  final T? initObjState;
 
   /// This bloc purpose
   final FormBlocPurpose? purpose;
@@ -42,9 +45,12 @@ abstract class IFormBloc<T> {
         switch (purpose) {
           case FormBlocPurpose.editing:
             {
-              await repository.update(obj!).catchError(
-                    (dynamic e) => isSaved = false,
-                  );
+              await repository.update(obj!, initObj: initObjState!).catchError(
+                (dynamic e) {
+                  debugPrint('error ${e.runtimeType}');
+                  isSaved = false;
+                },
+              );
               break;
             }
           case FormBlocPurpose.creating:

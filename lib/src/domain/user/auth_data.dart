@@ -9,6 +9,11 @@ class AuthData {
     this.password = '',
   });
 
+  factory AuthData.empty() => AuthData(
+        email: '',
+        password: '',
+      );
+
   factory AuthData.fromJson(Map<String, dynamic> json) =>
       _$AuthDataFromJson(json);
 

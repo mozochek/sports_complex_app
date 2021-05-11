@@ -13,4 +13,6 @@ abstract class IUserRepository with WatcherMixin<User>, UserWatcherMixin {
   Future<Stream<User>> userStream(AuthData authData);
 
   Future<void> updateUserRole(User user, Role role);
+
+  Future<void> updateUserPersonalData(User user, PersonalData personalData);
 }

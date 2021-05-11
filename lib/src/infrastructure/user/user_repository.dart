@@ -74,13 +74,23 @@ class UserRepository implements IUserRepository {
           .update(role.toJson());
 
   @override
+  Future<void> updateUserPersonalData(
+    User user,
+    PersonalData personalData,
+  ) async =>
+      _firebaseFirestore.userDoc(user).update(
+        <String, dynamic>{
+          'personalData': personalData.toJson(),
+        },
+      );
+
+  @override
   Stream<List<User>> watchAll() => _firebaseFirestore.usersCollection
       .orderBy('role')
       .snapshots()
       .map((snapshot) => snapshot.docs.map(
             (doc) {
-              // TODO: !
-              final userAsJson = doc.data() ?? <String, dynamic>{};
+              final userAsJson = doc.data();
               return User.fromJson(userAsJson);
             },
           ).toList());

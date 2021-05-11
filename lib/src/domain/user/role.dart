@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
 import 'package:sports_complex_app/src/infrastructure/core/extensions/string_x.dart';
+import 'package:sports_complex_app/src/presentation/colors.dart';
 
 enum Role {
   unknown,
@@ -60,7 +61,7 @@ extension RoleX on Role {
           onPressed: null,
           icon: const FaIcon(
             FontAwesomeIcons.userAlt,
-            color: Colors.green,
+            color: AppColors.green,
           ),
         );
       case Role.coach:
@@ -70,7 +71,7 @@ extension RoleX on Role {
           onPressed: null,
           icon: const FaIcon(
             FontAwesomeIcons.users,
-            color: Colors.deepPurple,
+            color: AppColors.deepPurple,
           ),
         );
       case Role.admin:
@@ -79,7 +80,7 @@ extension RoleX on Role {
           onPressed: null,
           icon: const FaIcon(
             FontAwesomeIcons.userShield,
-            color: Colors.red,
+            color: AppColors.secondaryRed,
           ),
         );
     }

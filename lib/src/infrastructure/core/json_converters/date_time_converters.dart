@@ -16,3 +16,20 @@ class DateTimeToDateConverter
   @override
   Map<String, dynamic>? toJson(DateTime? date) => date?.onlyDateToJson();
 }
+
+class DateTimeConverter
+    implements JsonConverter<DateTime?, Map<String, dynamic>?> {
+  const DateTimeConverter();
+
+  @override
+  DateTime? fromJson(Map<String, dynamic>? json) => DateTime(
+        json?['year'] as int,
+        json?['month'] as int,
+        json?['day'] as int,
+        json?['hour'] as int,
+        json?['minute'] as int,
+      );
+
+  @override
+  Map<String, dynamic>? toJson(DateTime? date) => date?.dateAndTimeToJson();
+}

@@ -1,15 +1,12 @@
+import 'package:animations/animations.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
+import 'package:sports_complex_app/injection.dart';
 
 import 'package:sports_complex_app/src/application/bottom_nav/bottom_navigation_bloc.dart';
-import 'package:sports_complex_app/src/application/workouts/actor_bloc/i_workout_actor_bloc.dart';
-import 'package:sports_complex_app/src/application/workouts/date_bloc/workouts_schedule_date_bloc.dart';
-import 'package:sports_complex_app/src/application/workouts/watcher_bloc/i_workouts_watcher_bloc.dart';
 import 'package:sports_complex_app/src/presentation/home/home_screen.dart';
 import 'package:sports_complex_app/src/presentation/profile/profile_screen.dart';
 import 'package:sports_complex_app/src/presentation/workouts/workouts_screen.dart';
-import 'package:sports_complex_app/injection.dart';
 import 'package:sports_complex_app/generated/l10n.dart';
 
 class BottomNavigation extends StatelessWidget {
@@ -17,24 +14,10 @@ class BottomNavigation extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  final _screens = <Widget>[
-    const HomeScreen(),
-    MultiProvider(
-      providers: [
-        Provider<IWorkoutsWatcherBloc>(
-          create: (_) => getIt<IWorkoutsWatcherBloc>(),
-        ),
-        Provider<IWorkoutActorBloc>(
-          create: (_) => getIt<IWorkoutActorBloc>(),
-        ),
-        Provider<WorkoutsScheduleDateBloc>(
-          create: (_) => getIt<WorkoutsScheduleDateBloc>(),
-          dispose: (_, bloc) async => bloc.dispose(),
-        ),
-      ],
-      child: const WorkoutsScreen(),
-    ),
-    const ProfileScreen(),
+  final _screens = const <Widget>[
+    HomeScreen(),
+    WorkoutsScreen(),
+    ProfileScreen(),
   ];
 
   final _navBarItems = <BottomNavigationBarItem>[
@@ -54,7 +37,7 @@ class BottomNavigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<BottomNavigationBloc>(context);
+    final bloc = getIt<BottomNavigationBloc>();
 
     return StreamBuilder<int>(
       stream: bloc.selectedIndex,
@@ -64,7 +47,16 @@ class BottomNavigation extends StatelessWidget {
           return DefaultTabController(
             length: _screens.length,
             child: Scaffold(
-              body: _screens[index],
+              body: PageTransitionSwitcher(
+                transitionBuilder: (child, animation, secondaryAnimation) {
+                  return FadeThroughTransition(
+                    animation: animation,
+                    secondaryAnimation: secondaryAnimation,
+                    child: child,
+                  );
+                },
+                child: _screens[index],
+              ),
               bottomNavigationBar: BottomNavigationBar(
                 items: _navBarItems,
                 onTap: bloc.changeSelectedIndex,

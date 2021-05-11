@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/src/infrastructure/core/extensions/date_time_x.dart';
 import 'package:sports_complex_app/src/application/workouts/form_bloc/i_workout_form_bloc.dart';
 
 class WorkoutDateTextField extends StatelessWidget {
   const WorkoutDateTextField({
+    required this.formBloc,
     Key? key,
   }) : super(key: key);
 
+  final IWorkoutFormBloc formBloc;
+
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<IWorkoutFormBloc>(context);
-
     return StreamBuilder<DateTime?>(
-      stream: bloc.workoutDate,
+      stream: formBloc.workoutDate,
       builder: (_, snapshot) {
         return TextFormField(
           controller: TextEditingController(
@@ -42,7 +42,7 @@ class WorkoutDateTextField extends StatelessWidget {
                 today.day + 14,
               ),
             );
-            bloc.changeWorkoutDate(pickedDate);
+            formBloc.changeWorkoutDate(pickedDate);
           },
         );
       },

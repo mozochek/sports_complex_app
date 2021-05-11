@@ -1,31 +1,26 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import 'package:sports_complex_app/src/application/halls/watcher_bloc/i_halls_watcher_bloc.dart';
 import 'package:sports_complex_app/src/application/workouts/form_bloc/i_workout_form_bloc.dart';
 import 'package:sports_complex_app/src/domain/halls/hall.dart';
 import 'package:sports_complex_app/src/presentation/common/hall_selector_dialog.dart';
-import 'package:sports_complex_app/injection.dart';
-
 
 class WorkoutHallTextField extends StatelessWidget {
   const WorkoutHallTextField({
+    required this.formBloc,
     Key? key,
   }) : super(key: key);
 
+  final IWorkoutFormBloc formBloc;
+
   @override
   Widget build(BuildContext context) {
-    final bloc = Provider.of<IWorkoutFormBloc>(context);
-
     return StreamBuilder<Hall>(
-      stream: bloc.workoutHall,
+      stream: formBloc.workoutHall,
       builder: (_, snapshot) {
         return TextFormField(
           controller: TextEditingController(
             // TODO: add localization
-            text: snapshot.hasData
-                ? snapshot.data!.name
-                : 'Выберите зал',
+            text: snapshot.hasData ? snapshot.data!.name : 'Выберите зал',
           ),
           decoration: InputDecoration(
             labelText: 'Зал',
@@ -37,12 +32,9 @@ class WorkoutHallTextField extends StatelessWidget {
           onTap: () async {
             final pickedHall = await showDialog<Hall>(
               context: context,
-              builder: (_) => Provider(
-                create: (_) => getIt<IHallsWatcherBloc>(),
-                child: const HallSelectorDialog(),
-              ),
+              builder: (_) => const HallSelectorDialog(),
             );
-            bloc.changeWorkoutHall(pickedHall);
+            formBloc.changeWorkoutHall(pickedHall);
           },
         );
       },

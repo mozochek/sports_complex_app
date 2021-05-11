@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
-import 'package:sports_complex_app/injection.dart';
 
+import 'package:sports_complex_app/injection.dart';
 import 'package:sports_complex_app/src/application/user/actor_bloc/i_user_actor_bloc.dart';
 import 'package:sports_complex_app/src/application/user/i_user_bloc.dart';
 import 'package:sports_complex_app/src/application/user/watcher_bloc/i_users_watcher_bloc.dart';
@@ -12,6 +10,7 @@ import 'package:sports_complex_app/src/domain/user/role.dart';
 import 'package:sports_complex_app/src/presentation/common/list_is_empty_indicator_widget.dart';
 import 'package:sports_complex_app/src/presentation/common/loading_indicator_widget.dart';
 import 'package:sports_complex_app/src/presentation/common/role_selector_dialog.dart';
+import 'package:sports_complex_app/src/presentation/common/slidable_edit_icon.dart';
 
 class UsersScreen extends StatelessWidget {
   const UsersScreen({
@@ -20,7 +19,7 @@ class UsersScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final usersWatcherBloc = Provider.of<IUsersWatcherBloc>(context);
+    final usersWatcherBloc = getIt<IUsersWatcherBloc>();
     final currentUser = getIt<IUserBloc>().currentUser!;
 
     return Scaffold(
@@ -56,9 +55,7 @@ class UsersScreen extends StatelessWidget {
                             secondaryActions: user.role == Role.admin
                                 ? null
                                 : <Widget>[
-                                    IconSlideAction(
-                                      icon: FontAwesomeIcons.edit,
-                                      color: Colors.yellow,
+                                    SlidableEditIcon(
                                       onTap: () async {
                                         final pickedRole =
                                             await showDialog<Role>(
@@ -68,18 +65,13 @@ class UsersScreen extends StatelessWidget {
                                         );
 
                                         if (pickedRole != null) {
-                                          await getIt<IUserActorBloc>().updateUserRole(
+                                          await getIt<IUserActorBloc>()
+                                              .updateUserRole(
                                             user,
                                             pickedRole,
                                           );
                                         }
                                       },
-                                    ),
-                                    IconSlideAction(
-                                      icon: FontAwesomeIcons.lock,
-                                      color: Colors.red,
-                                      // TODO: add user disabling
-                                      onTap: () {},
                                     ),
                                   ],
                             child: Column(

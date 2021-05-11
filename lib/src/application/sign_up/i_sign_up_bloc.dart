@@ -37,7 +37,7 @@ abstract class ISignUpBloc {
   Stream<bool> get isSignUpAllowed;
 
   /// Method which called on user sign up
-  Future<void> signUp();
+  Future<bool?> signUp();
 
   /// Dispose of all possible resources
   Future<void> dispose();

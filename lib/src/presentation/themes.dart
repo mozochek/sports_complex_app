@@ -2,19 +2,23 @@ import 'package:flutter/material.dart';
 
 import 'package:sports_complex_app/src/presentation/colors.dart';
 
-// TODO: play around with theme
 class AppThemes {
-  static final ThemeData mainTheme = ThemeData(
+  static final ThemeData mainTheme = darkTheme;
+
+  static final ThemeData darkTheme = ThemeData(
     // Main colors
     fontFamily: 'ProximaNova',
-    // brightness: Brightness.dark,
+    brightness: Brightness.dark,
     visualDensity: VisualDensity.adaptivePlatformDensity,
     primaryColor: AppColors.primaryDark,
     accentColor: AppColors.secondaryRed,
     primaryColorDark: AppColors.primaryDark,
-    scaffoldBackgroundColor: AppColors.primaryDark,
+    scaffoldBackgroundColor: AppColors.backgroundDark,
     dialogBackgroundColor: AppColors.primaryDark,
-    hintColor: AppColors.textWhite,
+    hintColor: AppColors.white,
+    splashColor: AppColors.secondaryRed.withOpacity(0.25),
+    highlightColor: AppColors.secondaryRed.withOpacity(0.5),
+    toggleableActiveColor: AppColors.secondaryRed,
     colorScheme: ColorScheme(
       primary: AppColors.red[700]!,
       primaryVariant: AppColors.dark[900]!,
@@ -23,147 +27,136 @@ class AppThemes {
       background: AppColors.dark[900]!,
       surface: AppColors.dark[800]!,
       error: AppColors.red[700]!,
-      onPrimary: AppColors.textWhite,
-      onSecondary: AppColors.textWhite,
-      onSurface: AppColors.textWhite,
-      onBackground: AppColors.textWhite,
-      onError: AppColors.textWhite,
+      onPrimary: AppColors.white,
+      onSecondary: AppColors.white,
+      onSurface: AppColors.white,
+      onBackground: AppColors.white,
+      onError: AppColors.white,
       brightness: Brightness.dark,
     ),
-    // canvasColor: AppColors.darkAccent,
-    // cardColor: AppColors.primaryDark,
+
     // App bar theme
-    appBarTheme: const AppBarTheme(
-      backgroundColor: AppColors.primaryDark,
+    appBarTheme: AppBarTheme(
+      backgroundColor: AppColors.dark[800]!,
     ),
 
     // Bottom navbar theme
-    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
-      backgroundColor: AppColors.primaryDark,
-      selectedItemColor: AppColors.secondaryRed,
-      unselectedItemColor: AppColors.textGrey,
+    bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      backgroundColor: AppColors.dark[800]!,
+      selectedItemColor: AppColors.white,
+      unselectedItemColor: AppColors.white38,
     ),
-
-    // Buttons
-    textButtonTheme: TextButtonThemeData(
-      style: ButtonStyle(
-        foregroundColor: MaterialStateProperty.resolveWith(
-          (states) {
-            if (states.contains(MaterialState.disabled)) {
-              return AppColors.textGrey;
-            }
-            return AppColors.secondaryRed;
-          },
-        ),
-        textStyle: MaterialStateProperty.resolveWith(
-          (states) => const TextStyle(
-            color: AppColors.textWhite,
-          ),
-        ),
-      ),
-    ),
-    toggleableActiveColor: AppColors.secondaryRed,
 
     // Fab theme
     floatingActionButtonTheme: const FloatingActionButtonThemeData(
       backgroundColor: AppColors.secondaryRed,
-      foregroundColor: AppColors.textWhite,
+      foregroundColor: AppColors.white,
     ),
+
     // Text theme
     textTheme: const TextTheme(
       headline1: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       headline2: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       headline3: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       headline4: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       headline5: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       headline6: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       subtitle1: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       subtitle2: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       bodyText1: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       bodyText2: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
+      ),
+      caption: TextStyle(
+        color: AppColors.white,
       ),
     ),
     primaryTextTheme: const TextTheme(
       headline1: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       headline2: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       headline3: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       headline4: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       headline5: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       headline6: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       subtitle1: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       subtitle2: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       bodyText1: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       bodyText2: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
+      ),
+      caption: TextStyle(
+        color: AppColors.white,
       ),
     ),
     accentTextTheme: const TextTheme(
       headline1: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       headline2: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       headline3: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       headline4: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       headline5: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       headline6: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       subtitle1: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       subtitle2: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       bodyText1: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
       ),
       bodyText2: TextStyle(
-        color: AppColors.textWhite,
+        color: AppColors.white,
+      ),
+      caption: TextStyle(
+        color: AppColors.white,
       ),
     ),
 
@@ -172,10 +165,9 @@ class AppThemes {
       cursorColor: AppColors.secondaryRed,
     ),
     inputDecorationTheme: const InputDecorationTheme(
-      // fillColor: AppColors.darkAccent,
       errorMaxLines: 2,
       labelStyle: TextStyle(
-        color: AppColors.textGrey,
+        color: AppColors.white24,
       ),
       errorStyle: TextStyle(
         color: AppColors.secondaryRed,
@@ -242,5 +234,20 @@ class AppThemes {
     accentIconTheme: const IconThemeData(
       color: AppColors.secondaryRed,
     ),
+
+    tooltipTheme: const TooltipThemeData(
+      textStyle: TextStyle(
+        color: AppColors.white,
+      ),
+      decoration: BoxDecoration(
+        color: AppColors.white24,
+      ),
+    ),
+  );
+
+  static final ThemeData lightTheme = ThemeData(
+    fontFamily: 'ProximaNova',
+    brightness: Brightness.light,
+    visualDensity: VisualDensity.adaptivePlatformDensity,
   );
 }

@@ -1,7 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
+import 'package:sports_complex_app/injection.dart';
 import 'package:sports_complex_app/src/application/sign_up/i_sign_up_bloc.dart';
 import 'package:sports_complex_app/src/presentation/common/email_text_field.dart';
 import 'package:sports_complex_app/src/presentation/common/password_text_field.dart';
@@ -9,16 +10,28 @@ import 'package:sports_complex_app/src/presentation/sign_up/widgets/already_regi
 import 'package:sports_complex_app/src/presentation/sign_up/widgets/sign_up_button.dart';
 import 'package:sports_complex_app/src/presentation/sign_up/widgets/user_name_text_field.dart';
 import 'package:sports_complex_app/src/presentation/sign_up/widgets/user_surname_text_field.dart';
+import 'package:sports_complex_app/src/presentation/router/app_router.gr.dart';
 
-class SignUpScreen extends StatelessWidget {
+class SignUpScreen extends StatefulWidget {
   const SignUpScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final bloc = Provider.of<ISignUpBloc>(context);
+  _SignUpScreenState createState() => _SignUpScreenState();
+}
 
+class _SignUpScreenState extends State<SignUpScreen> {
+  late final ISignUpBloc _bloc;
+
+  @override
+  void initState() {
+    _bloc = getIt<ISignUpBloc>();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: CustomScrollView(
@@ -45,29 +58,43 @@ class SignUpScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: UserSurnameTextField(
-                        userSurnameStream: bloc.userSurname,
-                        onChanged: bloc.changeSurname,
+                        userSurnameStream: _bloc.userSurname,
+                        onChanged: _bloc.changeSurname,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
                       child: UserNameTextField(
-                        userNameStream: bloc.userName,
-                        onChanged: bloc.changeName,
+                        userNameStream: _bloc.userName,
+                        onChanged: _bloc.changeName,
                       ),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(bottom: 16.0),
                       child: EmailTextField(
-                        emailStream: bloc.email,
-                        onChanged: bloc.changeEmail,
+                        emailStream: _bloc.email,
+                        onChanged: _bloc.changeEmail,
                       ),
                     ),
-                    PasswordTextField(
-                      passwordStream: bloc.password,
-                      onChanged: bloc.changePassword,
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 8.0),
+                      child: PasswordTextField(
+                        passwordStream: _bloc.password,
+                        onChanged: _bloc.changePassword,
+                      ),
                     ),
-                    const SignUpButton(),
+                    SignUpButton(
+                      buttonAvailabilityStream: _bloc.isSignUpAllowed,
+                      onPressed: () async {
+                        final isUserSignedUp = await _bloc.signUp();
+                        if (isUserSignedUp ?? false) {
+                          await context.router.pushAndPopUntil(
+                            const SignInScreenRoute(),
+                            predicate: (route) => route.settings.name == '/',
+                          );
+                        }
+                      },
+                    ),
                     const AlreadyRegisteredText(),
                   ],
                 ),
@@ -77,5 +104,11 @@ class SignUpScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _bloc.dispose();
+    super.dispose();
   }
 }

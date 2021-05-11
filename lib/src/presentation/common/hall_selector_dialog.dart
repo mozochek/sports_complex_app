@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:sports_complex_app/injection.dart';
 
 import 'package:sports_complex_app/src/application/halls/watcher_bloc/i_halls_watcher_bloc.dart';
 import 'package:sports_complex_app/src/domain/halls/hall.dart';
@@ -30,7 +30,7 @@ class HallSelectorDialog extends StatelessWidget {
       ),
       children: <Widget>[
         StreamBuilder<List<Hall>>(
-          stream: Provider.of<IHallsWatcherBloc>(context).streamOfObjects,
+          stream: getIt<IHallsWatcherBloc>().streamOfObjects,
           builder: (_, snapshot) {
             if (snapshot.hasData) {
               if (snapshot.connectionState == ConnectionState.active ||

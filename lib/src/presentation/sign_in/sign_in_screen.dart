@@ -1,7 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
+import 'package:sports_complex_app/injection.dart';
 import 'package:sports_complex_app/src/application/sign_in/i_sign_in_bloc.dart';
 import 'package:sports_complex_app/src/presentation/common/email_text_field.dart';
 import 'package:sports_complex_app/src/presentation/common/loading_indicator_widget.dart';
@@ -10,20 +11,32 @@ import 'package:sports_complex_app/src/presentation/common/simple_switch.dart';
 import 'package:sports_complex_app/src/presentation/sign_in/widgets/do_not_have_an_account_text.dart';
 import 'package:sports_complex_app/src/presentation/sign_in/widgets/sign_in_button.dart';
 import 'package:sports_complex_app/src/presentation/sign_in/widgets/sign_in_picture.dart';
+import 'package:sports_complex_app/src/presentation/router/app_router.gr.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatefulWidget {
   const SignInScreen({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    final bloc = Provider.of<ISignInBloc>(context);
+  _SignInScreenState createState() => _SignInScreenState();
+}
 
+class _SignInScreenState extends State<SignInScreen> {
+  late final ISignInBloc _bloc;
+
+  @override
+  void initState() {
+    _bloc = getIt<ISignInBloc>();
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: FutureBuilder<Map<String, dynamic>>(
-          future: bloc.getCachedData(),
+          future: _bloc.getCachedData(),
           builder: (_, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
               final cacheMap = snapshot.data!;
@@ -63,22 +76,36 @@ class SignInScreen extends StatelessWidget {
                               children: <Widget>[
                                 EmailTextField(
                                   initialValue: cacheMap['email'] as String?,
-                                  emailStream: bloc.email,
-                                  onChanged: bloc.changeEmail,
+                                  emailStream: _bloc.email,
+                                  onChanged: _bloc.changeEmail,
                                 ),
                                 Padding(
                                   padding: const EdgeInsets.only(top: 16.0),
                                   child: PasswordTextField(
-                                    passwordStream: bloc.password,
-                                    onChanged: bloc.changePassword,
+                                    passwordStream: _bloc.password,
+                                    onChanged: _bloc.changePassword,
                                   ),
                                 ),
                                 SimpleSwitch(
                                   label: 'Запомнить email',
-                                  valueStream: bloc.isEmailRememberedStream,
-                                  onChanged: bloc.changeIsEmailRemembered,
+                                  valueStream: _bloc.isEmailRememberedStream,
+                                  onChanged: _bloc.changeIsEmailRemembered,
                                 ),
-                                const SignInButton(),
+                                SignInButton(
+                                  buttonAvailabilityStream:
+                                      _bloc.isSignInAllowed,
+                                  onPressed: () async {
+                                    final isUserSignedIn = await _bloc.signIn();
+                                    if (isUserSignedIn ?? false) {
+                                      await context.router.pushAndPopUntil(
+                                        BottomNavigationRoute(),
+                                        predicate: (route) =>
+                                            route.settings.name ==
+                                            BottomNavigationRoute.name,
+                                      );
+                                    }
+                                  },
+                                ),
                                 const DoNotHaveAnAccountText(),
                               ],
                             ),
@@ -95,5 +122,11 @@ class SignInScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _bloc.dispose();
+    super.dispose();
   }
 }

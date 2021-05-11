@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/injection.dart';
 import 'package:sports_complex_app/src/application/user/i_user_bloc.dart';
 import 'package:sports_complex_app/src/application/workouts/actor_bloc/i_workout_actor_bloc.dart';
-import 'package:sports_complex_app/src/application/workouts/form_bloc/i_workout_form_bloc.dart';
 import 'package:sports_complex_app/src/application/workouts/form_bloc/workout_form_bloc.dart';
 import 'package:sports_complex_app/src/domain/workouts/workout.dart';
 import 'package:sports_complex_app/src/presentation/common/delete_dialog.dart';
+import 'package:sports_complex_app/src/presentation/common/slidable_delete_icon.dart';
+import 'package:sports_complex_app/src/presentation/common/slidable_edit_icon.dart';
 import 'package:sports_complex_app/src/presentation/common/workout_list_tile_widget.dart';
 import 'package:sports_complex_app/src/presentation/workouts/workout_details/workout_details_screen.dart';
 import 'package:sports_complex_app/src/presentation/workouts/workout_form/workout_form.dart';
+import 'package:sports_complex_app/src/presentation/workouts/workout_form/workout_form_inh_widget.dart';
 
 class ListOfWorkouts extends StatelessWidget {
   const ListOfWorkouts({
@@ -35,28 +36,22 @@ class ListOfWorkouts extends StatelessWidget {
           secondaryActions:
               currentUser.isAdmin || workout.coach.id == currentUser.id
                   ? <Widget>[
-                      IconSlideAction(
-                        color: Colors.yellow,
-                        icon: Icons.edit,
+                      SlidableEditIcon(
                         onTap: () async {
                           // TODO: old navigation
                           await Navigator.of(context).push<void>(
                             MaterialPageRoute(
                               fullscreenDialog: true,
-                              builder: (_) => Provider<IWorkoutFormBloc>(
-                                create: (_) => WorkoutFormBloc.forEditing(
-                                  workout,
-                                ),
-                                dispose: (_, bloc) async => bloc.dispose(),
+                              builder: (_) => WorkoutFormInhWidget(
+                                workoutFormBloc:
+                                    WorkoutFormBloc.forEditing(workout),
                                 child: const WorkoutForm(),
                               ),
                             ),
                           );
                         },
                       ),
-                      IconSlideAction(
-                        color: Colors.red,
-                        icon: Icons.delete,
+                      SlidableDeleteIcon(
                         onTap: () async {
                           final isDeleteConfirmed = await showDialog<bool>(
                             context: context,
@@ -74,10 +69,7 @@ class ListOfWorkouts extends StatelessWidget {
                           // In this case we didn't get any response from dialog so as default
                           // we set it to false
                           if (isDeleteConfirmed ?? false) {
-                            await Provider.of<IWorkoutActorBloc>(
-                              context,
-                              listen: false,
-                            ).delete(workout);
+                            await getIt<IWorkoutActorBloc>().delete(workout);
                           }
                         },
                       ),

@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'package:sports_complex_app/src/application/workouts/form_bloc/i_workout_form_bloc.dart';
-import 'package:sports_complex_app/src/application/workouts/form_bloc/workout_form_bloc.dart';
-import 'package:sports_complex_app/src/presentation/workouts/workout_form/workout_form.dart';
 
 class WorkoutsFab extends StatelessWidget {
   const WorkoutsFab({
+    required this.onTap,
     Key? key,
   }) : super(key: key);
+
+  final Function() onTap;
 
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
-      onPressed: () async {
+      onPressed: onTap
+          /*?? () async {
         // TODO: old navigation
         await Navigator.of(context).push<void>(
           MaterialPageRoute(
@@ -25,7 +24,7 @@ class WorkoutsFab extends StatelessWidget {
             ),
           ),
         );
-      },
+      }*/,
       child: const Icon(Icons.add),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 import 'package:sports_complex_app/src/domain/workouts/i_workouts_firestore_crud_repository.dart';
@@ -14,25 +15,29 @@ class WorkoutsFirestoreCrudRepository extends IWorkoutsFirestoreCrudRepository {
       : super(firestoreInstance);
 
   @override
-  Future<void> create(Workout obj) =>
-      firestoreInstance
-          .workoutsScheduleCollection(obj.date!)
-          .doc(obj.id)
-          .set(obj.toJson());
+  Future<void> create(Workout obj) => firestoreInstance
+      .workoutsScheduleCollection(obj.date!)
+      .doc(obj.id)
+      .set(obj.toJson());
 
   @override
-  Future<void> delete(Workout obj) =>
-      firestoreInstance
-          .workoutsScheduleCollection(obj.date!)
-          .doc(obj.id)
-         .delete();
+  Future<void> delete(Workout obj) => firestoreInstance
+      .workoutsScheduleCollection(obj.date!)
+      .doc(obj.id)
+      .delete();
 
   @override
-  Future<void> update(Workout obj) =>
-      firestoreInstance
-          .workoutsScheduleCollection(obj.date!)
-          .doc(obj.id)
-          .update(obj.toJson());
+  Future<void> update(Workout obj, {Workout? initObj}) async {
+    if (initObj != null && obj.date != initObj.date) {
+      await delete(initObj);
+      await create(obj);
+      return;
+    }
+    await firestoreInstance
+        .workoutsScheduleCollection(obj.date!)
+        .doc(obj.id)
+        .update(obj.toJson());
+  }
 
   @override
   Stream<List<Workout>> watchAllByDate(DateTime date) => firestoreInstance

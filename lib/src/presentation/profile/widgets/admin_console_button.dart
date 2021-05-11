@@ -1,9 +1,10 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
-import 'package:sports_complex_app/injection.dart';
-import 'package:sports_complex_app/src/presentation/router/i_sports_complex_router.dart';
+import 'package:sports_complex_app/src/presentation/colors.dart';
+import 'package:sports_complex_app/src/presentation/router/app_router.gr.dart';
 
 class AdminConsoleButton extends StatelessWidget {
   const AdminConsoleButton({
@@ -12,13 +13,13 @@ class AdminConsoleButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () async =>
-          getIt<ISportsComplexRouter>().push(ScreenRoutes.adminConsole),
+          context.router.push(const AdminConsoleScreenRoute()),
       child: ListTile(
         leading: const FaIcon(
           FontAwesomeIcons.userShield,
-          color: Colors.lightBlue,
+          color: AppColors.blue,
         ),
         title: Text(
           S.current.admin_console_text,

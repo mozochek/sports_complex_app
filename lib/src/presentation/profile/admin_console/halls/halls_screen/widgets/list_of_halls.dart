@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:provider/provider.dart';
 
 import 'package:sports_complex_app/generated/l10n.dart';
+import 'package:sports_complex_app/injection.dart';
 import 'package:sports_complex_app/src/application/halls/actor_bloc/i_hall_actor_bloc.dart';
 import 'package:sports_complex_app/src/application/halls/form_bloc/hall_form_bloc.dart';
-import 'package:sports_complex_app/src/application/halls/form_bloc/i_hall_form_bloc.dart';
 import 'package:sports_complex_app/src/domain/halls/hall.dart';
 import 'package:sports_complex_app/src/presentation/common/delete_dialog.dart';
 import 'package:sports_complex_app/src/presentation/common/hall_list_tile_widget.dart';
+import 'package:sports_complex_app/src/presentation/common/slidable_delete_icon.dart';
+import 'package:sports_complex_app/src/presentation/common/slidable_edit_icon.dart';
 import 'package:sports_complex_app/src/presentation/profile/admin_console/halls/hall_form/hall_form.dart';
+import 'package:sports_complex_app/src/presentation/profile/admin_console/halls/hall_form/hall_form_inh_widget.dart';
 
 class ListOfHalls extends StatelessWidget {
   const ListOfHalls({
@@ -22,33 +24,28 @@ class ListOfHalls extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      shrinkWrap: true,
       itemCount: halls.length,
       itemBuilder: (_, index) {
         final hall = halls[index];
         return Slidable(
           actionPane: const SlidableScrollActionPane(),
           secondaryActions: <Widget>[
-            IconSlideAction(
-              color: Colors.yellow,
-              icon: Icons.edit,
+            SlidableEditIcon(
               onTap: () async {
                 // TODO: old navigation
-                await Navigator.of(context).push<void>(
+                await Navigator.push<void>(
+                  context,
                   MaterialPageRoute(
                     fullscreenDialog: true,
-                    builder: (_) => Provider<IHallFormBloc>(
-                      create: (_) => HallFormBloc.forEditing(hall),
-                      dispose: (_, bloc) async => bloc.dispose(),
+                    builder: (_) => HallFormInhWidget(
+                      hallFormBloc: HallFormBloc.forEditing(hall),
                       child: const HallForm(),
                     ),
                   ),
                 );
               },
             ),
-            IconSlideAction(
-              color: Colors.red,
-              icon: Icons.delete,
+            SlidableDeleteIcon(
               onTap: () async {
                 final isDeleteConfirmed = await showDialog<bool>(
                   context: context,
@@ -64,10 +61,7 @@ class ListOfHalls extends StatelessWidget {
                 // In this case we didn't get any response from dialog so as default
                 // we set it to false
                 if (isDeleteConfirmed ?? false) {
-                  await Provider.of<IHallsActorBloc>(
-                    context,
-                    listen: false,
-                  ).delete(hall);
+                  await getIt<IHallsActorBloc>().delete(hall);
                 }
               },
             ),
@@ -76,12 +70,12 @@ class ListOfHalls extends StatelessWidget {
             hall: hall,
             onTap: () async {
               // TODO: old navigation
-              await Navigator.of(context).push<void>(
+              await Navigator.push<void>(
+                context,
                 MaterialPageRoute(
                   fullscreenDialog: true,
-                  builder: (_) => Provider<IHallFormBloc>(
-                    create: (_) => HallFormBloc.forEditing(hall),
-                    dispose: (_, bloc) async => bloc.dispose(),
+                  builder: (_) => HallFormInhWidget(
+                    hallFormBloc: HallFormBloc.forEditing(hall),
                     child: const HallForm(),
                   ),
                 ),
